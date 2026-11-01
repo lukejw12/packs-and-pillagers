@@ -17,7 +17,7 @@
             {
               "type": "minecraft:set_name",
               "name": {
-                "text": "Deep Dark Map",
+                "translate": "pnp.card.map_city.name", "fallback": "Deep Dark Map",
                 "italic": false
               },
               "target": "item_name"

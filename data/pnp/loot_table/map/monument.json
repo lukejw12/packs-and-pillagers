@@ -17,7 +17,7 @@
             {
               "type": "minecraft:set_name",
               "name": {
-                "text": "Ocean Explorer Map",
+                "translate": "pnp.item.ocean_explorer_map", "fallback": "Ocean Explorer Map",
                 "italic": false
               },
               "target": "item_name"

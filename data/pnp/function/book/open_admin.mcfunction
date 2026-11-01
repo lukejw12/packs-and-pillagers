@@ -15,4 +15,4 @@ scoreboard players operation @e[type=marker,tag=pnp.glide_new] pnp.pid = #me pnp
 tag @e[type=marker,tag=pnp.glide_new] remove pnp.glide_new
 rotate @s 180 52
 playsound minecraft:item.book.page_turn master @s ~ ~ ~ 1 0.8
-title @s actionbar {text:"Every card in the game. Click one for details, then the right page to spawn it. Click off the book to close it.",color:"gray"}
+title @s actionbar {translate:"pnp.book.every_card_in_the_game_click",fallback:"Every card in the game. Click one for details, then the right page to spawn it. Click off the book to close it.",color:"gray"}

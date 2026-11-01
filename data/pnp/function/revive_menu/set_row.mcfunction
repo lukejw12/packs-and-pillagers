@@ -1,1 +1,1 @@
-$execute as @e[type=text_display,tag=pnp.memo_r$(k),distance=..40] if score @s pnp.pid = #me pnp.tmp run data modify entity @s text set value [{text:"$(n)",color:"#3a2614",bold:true},{text:"\n$(c) · day $(d)",color:"#7a6650",bold:false}]
+$execute as @e[type=text_display,tag=pnp.memo_r$(k),distance=..40] if score @s pnp.pid = #me pnp.tmp run data modify entity @s text set value [{text:"$(n)",color:"#3a2614",bold:true},{text:"\n",extra:[{translate:"pnp.revive_menu.day",fallback:"%s · day %s",with:["$(c)","$(d)"]}],color:"#7a6650",bold:false}]

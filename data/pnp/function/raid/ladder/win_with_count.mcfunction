@@ -1,1 +1,1 @@
-$tellraw @a[tag=pnp.mate] [{text:"Raid $(n) defeated! ",color:"green"},{translate:"pnp.raid.the_next_raid_comes_in_three",fallback:"The next raid comes in three nights, and it will be bigger.",color:"gray"}]
+$tellraw @a[tag=pnp.mate] [{text:"",extra:[{translate:"pnp.raid.raid_defeated_2",fallback:"Raid %s defeated!",with:["$(n)"]}," "],color:"green"},{translate:"pnp.raid.the_next_raid_comes_in_three",fallback:"The next raid comes in three nights, and it will be bigger.",color:"gray"}]

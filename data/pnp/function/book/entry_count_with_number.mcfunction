@@ -1,1 +1,1 @@
-$data modify storage pnp:board pgo append value {"text":"You've found $(n) of 89 cards.\n","color":"#7a1f1f","bold":true}
+$data modify storage pnp:board pgo append value {"text": "", "extra": [{"translate": "pnp.book.cards_found", "fallback": "You've found %s of %s cards.", "with": ["$(n)", "$(t)"]}, "\n"],"color":"#7a1f1f","bold":true}

@@ -4,8 +4,8 @@ $execute in pnp:board positioned $(axc).5 65 16 as @e[type=item_display,tag=pnp.
 $execute if score #gres pnp.tmp matches 1 run function pnp:gateway/won/$(s)_$(st)
 $execute in pnp:board positioned $(axc).5 65 16 as @e[type=marker,tag=pnp.fight,distance=..15] at @s run function pnp:gateway/end_fight
 $function pnp:gateway/return/stack {gx:$(gx),gz:$(gz)}
-$execute if score #gres pnp.tmp matches 0 run tellraw @s {text:"Your party fell in the $(name). Their gear made it back to your table.",color:"red"}
-$execute if score #gres pnp.tmp matches 2 run tellraw @s {text:"You pulled your party back from the $(name).",color:"yellow"}
+$execute if score #gres pnp.tmp matches 0 run tellraw @s {translate:"pnp.gateway.your_party_fell_in_the_their",fallback:"Your party fell in the %s. Their gear made it back to your table.",with:["$(name)"],color:"red"}
+$execute if score #gres pnp.tmp matches 2 run tellraw @s {translate:"pnp.gateway.you_pulled_your_party_back_from",fallback:"You pulled your party back from the %s.",with:["$(name)"],color:"yellow"}
 tag @e[type=item_display,tag=pnp.gw_used] remove pnp.gw_used
 $execute on vehicle in pnp:board run tp @s $(cx) $(cy) $(cz)
 rotate @s 180 50

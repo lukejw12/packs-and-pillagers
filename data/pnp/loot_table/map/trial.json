@@ -17,7 +17,7 @@
             {
               "type": "minecraft:set_name",
               "name": {
-                "text": "Trial Chamber Map",
+                "translate": "pnp.card.map_trial.name", "fallback": "Trial Chamber Map",
                 "italic": false
               },
               "target": "item_name"

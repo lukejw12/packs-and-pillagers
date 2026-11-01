@@ -1,3 +1,3 @@
 data modify storage pnp:board qbl append value {text:"▶ ",extra:[{translate:"pnp.quest_board.a_charged_core",fallback:"A Charged Core"},"\n"], color: "#2b1a0c", bold: true}
-$data modify storage pnp:board qbl append value {text: "   Find a Charged Redstone Core ($(mp)/1)\n", color: "#2b1a0c"}
+$data modify storage pnp:board qbl append value {text:"   ",extra:[{translate:"pnp.quest_board.find_a_charged_redstone_core_1",fallback:"Find a Charged Redstone Core (%s/1)",with:["$(mp)"]},"\n"], color: "#2b1a0c"}
 data modify storage pnp:board qbl append value {text:"   ",extra:[{translate:"pnp.quest_board.reward_2_tnt",fallback:"Reward: 2 TNT"},"\n"], color: "#7a5a30"}

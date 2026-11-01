@@ -9,4 +9,4 @@ execute as @e[type=text_display,tag=pnp.book_ct,distance=..40] if score @s pnp.p
 execute as @e[type=text_display,tag=pnp.book_cs,distance=..40] if score @s pnp.pid = #me pnp.tmp run data modify entity @s text set from storage pnp:board pgsrc.st
 function pnp:book/scale_count_text with storage pnp:board pgsrc
 playsound minecraft:item.book.page_turn master @s ~ ~ ~ 1 1.3
-execute if score @s pnp.bset matches 2 run title @s actionbar {text:"Click the right page to spawn this card, or the left page to go back.",color:"gold"}
+execute if score @s pnp.bset matches 2 run title @s actionbar {translate:"pnp.book.click_the_right_page_to_spawn",fallback:"Click the right page to spawn this card, or the left page to go back.",color:"gold"}

@@ -1,7 +1,7 @@
-$execute if data storage pnp:board qbr{t:0} run data modify storage pnp:board qbs append value {text: "Baker I: Hand in 1 Cake ($(n)/1)\n", color: "#2b1a0c"}
+$execute if data storage pnp:board qbr{t:0} run data modify storage pnp:board qbs append value {text:"",extra:[{translate:"pnp.quest_board.baker_i_hand_in_1_cake",fallback:"Baker I: Hand in 1 Cake (%s/1)",with:["$(n)"]},"\n"], color: "#2b1a0c"}
 execute if data storage pnp:board qbr{t:0} run data modify storage pnp:board qbs append value {text:"   ",extra:[{translate:"pnp.quest_board.reward_4_emeralds",fallback:"Reward: 4 Emeralds"},"\n"], color: "#7a5a30"}
-$execute if data storage pnp:board qbr{t:1} run data modify storage pnp:board qbs append value {text: "Baker II: Hand in 3 Cake ($(n)/3)\n", color: "#2b1a0c"}
+$execute if data storage pnp:board qbr{t:1} run data modify storage pnp:board qbs append value {text:"",extra:[{translate:"pnp.quest_board.baker_ii_hand_in_3_cake",fallback:"Baker II: Hand in 3 Cake (%s/3)",with:["$(n)"]},"\n"], color: "#2b1a0c"}
 execute if data storage pnp:board qbr{t:1} run data modify storage pnp:board qbs append value {text:"   ",extra:[{translate:"pnp.quest_board.reward_golden_apple_and_2_emeralds",fallback:"Reward: Golden Apple and 2 Emeralds"},"\n"], color: "#7a5a30"}
-$execute if data storage pnp:board qbr{t:2} run data modify storage pnp:board qbs append value {text: "Baker III: Hand in 6 Cake ($(n)/6)\n", color: "#2b1a0c"}
+$execute if data storage pnp:board qbr{t:2} run data modify storage pnp:board qbs append value {text:"",extra:[{translate:"pnp.quest_board.baker_iii_hand_in_6_cake",fallback:"Baker III: Hand in 6 Cake (%s/6)",with:["$(n)"]},"\n"], color: "#2b1a0c"}
 execute if data storage pnp:board qbr{t:2} run data modify storage pnp:board qbs append value {text:"   ",extra:[{translate:"pnp.quest_board.reward_adventure_pack_and_golden_apple",fallback:"Reward: Adventure Pack and Golden Apple"},"\n"], color: "#7a5a30"}
 execute if data storage pnp:board qbr{t:3} run data modify storage pnp:board qbs append value {text:"✔ ",extra:[{translate:"pnp.quest_board.baker_all_three_done",fallback:"Baker: all three done"},"\n"], color: "#4a7a2a"}

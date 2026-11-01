@@ -1,1 +1,1 @@
-$title @a[tag=pnp.dropper] actionbar {text:"Locked. Buy 3 $(kn) Packs to open it ($(h) so far).",color:"gray"}
+$title @a[tag=pnp.dropper] actionbar {translate:"pnp.shop.locked_buy_3_packs_to_open",fallback:"Locked. Buy 3 %s Packs to open it (%s so far).",with:["$(kn)","$(h)"],color:"gray"}
