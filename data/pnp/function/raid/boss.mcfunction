@@ -7,4 +7,4 @@ scoreboard players operation #bhp pnp.tmp *= #c34 pnp.tmp
 scoreboard players add #bhp pnp.tmp 135
 execute in pnp:board as @e[type=item_display,tag=pnp.c.illusioner] if score @s pnp.uid = #uid pnp.ids run function pnp:raid/set_boss
 title @a[tag=pnp.mate] times 5 60 15
-title @a[tag=pnp.mate] subtitle {text:"The Illusioner leads this raid",color:"gray"}
+title @a[tag=pnp.mate] subtitle {translate:"pnp.raid.the_illusioner_leads_this_raid",fallback:"The Illusioner leads this raid",color:"gray"}

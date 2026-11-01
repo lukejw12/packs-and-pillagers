@@ -5,4 +5,4 @@ summon block_display ~ 64.03 ~ {Tags:["pnp.board_ent","pnp.pmark","pnp.pm_new"],
 scoreboard players operation @e[type=block_display,tag=pnp.pm_new] pnp.pid = #me pnp.tmp
 tag @e[type=block_display,tag=pnp.pm_new] remove pnp.pm_new
 playsound minecraft:ui.button.click master @p[tag=pnp.painter] ~ ~ ~ 0.4 1.8
-title @p[tag=pnp.painter] actionbar {text:"Now click the opposite corner.",color:"gray"}
+title @p[tag=pnp.painter] actionbar {translate:"pnp.paint.now_click_the_opposite_corner",fallback:"Now click the opposite corner.",color:"gray"}

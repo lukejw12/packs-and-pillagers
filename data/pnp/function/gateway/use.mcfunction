@@ -1,7 +1,7 @@
 tag @e[type=item_display,tag=pnp.gwc] remove pnp.gwc
 execute as @e[type=item_display,tag=pnp.card,distance=..64] if score @s pnp.uid = #uid pnp.tmp run tag @s add pnp.gwc
-execute if score @s pnp.gws matches 1.. run return run title @s actionbar {text:"Your party is already through a gateway.",color:"red"}
-execute if score @s pnp.gwj matches 1.. run return run title @s actionbar {text:"You're already in a gateway.",color:"red"}
+execute if score @s pnp.gws matches 1.. run return run title @s actionbar {translate:"pnp.gateway.your_party_is_already_through_a",fallback:"Your party is already through a gateway.",color:"red"}
+execute if score @s pnp.gwj matches 1.. run return run title @s actionbar {translate:"pnp.gateway.you_re_already_in_a_gateway",fallback:"You're already in a gateway.",color:"red"}
 execute if entity @e[type=item_display,tag=pnp.gwc,tag=pnp.gw_used] run return run function pnp:gateway/join_late
 execute if entity @e[type=item_display,tag=pnp.gwc,tag=pnp.c.player_portal] run return run function pnp:pvp/portal/try
 execute if entity @e[type=item_display,tag=pnp.gwc,tag=pnp.c.redstone_caves] run return run function pnp:redstone_caves/try_start {s:"caves",name:"Redstone Caves"}

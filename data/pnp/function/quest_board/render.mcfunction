@@ -1,48 +1,48 @@
-data modify storage pnp:board qbl set value [{text:""},{text: "Chapter 1\n", color: "#5a1e0e", bold: true},{text: "Humble Beginnings\n\n", color: "#7a3a1e", italic: true}]
+data modify storage pnp:board qbl set value [{text:""},{text:"",extra:[{translate:"pnp.quest_board.chapter_1",fallback:"Chapter 1"},"\n"], color: "#5a1e0e", bold: true},{text:"",extra:[{translate:"pnp.common.humble_beginnings",fallback:"Humble Beginnings"},"\n\n"], color: "#7a3a1e", italic: true}]
 $execute store result score #qm pnp.tmp run data get storage pnp:qb p$(p).m
 $execute store result storage pnp:board qbr.mp int 1 run data get storage pnp:qb p$(p).mp
-execute if score #qm pnp.tmp matches 1.. run data modify storage pnp:board qbl append value {text: "✔ Lumber\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches 1.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.lumber",fallback:"Lumber"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 0 run function pnp:quest_board/pages/m_lumber with storage pnp:board qbr
-execute if score #qm pnp.tmp matches 2.. run data modify storage pnp:board qbl append value {text: "✔ Stone\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches 2.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.stone",fallback:"Stone"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 1 run function pnp:quest_board/pages/m_stone with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..0 run data modify storage pnp:board qbl append value {text: "○ Stone\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 3.. run data modify storage pnp:board qbl append value {text: "✔ Harvest\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..0 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.stone",fallback:"Stone"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 3.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.harvest",fallback:"Harvest"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 2 run function pnp:quest_board/pages/m_harvest with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..1 run data modify storage pnp:board qbl append value {text: "○ Harvest\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 4.. run data modify storage pnp:board qbl append value {text: "✔ Growing Village\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..1 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.harvest",fallback:"Harvest"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 4.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.card.q_village.name",fallback:"Growing Village"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 3 run function pnp:quest_board/pages/m_village with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..2 run data modify storage pnp:board qbl append value {text: "○ Growing Village\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 5.. run data modify storage pnp:board qbl append value {text: "✔ New Homes\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..2 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.card.q_village.name",fallback:"Growing Village"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 5.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.card.q_housing.name",fallback:"New Homes"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 4 run function pnp:quest_board/pages/m_homes with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..3 run data modify storage pnp:board qbl append value {text: "○ New Homes\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 6.. run data modify storage pnp:board qbl append value {text: "✔ Survivor\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..3 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.card.q_housing.name",fallback:"New Homes"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 6.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.card.q_survivor.name",fallback:"Survivor"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 5 run function pnp:quest_board/pages/m_survivor with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..4 run data modify storage pnp:board qbl append value {text: "○ Survivor\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 7.. run data modify storage pnp:board qbl append value {text: "✔ Iron Age\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..4 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.card.q_survivor.name",fallback:"Survivor"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 7.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.iron_age",fallback:"Iron Age"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 6 run function pnp:quest_board/pages/m_iron with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..5 run data modify storage pnp:board qbl append value {text: "○ Iron Age\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 8.. run data modify storage pnp:board qbl append value {text: "✔ Into the Depths\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..5 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.iron_age",fallback:"Iron Age"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 8.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.into_the_depths",fallback:"Into the Depths"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 7 run function pnp:quest_board/pages/m_depths with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..6 run data modify storage pnp:board qbl append value {text: "○ Into the Depths\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 9.. run data modify storage pnp:board qbl append value {text: "✔ Redstone Caves\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..6 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.into_the_depths",fallback:"Into the Depths"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 9.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.card.redstone_caves.name",fallback:"Redstone Caves"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 8 run function pnp:quest_board/pages/m_rcaves with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..7 run data modify storage pnp:board qbl append value {text: "○ Redstone Caves\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 10.. run data modify storage pnp:board qbl append value {text: "✔ A Charged Core\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..7 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.card.redstone_caves.name",fallback:"Redstone Caves"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 10.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.a_charged_core",fallback:"A Charged Core"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 9 run function pnp:quest_board/pages/m_core with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..8 run data modify storage pnp:board qbl append value {text: "○ A Charged Core\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 11.. run data modify storage pnp:board qbl append value {text: "✔ Summoning Orb\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..8 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.a_charged_core",fallback:"A Charged Core"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 11.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.card.summoning_orb.name",fallback:"Summoning Orb"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 10 run function pnp:quest_board/pages/m_orb with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..9 run data modify storage pnp:board qbl append value {text: "○ Summoning Orb\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 12.. run data modify storage pnp:board qbl append value {text: "✔ Awakening\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..9 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.card.summoning_orb.name",fallback:"Summoning Orb"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 12.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.awakening",fallback:"Awakening"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 11 run function pnp:quest_board/pages/m_awaken with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..10 run data modify storage pnp:board qbl append value {text: "○ Awakening\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text: "✔ The Redstone Monstrosity\n", color: "#4a7a2a"}
+execute if score #qm pnp.tmp matches ..10 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.awakening",fallback:"Awakening"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text:"✔ ",extra:[{translate:"pnp.quest_board.the_redstone_monstrosity",fallback:"The Redstone Monstrosity"},"\n"], color: "#4a7a2a"}
 execute if score #qm pnp.tmp matches 12 run function pnp:quest_board/pages/m_boss with storage pnp:board qbr
-execute if score #qm pnp.tmp matches ..11 run data modify storage pnp:board qbl append value {text: "○ The Redstone Monstrosity\n", color: "#a8957a"}
-execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text: "\nChapter 1 complete!\n", color: "#9a6a00", bold: true}
-execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text: "Chapter 2, the Nether, is coming soon.\n", color: "#7a5a30"}
-data modify storage pnp:board qbl append value {text: "\nDrop cards on this book to hand them in.", color: "#8a7660", italic: true}
-data modify storage pnp:board qbs set value [{text:""},{text: "Side Quests\n\n", color: "#5a1e0e", bold: true}]
+execute if score #qm pnp.tmp matches ..11 run data modify storage pnp:board qbl append value {text:"○ ",extra:[{translate:"pnp.quest_board.the_redstone_monstrosity",fallback:"The Redstone Monstrosity"},"\n"], color: "#a8957a"}
+execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text:"\n",extra:[{translate:"pnp.common.chapter_1_complete_2",fallback:"Chapter 1 complete!"},"\n"], color: "#9a6a00", bold: true}
+execute if score #qm pnp.tmp matches 13.. run data modify storage pnp:board qbl append value {text:"",extra:[{translate:"pnp.quest_board.chapter_2_the_nether_is_coming",fallback:"Chapter 2, the Nether, is coming soon."},"\n"], color: "#7a5a30"}
+data modify storage pnp:board qbl append value {text:"\n",extra:[{translate:"pnp.quest_board.drop_cards_on_this_book_to",fallback:"Drop cards on this book to hand them in."}], color: "#8a7660", italic: true}
+data modify storage pnp:board qbs set value [{text:""},{text:"",extra:[{translate:"pnp.quest_board.side_quests",fallback:"Side Quests"},"\n\n"], color: "#5a1e0e", bold: true}]
 $execute store result storage pnp:board qbr.t int 1 run data get storage pnp:qb p$(p).s.s_feast.t
 $execute store result storage pnp:board qbr.n int 1 run data get storage pnp:qb p$(p).s.s_feast.n
 function pnp:quest_board/pages/s_feast with storage pnp:board qbr

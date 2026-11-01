@@ -7,7 +7,7 @@ execute unless entity @a[tag=pnp.vhost] run return fail
 execute unless entity @a[tag=pnp.vhost,scores={pnp.plot=2}] run return run function pnp:multiplayer/visit/none
 execute store result storage pnp:board vis.h int 1 run scoreboard players get @a[tag=pnp.vhost,limit=1] pnp.pid
 function pnp:multiplayer/visit/by_id with storage pnp:board vis
-tellraw @s [{text:"You joined ",color:"green"},{selector:"@a[tag=pnp.vhost]"},{text:"'s card table. Sneak to go back.",color:"green"}]
-tellraw @a[tag=pnp.vhost] [{selector:"@s"},{text:" joined your card table.",color:"green"}]
+tellraw @s [{text:"",extra:[{translate:"pnp.multiplayer.you_joined",fallback:"You joined"}," "],color:"green"},{selector:"@a[tag=pnp.vhost]"},{translate:"pnp.multiplayer.s_card_table_sneak_to_go",fallback:"'s card table. Sneak to go back.",color:"green"}]
+tellraw @a[tag=pnp.vhost] [{selector:"@s"},{text:" ",extra:[{translate:"pnp.multiplayer.joined_your_card_table",fallback:"joined your card table."}],color:"green"}]
 tag @a remove pnp.vhost
 return 1

@@ -353,10 +353,10 @@ scoreboard objectives add pnp.ptp dummy
 scoreboard players set #c26 pnp.tmp 26
 scoreboard players set #c6 pnp.tmp 6
 scoreboard players set #c22 pnp.tmp 22
-bossbar add pnp:monstrosity {text:"Redstone Monstrosity",color:"red"}
-bossbar set pnp:monstrosity color red
-bossbar set pnp:monstrosity style notched_10
-bossbar set pnp:monstrosity max 150
+bossbar remove pnp:monstrosity
+execute store result score #cob pnp.tmp run scoreboard players get #pid pnp.ids
+execute if score #cob pnp.tmp matches 1.. store result storage pnp:board cob.p int 1 run scoreboard players get #cob pnp.tmp
+execute if score #cob pnp.tmp matches 1.. run function pnp:core/clear_old_bars with storage pnp:board cob
 scoreboard objectives add pnp.pcat dummy
 scoreboard objectives add pnp.phov dummy
 scoreboard objectives add pnp.pslot dummy

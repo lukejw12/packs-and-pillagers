@@ -5,5 +5,5 @@ scoreboard players operation @s pnp.saz = #bz pnp.tmp
 scoreboard players set @s pnp.sls 1
 function pnp:selection/box/spawn
 playsound minecraft:ui.button.click master @s ~ ~ ~ 0.5 1.4
-title @s actionbar {text:"Right-click the opposite corner.",color:"aqua"}
+title @s actionbar {translate:"pnp.selection.right_click_the_opposite_corner",fallback:"Right-click the opposite corner.",color:"aqua"}
 return 1

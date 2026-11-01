@@ -3,10 +3,10 @@ execute as @e[type=item_display,tag=pnp.card,distance=..64] if score @s pnp.uid 
 scoreboard players set #enemy pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.k.enemy,distance=..64] if score @s pnp.uid = #uid pnp.tmp run scoreboard players set #enemy pnp.tmp 1
 execute as @e[type=item_display,tag=pnp.k.shop,tag=!pnp.c.wandering_trader,distance=..64] if score @s pnp.uid = #uid pnp.tmp run scoreboard players set #enemy pnp.tmp 2
-execute if score #enemy pnp.tmp matches 2 run return run title @s actionbar {text:"Drop emeralds on a shop pack to buy it.",color:"green"}
+execute if score #enemy pnp.tmp matches 2 run return run title @s actionbar {translate:"pnp.board.drop_emeralds_on_a_shop_pack",fallback:"Drop emeralds on a shop pack to buy it.",color:"green"}
 execute as @e[type=item_display,tag=pnp.k.sell,distance=..64] if score @s pnp.uid = #uid pnp.tmp run scoreboard players set #enemy pnp.tmp 3
-execute if score #enemy pnp.tmp matches 3 run return run title @s actionbar {text:"Drop cards here to sell them for emeralds.",color:"green"}
-execute if score #enemy pnp.tmp matches 1 run return run title @s actionbar {text:"You can't move enemies. Drop a fighter on one to start a fight.",color:"red"}
+execute if score #enemy pnp.tmp matches 3 run return run title @s actionbar {translate:"pnp.board.drop_cards_here_to_sell_them",fallback:"Drop cards here to sell them for emeralds.",color:"green"}
+execute if score #enemy pnp.tmp matches 1 run return run title @s actionbar {translate:"pnp.board.you_can_t_move_enemies_drop",fallback:"You can't move enemies. Drop a fighter on one to start a fight.",color:"red"}
 execute as @e[type=item_display,tag=pnp.card,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 at @s run function pnp:board/recipe/clear
 scoreboard players add #stack pnp.ids 1
 scoreboard players operation @s pnp.holding = #stack pnp.ids

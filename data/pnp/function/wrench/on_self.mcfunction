@@ -9,4 +9,4 @@ execute anchored eyes positioned ^ ^ ^1.1 run summon item_display ~ ~ ~ {Tags:["
 scoreboard players operation @e[tag=pnp.fx_new] pnp.pid = #me pnp.tmp
 tag @e[tag=pnp.fx_new] remove pnp.fx_new
 playsound minecraft:block.piston.extend master @s ~ ~ ~ 0.5 1.6
-title @s actionbar {text:"Wrench out: right-click two ports to link them, left-click a port to cut its link. Right-click the Wrench again to put it away.",color:"yellow"}
+title @s actionbar {translate:"pnp.wrench.wrench_out_right_click_two_ports",fallback:"Wrench out: right-click two ports to link them, left-click a port to cut its link. Right-click the Wrench again to put it away.",color:"yellow"}

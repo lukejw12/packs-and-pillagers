@@ -1,12 +1,12 @@
 scoreboard players set @s pnp.use 0
 execute if dimension pnp:board run return 0
-execute unless score @s pnp.plot matches 2..3 run return run tellraw @s {text:"Open your Card Board once first.",color:"gray"}
+execute unless score @s pnp.plot matches 2..3 run return run tellraw @s {translate:"pnp.common.open_your_card_board_once_first",fallback:"Open your Card Board once first.",color:"gray"}
 kill @e[type=marker,tag=pnp.wsm_new]
 scoreboard players set #wr pnp.tmp 0
 scoreboard players set #whit pnp.tmp 0
 execute anchored eyes positioned ^ ^ ^ run function pnp:waystone/raycast
-execute if score #whit pnp.tmp matches 0 run return run tellraw @s {text:"Look at a block within reach to place a waystone.",color:"gray"}
-execute if score #whit pnp.tmp matches 2 run return run tellraw @s {text:"Someone is standing there. Aim somewhere clear.",color:"gray"}
+execute if score #whit pnp.tmp matches 0 run return run tellraw @s {translate:"pnp.waystone.look_at_a_block_within_reach",fallback:"Look at a block within reach to place a waystone.",color:"gray"}
+execute if score #whit pnp.tmp matches 2 run return run tellraw @s {translate:"pnp.waystone.someone_is_standing_there_aim_somewhere",fallback:"Someone is standing there. Aim somewhere clear.",color:"gray"}
 data modify storage pnp:board wp set value {a:1b}
 scoreboard players add #wid pnp.ids 1
 execute store result storage pnp:board wp.id int 1 run scoreboard players get #wid pnp.ids
@@ -27,6 +27,6 @@ tag @e[type=marker,tag=pnp.wsm_new] remove pnp.wsm_new
 function pnp:world/deliver {card:"waypoint"}
 execute in pnp:board as @e[type=item_display,tag=pnp.c.waypoint] if score @s pnp.uid = #uid pnp.ids run function pnp:waystone/bind with storage pnp:board wp
 clear @s minecraft:carrot_on_a_stick[minecraft:custom_data~{pnp:{waystone:1b}}] 1
-tellraw @s {text:"Waystone placed. It's on your card table now: right-click it there to come back to this spot.",color:"aqua"}
+tellraw @s {translate:"pnp.waystone.waystone_placed_it_s_on_your",fallback:"Waystone placed. It's on your card table now: right-click it there to come back to this spot.",color:"aqua"}
 scoreboard players operation #wnid pnp.tmp = #wid pnp.ids
 function pnp:waystone/name_start

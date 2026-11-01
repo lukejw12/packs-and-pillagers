@@ -1,12 +1,12 @@
 {
   "type": "minecraft:multi_action",
   "title": {
-    "text": "Multiplayer",
+    "translate": "pnp.common.multiplayer", "fallback": "Multiplayer",
     "color": "gold",
     "bold": true
   },
   "external_title": {
-    "text": "Multiplayer"
+    "translate": "pnp.common.multiplayer", "fallback": "Multiplayer"
   },
   "body": [
     {
@@ -14,27 +14,27 @@
       "width": 330,
       "contents": [
         {
-          "text": "Shared Board",
+          "translate": "pnp.common.shared_board", "fallback": "Shared Board",
           "color": "white"
         },
         {
-          "text": ": everyone plays on one table.\n",
+          "text": "", "extra": [{"translate": "pnp.common.everyone_plays_on_one_table", "fallback": ": everyone plays on one table."}, "\n"],
           "color": "gray"
         },
         {
-          "text": "Individual Boards",
+          "translate": "pnp.common.individual_boards", "fallback": "Individual Boards",
           "color": "white"
         },
         {
-          "text": ": everyone gets their own table.\n",
+          "text": "", "extra": [{"translate": "pnp.common.everyone_gets_their_own_table", "fallback": ": everyone gets their own table."}, "\n"],
           "color": "gray"
         },
         {
-          "text": "PvP",
+          "translate": "pnp.common.pvp", "fallback": "PvP",
           "color": "white"
         },
         {
-          "text": ": your own tables, and you can raid each other.",
+          "translate": "pnp.common.your_own_tables_and_you_can", "fallback": ": your own tables, and you can raid each other.",
           "color": "gray"
         }
       ]
@@ -53,11 +53,11 @@
           "font": "pnp:menu"
         },
         {
-          "text": "  Shared Board"
+          "text": "  ", "extra": [{"translate": "pnp.common.shared_board", "fallback": "Shared Board"}]
         }
       ],
       "tooltip": {
-        "text": "Everyone plays on the host table together."
+        "translate": "pnp.common.everyone_plays_on_the_host_table", "fallback": "Everyone plays on the host table together."
       },
       "width": 230,
       "action": {
@@ -75,11 +75,11 @@
           "font": "pnp:menu"
         },
         {
-          "text": "  Individual Boards"
+          "text": "  ", "extra": [{"translate": "pnp.common.individual_boards", "fallback": "Individual Boards"}]
         }
       ],
       "tooltip": {
-        "text": "Everyone builds their own table."
+        "translate": "pnp.common.everyone_builds_their_own_table", "fallback": "Everyone builds their own table."
       },
       "width": 230,
       "action": {
@@ -97,11 +97,11 @@
           "font": "pnp:menu"
         },
         {
-          "text": "  PvP"
+          "text": "  ", "extra": [{"translate": "pnp.common.pvp", "fallback": "PvP"}]
         }
       ],
       "tooltip": {
-        "text": "Your own tables. Send fighters through portals to raid other players."
+        "translate": "pnp.common.your_own_tables_send_fighters_through", "fallback": "Your own tables. Send fighters through portals to raid other players."
       },
       "width": 230,
       "action": {
@@ -112,7 +112,7 @@
   ],
   "exit_action": {
     "label": {
-      "text": "Back"
+      "translate": "pnp.common.back", "fallback": "Back"
     },
     "width": 120,
     "action": {

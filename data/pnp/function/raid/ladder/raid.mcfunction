@@ -25,4 +25,4 @@ scoreboard players set @s pnp.rkind 1
 execute store result storage pnp:board rl.n int 1 run scoreboard players get @s pnp.rlvl
 function pnp:raid/ladder/message with storage pnp:board rl
 playsound minecraft:event.raid.horn master @s ~ ~ ~ 0.5 1
-execute unless entity @s[tag=pnp.in_board] run tellraw @a[tag=pnp.mate] {text:"Raiders are on their way. They move slowly while your board is closed.",color:"red"}
+execute unless entity @s[tag=pnp.in_board] run tellraw @a[tag=pnp.mate] {translate:"pnp.raid.raiders_are_on_their_way_they",fallback:"Raiders are on their way. They move slowly while your board is closed.",color:"red"}

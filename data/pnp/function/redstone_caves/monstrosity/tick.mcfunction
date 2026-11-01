@@ -5,5 +5,3 @@ execute if entity @s[tag=pnp.rm_shield] unless entity @e[type=item_display,tag=p
 execute if entity @s[tag=pnp.rm_shield] if score #g5 pnp.tmp matches 0 run particle minecraft:dust{color:[1.0,0.12,0.12],scale:1.4} ~ ~0.45 ~ 0.55 0.3 0.55 0 6
 execute if score @s pnp.spell matches 120..139 if score #g5 pnp.tmp matches 0 run function pnp:redstone_caves/monstrosity/telegraph
 execute if score @s pnp.spell matches 140.. run function pnp:redstone_caves/monstrosity/slam
-execute if score #g5 pnp.tmp matches 0 store result bossbar pnp:monstrosity value run scoreboard players get @s pnp.hp
-execute if score #g5 pnp.tmp matches 0 run bossbar set pnp:monstrosity players @a[distance=..64]

@@ -10,4 +10,4 @@ execute as @e[type=block_display,tag=pnp.lk_new] at @s run function pnp:wrench/l
 tag @e[type=block_display,tag=pnp.lk_new] remove pnp.lk_new
 execute as @e[type=item_display,tag=pnp.card,distance=..64] if score @s pnp.uid = #su pnp.tmp at @s run function pnp:wrench/has_output
 playsound minecraft:block.chain.place master @s ~ ~ ~ 0.8 1.2
-title @s actionbar {text:"Linked!",color:"green"}
+title @s actionbar {translate:"pnp.wrench.linked",fallback:"Linked!",color:"green"}

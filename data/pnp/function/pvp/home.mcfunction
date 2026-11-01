@@ -3,5 +3,5 @@ $data modify storage pnp:pvp hm.list set from storage pnp:pvp a$(p).surv
 $data modify storage pnp:pvp hm.loot set from storage pnp:pvp a$(p).loot
 function pnp:pvp/home_loop
 function pnp:pvp/loot_loop
-tellraw @s {text:"Your fighters made it home.",color:"gold"}
+tellraw @s {translate:"pnp.pvp.your_fighters_made_it_home",fallback:"Your fighters made it home.",color:"gold"}
 function pnp:pvp/done

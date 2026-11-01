@@ -4,7 +4,7 @@ execute store result storage pnp:board gw.v int 1 run scoreboard players get @s 
 scoreboard players add @s pnp.gwv 1
 scoreboard players set @s pnp.gwt 50
 function pnp:gateway/wave/load with storage pnp:board gw
-execute if score @s pnp.gwn matches 4 if score @s pnp.gwv matches ..3 run title @a[tag=pnp.gw_owner] actionbar [{text:"Wave ",color:"light_purple"},{score:{name:"@s",objective:"pnp.gwv"},color:"white"},{text:" of 3",color:"light_purple"}]
-execute if score @s pnp.gwn matches 4 if score @s pnp.gwv matches 4 run title @a[tag=pnp.gw_owner] actionbar {text:"The boss is here!",color:"red"}
+execute if score @s pnp.gwn matches 4 if score @s pnp.gwv matches ..3 run title @a[tag=pnp.gw_owner] actionbar [{text:"",extra:[{translate:"pnp.gateway.wave",fallback:"Wave"}," "],color:"light_purple"},{score:{name:"@s",objective:"pnp.gwv"},color:"white"},{text:" ",extra:[{translate:"pnp.gateway.of_3",fallback:"of 3"}],color:"light_purple"}]
+execute if score @s pnp.gwn matches 4 if score @s pnp.gwv matches 4 run title @a[tag=pnp.gw_owner] actionbar {translate:"pnp.gateway.the_boss_is_here",fallback:"The boss is here!",color:"red"}
 playsound minecraft:block.trial_spawner.spawn_mob hostile @a[distance=..32] ~ ~ ~ 1 1
-execute if score @s pnp.gwn matches 5 run title @a[tag=pnp.gw_owner] actionbar [{text:"Wave ",color:"red"},{score:{name:"@s",objective:"pnp.gwv"},color:"white"},{text:" of 5",color:"red"}]
+execute if score @s pnp.gwn matches 5 run title @a[tag=pnp.gw_owner] actionbar [{text:"",extra:[{translate:"pnp.gateway.wave",fallback:"Wave"}," "],color:"red"},{score:{name:"@s",objective:"pnp.gwv"},color:"white"},{text:" ",extra:[{translate:"pnp.gateway.of_5",fallback:"of 5"}],color:"red"}]

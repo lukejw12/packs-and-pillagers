@@ -9,4 +9,4 @@ $execute unless data storage pnp:found p$(p).house run data modify storage pnp:b
 $execute unless data storage pnp:found p$(p).farm run data modify storage pnp:board gl.g set value "Grow food: learn the Farm idea and build one."
 $execute unless data storage pnp:found p$(p).wooden_sword unless data storage pnp:found p$(p).stone_sword run data modify storage pnp:board gl.g set value "Arm a villager before night 2: make a sword on the Crafting Table and drop it on them."
 $execute unless data storage pnp:found p$(p).crafting_table run data modify storage pnp:board gl.g set value "Make a Crafting Table: stack 2 Oak Logs on a Villager."
-tellraw @s [{text:"Next goal: ",color:"gold"},{storage:"pnp:board",nbt:"gl.g",interpret:true,color:"white"}]
+tellraw @s [{text:"",extra:[{translate:"pnp.tips.next_goal",fallback:"Next goal:"}," "],color:"gold"},{storage:"pnp:board",nbt:"gl.g",interpret:true,color:"white"}]

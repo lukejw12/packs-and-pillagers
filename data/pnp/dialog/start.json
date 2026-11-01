@@ -1,19 +1,19 @@
 {
   "type": "minecraft:multi_action",
   "title": {
-    "text": "Packs & Pillagers",
+    "translate": "pnp.common.packs_pillagers", "fallback": "Packs & Pillagers",
     "color": "gold",
     "bold": true
   },
   "external_title": {
-    "text": "How do you want to play?"
+    "translate": "pnp.common.how_do_you_want_to_play", "fallback": "How do you want to play?"
   },
   "body": [
     {
       "type": "minecraft:plain_message",
       "width": 330,
       "contents": {
-        "text": "How do you want to play?",
+        "translate": "pnp.common.how_do_you_want_to_play", "fallback": "How do you want to play?",
         "color": "gray"
       }
     }
@@ -31,11 +31,11 @@
           "font": "pnp:menu"
         },
         {
-          "text": "  Single Player"
+          "text": "  ", "extra": [{"translate": "pnp.common.single_player", "fallback": "Single Player"}]
         }
       ],
       "tooltip": {
-        "text": "Just you and your own card table."
+        "translate": "pnp.common.just_you_and_your_own_card", "fallback": "Just you and your own card table."
       },
       "width": 170,
       "action": {
@@ -53,11 +53,11 @@
           "font": "pnp:menu"
         },
         {
-          "text": "  Multiplayer"
+          "text": "  ", "extra": [{"translate": "pnp.common.multiplayer", "fallback": "Multiplayer"}]
         }
       ],
       "tooltip": {
-        "text": "Play with friends: share a table, play side by side, or raid each other."
+        "translate": "pnp.common.play_with_friends_share_a_table", "fallback": "Play with friends: share a table, play side by side, or raid each other."
       },
       "width": 170,
       "action": {

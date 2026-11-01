@@ -11,6 +11,6 @@ execute unless entity @e[type=item_display,tag=pnp.c.villager,scores={pnp.uid=1.
 scoreboard players set #rnf pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.c.villager,distance=..64] if score @s pnp.uid = #ru pnp.tmp run function pnp:villager/rename/set
 execute if score #rnf pnp.tmp matches 0 run return run function pnp:villager/rename/end {m:"That villager is gone."}
-tellraw @s [{text:"Renamed to ",color:"green"},{storage:"pnp:board",nbt:"rn.n",interpret:true,color:"white"},{text:".",color:"green"}]
+tellraw @s [{text:"",extra:[{translate:"pnp.villager.renamed_to",fallback:"Renamed to"}," "],color:"green"},{storage:"pnp:board",nbt:"rn.n",interpret:true,color:"white"},{text:".",color:"green"}]
 playsound minecraft:entity.villager.yes master @s ~ ~ ~ 0.8 1.1
 function pnp:villager/rename/end {m:""}

@@ -9,8 +9,8 @@ scoreboard players operation #bc pnp.tmp = @e[type=item_display,tag=pnp.lbar,lim
 scoreboard players operation #bc pnp.tmp += #hsize pnp.tmp
 execute unless entity @e[type=item_display,tag=pnp.lbar,tag=pnp.c.copper_barrel] if score #bc pnp.tmp matches 129.. run scoreboard players set #bad pnp.tmp 2
 execute if entity @e[type=item_display,tag=pnp.lbar,tag=pnp.c.copper_barrel] if score #bc pnp.tmp matches 257.. run scoreboard players set #bad pnp.tmp 2
-execute if score #bad pnp.tmp matches 1 run title @s actionbar {text:"A barrel only holds one kind of card.",color:"red"}
-execute if score #bad pnp.tmp matches 2 run title @s actionbar {text:"That barrel is full (128 cards).",color:"red"}
+execute if score #bad pnp.tmp matches 1 run title @s actionbar {translate:"pnp.logistics.a_barrel_only_holds_one_kind",fallback:"A barrel only holds one kind of card.",color:"red"}
+execute if score #bad pnp.tmp matches 2 run title @s actionbar {translate:"pnp.logistics.that_barrel_is_full_128_cards",fallback:"That barrel is full (128 cards).",color:"red"}
 execute if score #bad pnp.tmp matches 1.. run return run scoreboard players set #route pnp.tmp 2
 scoreboard players set #route pnp.tmp 1
 execute as @e[type=item_display,tag=pnp.lbar,limit=1] run data modify entity @s item.components."minecraft:custom_data".bt set from storage pnp:board lbt.t

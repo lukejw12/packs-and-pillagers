@@ -5,4 +5,4 @@ execute store result storage pnp:board rl.lvl int 1 run scoreboard players get @
 execute store result storage pnp:board rl.p int 1 run scoreboard players get @a[tag=pnp.dropper,limit=1] pnp.pid
 function pnp:villager/release/queue with storage pnp:board rl
 function pnp:card/remove
-title @a[tag=pnp.dropper] actionbar {text:"Released. They'll be waiting for you when you leave the table.",color:"green"}
+title @a[tag=pnp.dropper] actionbar {translate:"pnp.villager.released_they_ll_be_waiting_for",fallback:"Released. They'll be waiting for you when you leave the table.",color:"green"}

@@ -1,1 +1,1 @@
-$title @s actionbar [{text:"Painting ",color:"gray"},{storage:"pnp:cards",nbt:"paint[$(i)].n",color:"white"},{text:". Click two corners. Right-click the brush for the next colour, Shift to stop.",color:"gray"}]
+$title @s actionbar [{text:"",extra:[{translate:"pnp.paint.painting",fallback:"Painting"}," "],color:"gray"},{storage:"pnp:cards",nbt:"paint[$(i)].n",color:"white"},{translate:"pnp.paint.click_two_corners_right_click_the",fallback:". Click two corners. Right-click the brush for the next colour, Shift to stop.",color:"gray"}]

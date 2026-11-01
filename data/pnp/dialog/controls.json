@@ -1,11 +1,11 @@
 {
   "type": "minecraft:notice",
   "title": {
-    "text": "Card Table Controls",
+    "translate": "pnp.dialog.card_table_controls", "fallback": "Card Table Controls",
     "color": "gold"
   },
   "external_title": {
-    "text": "Card Table Controls"
+    "translate": "pnp.dialog.card_table_controls", "fallback": "Card Table Controls"
   },
   "body": [
     {
@@ -14,7 +14,7 @@
       "contents": [
         "",
         {
-          "text": "Moving\n",
+          "text": "", "extra": [{"translate": "pnp.dialog.moving", "fallback": "Moving"}, "\n"],
           "bold": true,
           "color": "gold"
         },
@@ -38,11 +38,11 @@
           "color": "yellow"
         },
         {
-          "text": "  move around the table\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.move_around_the_table", "fallback": "move around the table"}, "\n"],
           "color": "gray"
         },
         {
-          "text": "Hold",
+          "translate": "pnp.dialog.hold", "fallback": "Hold",
           "color": "yellow"
         },
         " ",
@@ -51,11 +51,11 @@
           "color": "yellow"
         },
         {
-          "text": "  zoom out and move faster\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.zoom_out_and_move_faster", "fallback": "zoom out and move faster"}, "\n"],
           "color": "gray"
         },
         {
-          "text": "Hold",
+          "translate": "pnp.dialog.hold", "fallback": "Hold",
           "color": "yellow"
         },
         " ",
@@ -64,7 +64,7 @@
           "color": "yellow"
         },
         {
-          "text": "  zoom in close\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.zoom_in_close", "fallback": "zoom in close"}, "\n"],
           "color": "gray"
         },
         {
@@ -73,11 +73,11 @@
         },
         " ",
         {
-          "text": "on empty felt",
+          "translate": "pnp.dialog.on_empty_felt", "fallback": "on empty felt",
           "color": "yellow"
         },
         {
-          "text": "  glide there\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.glide_there", "fallback": "glide there"}, "\n"],
           "color": "gray"
         },
         {
@@ -85,7 +85,7 @@
           "color": "yellow"
         },
         {
-          "text": "  leave the table",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.leave_the_table", "fallback": "leave the table"}],
           "color": "gray"
         }
       ]
@@ -96,7 +96,7 @@
       "contents": [
         "",
         {
-          "text": "Cards\n",
+          "text": "", "extra": [{"translate": "pnp.dialog.cards", "fallback": "Cards"}, "\n"],
           "bold": true,
           "color": "gold"
         },
@@ -106,11 +106,11 @@
         },
         " ",
         {
-          "text": "on a card",
+          "translate": "pnp.dialog.on_a_card", "fallback": "on a card",
           "color": "yellow"
         },
         {
-          "text": "  pick it up, click again to drop it\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.pick_it_up_click_again_to", "fallback": "pick it up, click again to drop it"}, "\n"],
           "color": "gray"
         },
         {
@@ -119,11 +119,11 @@
         },
         " ",
         {
-          "text": "on a card",
+          "translate": "pnp.dialog.on_a_card", "fallback": "on a card",
           "color": "yellow"
         },
         {
-          "text": "  use it: open packs and books, learn ideas\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.use_it_open_packs_and_books", "fallback": "use it: open packs and books, learn ideas"}, "\n"],
           "color": "gray"
         },
         {
@@ -132,11 +132,11 @@
         },
         " ",
         {
-          "text": "on a villager",
+          "translate": "pnp.dialog.on_a_villager", "fallback": "on a villager",
           "color": "yellow"
         },
         {
-          "text": "  give it a new name",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.give_it_a_new_name", "fallback": "give it a new name"}],
           "color": "gray"
         }
       ]
@@ -147,7 +147,7 @@
       "contents": [
         "",
         {
-          "text": "Tools\n",
+          "text": "", "extra": [{"translate": "pnp.dialog.tools", "fallback": "Tools"}, "\n"],
           "bold": true,
           "color": "gold"
         },
@@ -156,7 +156,7 @@
           "color": "yellow"
         },
         {
-          "text": "  the Wrench: right-click to switch tool mode\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.the_wrench_right_click_to_switch", "fallback": "the Wrench: right-click to switch tool mode"}, "\n"],
           "color": "gray"
         },
         {
@@ -165,11 +165,11 @@
         },
         " ",
         {
-          "text": "on a port",
+          "translate": "pnp.dialog.on_a_port", "fallback": "on a port",
           "color": "yellow"
         },
         {
-          "text": "  in tool mode, then another to link them\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.in_tool_mode_then_another_to", "fallback": "in tool mode, then another to link them"}, "\n"],
           "color": "gray"
         },
         {
@@ -178,11 +178,11 @@
         },
         " ",
         {
-          "text": "on a port",
+          "translate": "pnp.dialog.on_a_port", "fallback": "on a port",
           "color": "yellow"
         },
         {
-          "text": "  in tool mode, cuts its link\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.in_tool_mode_cuts_its_link", "fallback": "in tool mode, cuts its link"}, "\n"],
           "color": "gray"
         },
         {
@@ -191,11 +191,11 @@
         },
         " ",
         {
-          "text": "while painting",
+          "translate": "pnp.dialog.while_painting", "fallback": "while painting",
           "color": "yellow"
         },
         {
-          "text": "  stop painting\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.stop_painting", "fallback": "stop painting"}, "\n"],
           "color": "gray"
         },
         {
@@ -203,7 +203,7 @@
           "color": "yellow"
         },
         {
-          "text": "  the Grid: right-click to line every card up\n",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.the_grid_right_click_to_line", "fallback": "the Grid: right-click to line every card up"}, "\n"],
           "color": "gray"
         },
         {
@@ -211,7 +211,7 @@
           "color": "yellow"
         },
         {
-          "text": "  these controls, any time",
+          "text": "  ", "extra": [{"translate": "pnp.dialog.these_controls_any_time", "fallback": "these controls, any time"}],
           "color": "gray"
         }
       ]
@@ -219,7 +219,7 @@
   ],
   "action": {
     "label": {
-      "text": "Show the keyboard"
+      "translate": "pnp.dialog.show_the_keyboard", "fallback": "Show the keyboard"
     },
     "action": {
       "type": "run_command",

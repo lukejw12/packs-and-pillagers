@@ -14,7 +14,7 @@ function pnp:selection/store_area
 execute in pnp:board as @e[type=item_display,tag=pnp.selc] run function pnp:selection/in_box
 execute unless entity @e[type=item_display,tag=pnp.selc] run function pnp:selection/box/remove
 execute unless entity @e[type=item_display,tag=pnp.selc] run scoreboard players set @s pnp.sls 0
-execute unless entity @e[type=item_display,tag=pnp.selc] run return run title @s actionbar {text:"There's nothing in that box to move.",color:"gray"}
+execute unless entity @e[type=item_display,tag=pnp.selc] run return run title @s actionbar {translate:"pnp.selection.there_s_nothing_in_that_box",fallback:"There's nothing in that box to move.",color:"gray"}
 scoreboard players operation @s pnp.srx1 = #X1 pnp.tmp
 scoreboard players operation @s pnp.srx2 = #X2 pnp.tmp
 scoreboard players operation @s pnp.srz1 = #Z1 pnp.tmp
@@ -31,5 +31,5 @@ execute in pnp:board as @e[type=item_display,tag=pnp.selc] run function pnp:sele
 tag @e[type=item_display,tag=pnp.selc] remove pnp.selc
 scoreboard players set @s pnp.sls 2
 playsound minecraft:item.bundle.insert master @s ~ ~ ~ 0.7 1
-title @s actionbar {text:"Click to put them down. Right-click to put them back.",color:"aqua"}
+title @s actionbar {translate:"pnp.selection.click_to_put_them_down_right",fallback:"Click to put them down. Right-click to put them back.",color:"aqua"}
 return 1

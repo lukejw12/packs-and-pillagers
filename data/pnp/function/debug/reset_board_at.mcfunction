@@ -11,7 +11,7 @@ $data remove storage pnp:gw p$(p)
 $data remove storage pnp:packs p$(p)
 $scoreboard players reset #bank$(p) pnp.bank
 $scoreboard players reset #f$(p) pnp.found
-$bossbar set pnp:gw$(p) visible false
+$bossbar remove pnp:gw$(p)
 $execute in pnp:board positioned $(x) 55 -8 positioned ~45 ~ ~ run kill @e[type=!player,dx=44,dy=45,dz=50]
 $execute in pnp:board positioned $(x) 63 -2 positioned ~45 ~ ~ run fill ~ ~ ~ ~42 ~1 ~40 minecraft:air
 $execute in pnp:board positioned $(x) 55 -8 positioned ~-47 ~ ~ run kill @e[type=!player,dx=46,dy=45,dz=50]
@@ -78,4 +78,4 @@ scoreboard players reset @s pnp.omen
 scoreboard players set @s pnp.tool 0
 scoreboard players set @s pnp.visit 0
 $execute in pnp:board positioned $(x) 64 0 run function pnp:board/plot/build
-tellraw @s {text:"Your card table is back to a fresh start.",color:"yellow"}
+tellraw @s {translate:"pnp.debug.your_card_table_is_back_to",fallback:"Your card table is back to a fresh start.",color:"yellow"}

@@ -20,5 +20,5 @@ $execute as @a[tag=pnp.in_board] if score @s pnp.gwj matches $(p) run function p
 scoreboard players set @s pnp.gwp 2
 playsound minecraft:block.portal.travel master @s ~ ~ ~ 0.25 1.6
 title @s times 10 50 15
-title @s subtitle {text:"Survive three waves and the boss",color:"gray"}
+title @s subtitle {translate:"pnp.gateway.survive_three_waves_and_the_boss",fallback:"Survive three waves and the boss",color:"gray"}
 $title @s title {text:"$(name)",color:"light_purple"}

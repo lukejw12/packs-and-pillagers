@@ -12,4 +12,4 @@ scoreboard players operation @e[type=marker,tag=pnp.glide_new] pnp.pid = #me pnp
 tag @e[type=marker,tag=pnp.glide_new] remove pnp.glide_new
 rotate @s 180 52
 playsound minecraft:block.enchantment_table.use master @s ~ ~ ~ 0.8 1.2
-title @s actionbar {text:"Pick a villager to bring back. Click off the scroll to close.",color:"gray"}
+title @s actionbar {translate:"pnp.revive_menu.pick_a_villager_to_bring_back",fallback:"Pick a villager to bring back. Click off the scroll to close.",color:"gray"}

@@ -1,13 +1,13 @@
-$data modify storage pnp:board tt set value [{sprite:"$(sprite)",atlas:"$(atlas)"},{text:" $(name)",color:"gold",bold:true},{text:"\n$(l1)",color:"gray"}]
-$execute unless data storage pnp:board tipd{l2:""} run data modify storage pnp:board tt append value {text:"\n$(l2)",color:"gray"}
-$execute unless data storage pnp:board tipd{l3:""} run data modify storage pnp:board tt append value {text:"\n$(l3)",color:"gray"}
-$execute unless data storage pnp:board tipd{l4:""} run data modify storage pnp:board tt append value {text:"\n$(l4)",color:"gray"}
-$data modify storage pnp:board tt append value {text:"\n$(kn)",color:"dark_gray",italic:true}
+$data modify storage pnp:board tt set value [{sprite:"$(sprite)",atlas:"$(atlas)"},{text:" ",color:"gold",bold:true,extra:[{translate:"pnp.card.$(id).name",fallback:"$(name)"}]},{text:"\n",color:"gray",extra:[{translate:"pnp.card.$(id).line1",fallback:"$(l1)"}]}]
+$execute unless data storage pnp:board tipd{l2:""} run data modify storage pnp:board tt append value {text:"\n",color:"gray",extra:[{translate:"pnp.card.$(id).line2",fallback:"$(l2)"}]}
+$execute unless data storage pnp:board tipd{l3:""} run data modify storage pnp:board tt append value {text:"\n",color:"gray",extra:[{translate:"pnp.card.$(id).line3",fallback:"$(l3)"}]}
+$execute unless data storage pnp:board tipd{l4:""} run data modify storage pnp:board tt append value {text:"\n",color:"gray",extra:[{translate:"pnp.card.$(id).line4",fallback:"$(l4)"}]}
+$data modify storage pnp:board tt append value {text:"\n",color:"dark_gray",italic:true,extra:[{translate:"pnp.card.$(id).type",fallback:"$(kn)"}]}
 $execute unless data storage pnp:board tipd{hp:0} run data modify storage pnp:board tt append value {text:"\n♥ $(hp)   ⚔ $(atk)",color:"red"}
-$execute if data storage pnp:board tipd{kind:"weapon"} run data modify storage pnp:board tt append value {text:"\n⚔ +$(atk) attack",color:"gray"}
-$execute unless data storage pnp:board tipd{heal:0} unless data storage pnp:board tipd{heal:99} run data modify storage pnp:board tt append value {text:"\nHeals $(heal)",color:"green"}
-execute if data storage pnp:board tipd{heal:99} run data modify storage pnp:board tt append value {text:"\nHeals fully",color:"green"}
-$execute if data storage pnp:board tipd{kind:"shop"} run data modify storage pnp:board tt append value {text:"\nCosts $(price) emeralds",color:"dark_green"}
-$execute unless data storage pnp:board tipd{sell:0} run data modify storage pnp:board tt append value {text:"\nSells for $(sl)",color:"dark_green"}
-$execute unless data storage pnp:board tipd{sn:1} run data modify storage pnp:board tt append value {text:"\nStack of $(sn) · worth $(svs) ",color:"dark_aqua"}
+$execute if data storage pnp:board tipd{kind:"weapon"} run data modify storage pnp:board tt append value {text:"\n",color:"gray",extra:[{translate:"pnp.board.tooltip.weapon_attack",fallback:"⚔ +%s attack",with:["$(atk)"]}]}
+$execute unless data storage pnp:board tipd{heal:0} unless data storage pnp:board tipd{heal:99} run data modify storage pnp:board tt append value {text:"\n",color:"green",extra:[{translate:"pnp.board.tooltip.heals",fallback:"Heals %s",with:["$(heal)"]}]}
+execute if data storage pnp:board tipd{heal:99} run data modify storage pnp:board tt append value {text:"\n",extra:[{translate:"pnp.board.tooltip.heals_fully",fallback:"Heals fully"}],color:"green"}
+$execute if data storage pnp:board tipd{kind:"shop"} run data modify storage pnp:board tt append value {text:"\n",color:"dark_green",extra:[{translate:"pnp.board.tooltip.costs",fallback:"Costs %s emeralds",with:["$(price)"]}]}
+$execute unless data storage pnp:board tipd{sell:0} run data modify storage pnp:board tt append value {text:"\n",color:"dark_green",extra:[{translate:"pnp.board.tooltip.sells_for",fallback:"Sells for %s",with:["$(sl)"]}]}
+$execute unless data storage pnp:board tipd{sn:1} run data modify storage pnp:board tt append value {text:"\n",color:"dark_aqua",extra:[{translate:"pnp.board.tooltip.stack_worth",fallback:"Stack of %s · worth %s",with:["$(sn)","$(svs)"]}," "]}
 execute unless data storage pnp:board tipd{sn:1} run data modify storage pnp:board tt append value {sprite:"item/emerald",atlas:"minecraft:items"}

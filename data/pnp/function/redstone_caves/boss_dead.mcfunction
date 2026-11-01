@@ -1,4 +1,3 @@
-bossbar set pnp:monstrosity players
 execute store result score #lr pnp.tmp run random value 1..2
 execute if score #lr pnp.tmp matches 1 run function pnp:card/pop {card:"redstone_awakened"}
 execute if score #lr pnp.tmp matches 2 run function pnp:card/pop {card:"monstrosity_helmet"}

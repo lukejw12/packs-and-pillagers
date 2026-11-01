@@ -3,4 +3,4 @@ execute if score #pman pnp.ids matches 1 run scoreboard players set #pman pnp.id
 execute if score #pman pnp.ids matches 0 unless score #pstate pnp.ids matches 0 run function pnp:speed/step
 function pnp:speed/check
 playsound minecraft:block.note_block.hat master @s ~ ~ ~ 0.7 1.2
-title @s actionbar [{text:"Speed ",color:"gold"},{score:{name:"#speed",objective:"pnp.ids"},color:"white"},{text:"×",color:"white"}]
+title @s actionbar [{text:"",extra:[{translate:"pnp.common.speed",fallback:"Speed"}," "],color:"gold"},{score:{name:"#speed",objective:"pnp.ids"},color:"white"},{text:"×",color:"white"}]

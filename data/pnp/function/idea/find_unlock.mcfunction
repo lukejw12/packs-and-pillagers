@@ -5,5 +5,5 @@ $data modify storage pnp:board fu.p set value $(p)
 data modify storage pnp:board fu.names set value []
 function pnp:idea/find_loop
 execute unless data storage pnp:board fu.names[0] run return 0
-$tellraw @a[scores={pnp.here=$(p)}] [{text:"✦ New recipe: ",color:"yellow"},{storage:"pnp:board",nbt:"fu.names[]",interpret:true,separator:", ",color:"white"}]
+$tellraw @a[scores={pnp.here=$(p)}] [{text:"✦ ",extra:[{translate:"pnp.idea.new_recipe",fallback:"New recipe:"}," "],color:"yellow"},{storage:"pnp:board",nbt:"fu.names[]",interpret:true,separator:", ",color:"white"}]
 $execute as @a[scores={pnp.here=$(p)}] at @s run playsound minecraft:block.amethyst_block.chime master @s ~ ~ ~ 1 1.3

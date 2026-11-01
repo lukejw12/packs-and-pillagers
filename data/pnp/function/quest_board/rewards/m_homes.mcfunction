@@ -1,5 +1,5 @@
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"adventure_pack"}
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"idea_shelf"}
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text: "✔ Quest complete: ", color: "gold"},{text: "New Homes", color: "white"},{text: "  Reward: Adventure Pack and the Shelf idea", color: "gray"}]
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text: "Next: ", color: "yellow"},{text: "Survivor", color: "white"},{text: " - Survive 2 nights", color: "gray"}]
+$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.quest_complete",fallback:"Quest complete:"}," "], color: "gold"},{translate:"pnp.card.q_housing.name",fallback:"New Homes", color: "white"},{text:"  ",extra:[{translate:"pnp.quest_board.reward_adventure_pack_and_the_shelf",fallback:"Reward: Adventure Pack and the Shelf idea"}], color: "gray"}]
+$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"",extra:[{translate:"pnp.quest_board.next",fallback:"Next:"}," "], color: "yellow"},{translate:"pnp.card.q_survivor.name",fallback:"Survivor", color: "white"},{text:" ",extra:[{translate:"pnp.quest_board.survive_2_nights",fallback:"- Survive 2 nights"}], color: "gray"}]
 $execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4

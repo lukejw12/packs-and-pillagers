@@ -3,6 +3,7 @@ execute as @e[type=item_display,tag=pnp.book_base,distance=..40] if score @s pnp
 $execute as @e[tag=pnp.pd_tipnew] run data modify entity @s text set from storage pnp:pedia2 tip.$(id)
 tag @e[tag=pnp.pd_tipnew] remove pnp.pd_tipnew
 data modify storage pnp:pedia2 dtt set value {n:"???",st:0.51f,tzs:-0.2253f}
+$data modify storage pnp:pedia2 dtt.id set value "$(id)"
 $data modify storage pnp:pedia2 dtt.n set from storage pnp:pedia2 meta.$(id).n
 $data modify storage pnp:pedia2 dtt.st set from storage pnp:pedia2 meta.$(id).st
 $data modify storage pnp:pedia2 dtt.tzs set from storage pnp:pedia2 meta.$(id).tzs

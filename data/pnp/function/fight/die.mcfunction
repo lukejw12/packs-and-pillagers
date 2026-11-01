@@ -6,7 +6,7 @@ execute if entity @s[tag=pnp.c.illusioner,tag=!pnp.illusion] at @s as @e[type=it
 execute if entity @s[tag=pnp.k.enemy] run scoreboard players set #killed pnp.tmp 1
 execute if entity @s[tag=pnp.c.villager] if data entity @s item.components."minecraft:custom_data".eq{s:"totem"} run return run function pnp:villager/totem_save
 execute if entity @s[tag=pnp.c.evoker] run playsound minecraft:entity.evoker.death hostile @a[distance=..48] ~ ~ ~ 1 1
-execute if entity @s[tag=pnp.c.evoker] run title @a[distance=..48] actionbar {text:"The Evoker is defeated!",color:"gold"}
+execute if entity @s[tag=pnp.c.evoker] run title @a[distance=..48] actionbar {translate:"pnp.fight.the_evoker_is_defeated",fallback:"The Evoker is defeated!",color:"gold"}
 execute if entity @s[tag=pnp.c.villager] run function pnp:villager/grave
 particle minecraft:poof ~ ~0.2 ~ 0.25 0.1 0.25 0.02 12
 execute if entity @s[tag=pnp.k.enemy] run playsound minecraft:entity.pillager.death master @a[distance=..24] ~ ~ ~ 0.8 1

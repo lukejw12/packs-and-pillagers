@@ -9,7 +9,6 @@ $execute if score #gres pnp.tmp matches 2 run tellraw @s {text:"You pulled your 
 tag @e[type=item_display,tag=pnp.gw_used] remove pnp.gw_used
 $execute on vehicle in pnp:board run tp @s $(cx) $(cy) $(cz)
 rotate @s 180 50
-$bossbar remove pnp:gw$(p)
 $execute in pnp:board positioned $(axc).5 65 16 run kill @e[type=marker,tag=pnp.arena_c,distance=..3]
 $execute in pnp:board run fill $(ax) 60 0 $(ax2) 72 31 minecraft:air
 $execute in pnp:board run forceload remove $(ax) 0 $(ax2) 31
