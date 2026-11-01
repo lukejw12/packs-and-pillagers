@@ -378,3 +378,4 @@ scoreboard objectives add pnp.tipcards dummy
 data modify storage pnp:api kinds set value {res:"Resource",food:"Food",unit:"Worker",enemy:"Monster",struct:"Structure",tool:"Tool",weapon:"Weapon",armor:"Armor",animal:"Animal",node:"Renewable source",trinket:"Talisman",book:"Book",idea:"Idea",quest:"Quest",shop:"Shop",pack:"Card Pack",trophy:"Trophy",portal:"Portal",gate:"Gateway",baby:"Baby",sell:"Sell box"}
 data modify storage pnp:api registered set value {}
 function #pnp:load
+schedule function pnp:card/machine_sync 2t

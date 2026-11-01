@@ -5,4 +5,5 @@ execute if entity @s[tag=pnp.c.hopper] run return run function pnp:route/accept/
 execute if entity @s[tag=pnp.c.sell_box] run return run function pnp:route/accept/sell with storage pnp:board rt
 execute if entity @s[tag=pnp.c.bundle] run return run function pnp:route/accept/bundle with storage pnp:board rt
 execute if entity @s[tag=pnp.c.dropper] run return run function pnp:route/accept/dropper
+execute if entity @s[tag=pnp.cm] run return run function pnp:machine/accepts
 return fail

@@ -85,3 +85,4 @@ execute if score #mode pnp.ids matches 4 run function pnp:pvp/portal/update_all
 execute as @e[type=item_display,tag=pnp.c.war_horn] run function pnp:card/remove
 function pnp:pvp/tick
 execute as @e[type=item_display,tag=pnp.c.redstone_monstrosity,tag=!pnp.rmin] at @s run function pnp:redstone_caves/boss_arrive
+execute as @e[type=item_display,tag=pnp.cm,tag=!pnp.held] at @s run function pnp:machine/tick

@@ -20,6 +20,7 @@ execute if score #nr pnp.tmp matches 2.. run function pnp:raid/ravager/spawn {r:
 scoreboard players operation #ln pnp.tmp = #ne pnp.tmp
 function pnp:raid/ladder/spawn_evoker
 execute if score #nb pnp.tmp matches 1.. run function pnp:raid/boss
+function pnp:raid/ladder/extras
 scoreboard players set @s pnp.raid 1
 scoreboard players set @s pnp.rkind 1
 execute store result storage pnp:board rl.n int 1 run scoreboard players get @s pnp.rlvl

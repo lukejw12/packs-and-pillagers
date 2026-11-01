@@ -7,6 +7,7 @@ execute if entity @s[tag=pnp.c.totem] run scoreboard players set #special pnp.tm
 execute if entity @s[tag=pnp.c.wrench] run scoreboard players set #special pnp.tmp 4
 execute if entity @s[tag=pnp.c.barrel] run scoreboard players set #special pnp.tmp 5
 execute if entity @s[tag=pnp.c.hopper] run scoreboard players set #special pnp.tmp 6
+execute if entity @s[tag=pnp.cm] run scoreboard players set #special pnp.tmp 24
 execute if entity @s[tag=pnp.k.gate] run scoreboard players set #special pnp.tmp 20
 execute if entity @s[tag=pnp.k.portal] run scoreboard players set #special pnp.tmp 20
 execute if entity @s[tag=pnp.c.admin_codex] run scoreboard players set #special pnp.tmp 21

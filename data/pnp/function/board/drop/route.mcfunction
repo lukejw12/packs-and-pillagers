@@ -18,6 +18,9 @@ execute if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.sell] run return run
 execute if score #hsize pnp.tmp matches 1 if score #hkind pnp.tmp matches 3 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] run return run function pnp:board/drop/heal
 execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] if function pnp:villager/try_route run return 1
 execute if score #hsize pnp.tmp matches 1 if score #hkind pnp.tmp matches 2 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] run return run function pnp:board/drop/equip
+scoreboard players set #tcm pnp.tmp 0
+execute as @e[type=item_display,tag=pnp.cm,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #tcm pnp.tmp 1
+execute if score #tcm pnp.tmp matches 1 run return run function pnp:machine/drop
 scoreboard players set #tbarrel pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.c.barrel,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #tbarrel pnp.tmp 1
 execute if score #tbarrel pnp.tmp matches 1 run return run function pnp:logistics/drop/barrel

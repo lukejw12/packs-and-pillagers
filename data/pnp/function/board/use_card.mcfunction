@@ -7,6 +7,7 @@ execute if score #special pnp.tmp matches 3 run function pnp:revive_menu/open
 execute if score #special pnp.tmp matches 4 run function pnp:wrench/toggle
 execute if score #special pnp.tmp matches 5 run function pnp:logistics/barrel/take
 execute if score #special pnp.tmp matches 6 run function pnp:logistics/hopper/clear
+execute if score #special pnp.tmp matches 24 as @e[type=item_display,tag=pnp.cm,distance=..64] if score @s pnp.uid = #uid pnp.tmp at @s run function pnp:machine/call {f:"on_use"}
 execute if score #special pnp.tmp matches 7 run function pnp:idea/learn
 execute if score #special pnp.tmp matches 8 run function pnp:book/open_cardopedia
 execute if score #special pnp.tmp matches 9 run function pnp:board/size/add_trophy

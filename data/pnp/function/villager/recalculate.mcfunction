@@ -94,12 +94,14 @@ execute if data entity @s item.components."minecraft:custom_data".eq{t:"bow"} ru
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"crossbow"} run scoreboard players set @s pnp.acd 28
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"trident"} run scoreboard players set @s pnp.acd 24
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"mace"} run scoreboard players set @s pnp.acd 30
+function pnp:villager/gear/addon
 scoreboard players operation @s pnp.hpmax = @s pnp.hpb
 execute if data entity @s item.components."minecraft:custom_data".eq{a:"leather_tunic"} run scoreboard players add @s pnp.hpmax 2
 execute if data entity @s item.components."minecraft:custom_data".eq{a:"iron_chestplate"} run scoreboard players add @s pnp.hpmax 4
 execute if data entity @s item.components."minecraft:custom_data".eq{a:"diamond_chestplate"} run scoreboard players add @s pnp.hpmax 6
 execute if data entity @s item.components."minecraft:custom_data".eq{a:"monstrosity_helmet"} run scoreboard players add @s pnp.hpmax 4
 execute if data entity @s item.components."minecraft:custom_data".eq{a:"monstrosity_helmet"} run tag @s add pnp.helm_rm
+scoreboard players operation @s pnp.hpmax += #ghp pnp.tmp
 scoreboard players operation #lb pnp.tmp = @s pnp.vlvl
 scoreboard players remove #lb pnp.tmp 1
 scoreboard players operation @s pnp.hpmax += #lb pnp.tmp
@@ -118,6 +120,7 @@ execute if data entity @s item.components."minecraft:custom_data".eq{t:"trident"
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"mace"} run scoreboard players add #atkb pnp.tmp 5
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"spear"} run scoreboard players add #atkb pnp.tmp 3
 execute if data entity @s item.components."minecraft:custom_data".eq{t:"redstone_awakened"} run scoreboard players add #atkb pnp.tmp 3
+scoreboard players operation #atkb pnp.tmp += #gatk pnp.tmp
 execute if entity @s[tag=pnp.sp.swordsman] run scoreboard players add #atkb pnp.tmp 1
 execute if entity @s[tag=pnp.sp.swordsman] run scoreboard players add @s pnp.hpmax 2
 execute if entity @s[tag=pnp.wellfed] run scoreboard players add #atkb pnp.tmp 1

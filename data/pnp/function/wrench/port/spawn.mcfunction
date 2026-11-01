@@ -15,3 +15,4 @@ $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.h
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.sell_box,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/sell_box
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.bundle,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/bundle
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.dropper,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/dropper
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.cm,tag=!pnp.held,distance=..24] at @s run function pnp:machine/ports/spawn

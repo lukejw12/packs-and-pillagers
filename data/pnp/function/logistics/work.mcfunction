@@ -5,3 +5,5 @@ execute as @e[type=item_display,tag=pnp.c.dropper] at @s if data entity @s item.
 execute as @e[type=item_display,tag=pnp.c.furnace] at @s if data entity @s item.components."minecraft:custom_data".fq[0] run function pnp:logistics/furnace/tick
 execute as @e[type=item_display,tag=pnp.port] at @s run function pnp:wrench/port/follow
 execute as @e[type=item_display,tag=pnp.c.autocrafter] at @s if data entity @s item.components."minecraft:custom_data".ar run function pnp:logistics/autocrafter/tick
+execute as @e[type=item_display,tag=pnp.cm,tag=pnp.hasout] at @s if data entity @s item.components."minecraft:custom_data".mo[0] run function pnp:machine/push
+execute as @e[type=item_display,tag=pnp.cm,tag=!pnp.hasout] at @s if data entity @s item.components."minecraft:custom_data".mo[0] run function pnp:machine/spill_out

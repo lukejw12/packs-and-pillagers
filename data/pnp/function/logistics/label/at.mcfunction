@@ -1,5 +1,6 @@
 execute unless function pnp:logistics/has_parts run function pnp:logistics/add_parts
 execute unless function pnp:logistics/has_icon run function pnp:logistics/add_icon
+execute if entity @s[tag=pnp.cm] run return run function pnp:machine/label
 execute if entity @s[tag=pnp.c.barrel] run function pnp:logistics/label/barrel
 execute if entity @s[tag=pnp.c.furnace] run function pnp:logistics/label/furnace
 execute if entity @s[tag=pnp.c.autocrafter] run function pnp:logistics/label/autocrafter

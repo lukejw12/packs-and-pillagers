@@ -6,3 +6,5 @@ $execute as @e[type=item_display,tag=pnp.k.shop,tag=pnp.c.$(id),distance=..0.01]
 $execute as @e[type=item_display,tag=pnp.card,distance=..0.01] if score @s pnp.uid = #uid pnp.ids run function pnp:cardopedia/mark_found {c:"$(id)"}
 execute as @e[type=item_display,tag=pnp.c.enchanted_book,distance=..0.01] if score @s pnp.uid = #uid pnp.ids run function pnp:enchanted_book/roll
 execute as @e[type=item_display,tag=pnp.c.copper_barrel,distance=..0.01] if score @s pnp.uid = #uid pnp.ids run tag @s add pnp.c.barrel
+$execute if data storage pnp:cards machine.$(id) as @e[type=item_display,tag=pnp.card,distance=..0.01] if score @s pnp.uid = #uid pnp.ids run function pnp:card/machine {id:"$(id)"}
+$execute if data storage pnp:cards machines.$(id) as @e[type=item_display,tag=pnp.card,distance=..0.01] if score @s pnp.uid = #uid pnp.ids run tag @s add pnp.cm
