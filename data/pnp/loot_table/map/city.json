@@ -1,0 +1,30 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:map",
+          "functions": [
+            {
+              "type": "minecraft:exploration_map",
+              "destination": "pnp:ancient_city",
+              "decoration": "minecraft:red_x",
+              "zoom": 2,
+              "skip_existing_chunks": false
+            },
+            {
+              "type": "minecraft:set_name",
+              "name": {
+                "text": "Deep Dark Map",
+                "italic": false
+              },
+              "target": "item_name"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+$data modify storage pnp:pvp a$(p).surv set value []
+$data modify storage pnp:pvp ab.list set from storage pnp:pvp a$(p).units
+scoreboard players set #pi pnp.tmp 0
+$function pnp:pvp/abort_loop {p:$(p)}
+scoreboard players set @s pnp.pvst 3
+tellraw @s {text:"The player you were attacking left their table, so your fighters are coming home.",color:"yellow"}

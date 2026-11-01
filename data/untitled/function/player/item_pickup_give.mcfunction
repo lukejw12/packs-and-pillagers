@@ -1,2 +1,0 @@
-
-$give @s $(id) $(count)

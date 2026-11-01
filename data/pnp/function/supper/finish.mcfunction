@@ -1,0 +1,10 @@
+$execute if score #hungry pnp.tmp matches 1.. in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.villager,tag=!pnp.held,tag=pnp.unfed,distance=..23,sort=random] at @s run function pnp:supper/starve
+$execute if score #part pnp.tmp matches 1 in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.villager,tag=!pnp.held,tag=!pnp.dying,tag=pnp.partfed,distance=..23,sort=random,limit=1] at @s run function pnp:supper/go_hungry
+$execute if score #wf pnp.tmp matches 1 in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.villager,tag=!pnp.held,distance=..23] at @s run function pnp:supper/well_fed
+execute if score #wf pnp.tmp matches 1 run tellraw @a[tag=pnp.mate] [{text:"Supper: ",color:"gold"},{text:"everyone ate well! ",color:"green"},{text:"Well Fed: healed 2 and +1 attack until tomorrow's supper.",color:"gray"}]
+execute if score #wf pnp.tmp matches 0 if score #unfed pnp.tmp matches 0 if score #part pnp.tmp matches 0 run tellraw @a[tag=pnp.mate] [{text:"Supper: ",color:"gold"},{text:"everyone ate their fill. ",color:"gray"},{text:"Cook or bake at least half of their food and they'll be Well Fed.",color:"dark_gray"}]
+execute if score #need pnp.tmp matches ..0 run playsound minecraft:entity.player.burp master @s ~ ~ ~ 0.5 1
+execute if score #unfed pnp.tmp matches 0 if score #part pnp.tmp matches 1 run tellraw @a[tag=pnp.mate] [{text:"Supper: ",color:"gold"},{text:"food ran short. One villager went Hungry: ",color:"yellow"},{text:"2 damage and 1 less attack until tomorrow's supper.",color:"gray"}]
+execute if score #unfed pnp.tmp matches 1 run tellraw @a[tag=pnp.mate] [{text:"Supper: ",color:"gold"},{text:"1 villager starved to death. Each villager needs 2 food points.",color:"red"}]
+execute if score #unfed pnp.tmp matches 2.. run tellraw @a[tag=pnp.mate] [{text:"Supper: ",color:"gold"},{score:{name:"#unfed",objective:"pnp.tmp"},color:"red"},{text:" villagers starved to death. Each villager needs 2 food points.",color:"red"}]
+execute if score #need pnp.tmp matches 1.. run playsound minecraft:entity.villager.no master @s ~ ~ ~ 0.8 1

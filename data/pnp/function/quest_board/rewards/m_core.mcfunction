@@ -1,0 +1,5 @@
+$execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"tnt"}
+$execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"tnt"}
+$tellraw @a[scores={pnp.tpid=$(p)}] [{text: "✔ Quest complete: ", color: "gold"},{text: "A Charged Core", color: "white"},{text: "  Reward: 2 TNT", color: "gray"}]
+$tellraw @a[scores={pnp.tpid=$(p)}] [{text: "Next: ", color: "yellow"},{text: "Summoning Orb", color: "white"},{text: " - Find a Summoning Orb (Evokers)", color: "gray"}]
+$execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4

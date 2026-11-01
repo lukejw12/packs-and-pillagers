@@ -1,0 +1,1 @@
+summon item_display ~ ~ ~ {Tags:["pnp.sb_lock"],item:{id:"minecraft:barrier",count:1},item_display:"fixed",brightness:{sky:15,block:15},transformation:{left_rotation:[-0.7071068f,0f,0f,0.7071068f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[9f,9f,0.2f]}}

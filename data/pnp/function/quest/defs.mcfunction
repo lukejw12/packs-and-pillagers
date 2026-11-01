@@ -1,0 +1,1 @@
+data modify storage pnp:quests ids set value ["q_lumber", "q_stone", "q_harvest", "q_iron", "q_feast", "q_wool", "q_village", "q_housing", "q_hunter", "q_survivor", "q_delver", "q_family", "q_angler", "q_wanderer", "q_slayer", "q_miner"]

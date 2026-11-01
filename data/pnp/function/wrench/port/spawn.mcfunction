@@ -1,0 +1,17 @@
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.oak_tree,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/oak_tree
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.rock,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/rock
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.berry_bush,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/berry_bush
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.forest,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/forest
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.mountain,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/mountain
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.cave,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/cave
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.farm,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/farm
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.sheep,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/sheep
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.cow,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/cow
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.chicken,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/chicken
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.pig,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/pig
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.furnace,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/furnace
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.barrel,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/barrel
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.hopper,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/hopper
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.sell_box,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/sell_box
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.bundle,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/bundle
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.dropper,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/dropper

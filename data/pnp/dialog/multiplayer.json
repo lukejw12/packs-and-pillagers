@@ -1,0 +1,123 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "Multiplayer",
+    "color": "gold",
+    "bold": true
+  },
+  "external_title": {
+    "text": "Multiplayer"
+  },
+  "body": [
+    {
+      "type": "minecraft:plain_message",
+      "width": 330,
+      "contents": [
+        {
+          "text": "Shared Board",
+          "color": "white"
+        },
+        {
+          "text": ": everyone plays on one table.\n",
+          "color": "gray"
+        },
+        {
+          "text": "Individual Boards",
+          "color": "white"
+        },
+        {
+          "text": ": everyone gets their own table.\n",
+          "color": "gray"
+        },
+        {
+          "text": "PvP",
+          "color": "white"
+        },
+        {
+          "text": ": your own tables, and you can raid each other.",
+          "color": "gray"
+        }
+      ]
+    }
+  ],
+  "can_close_with_escape": false,
+  "columns": 1,
+  "actions": [
+    {
+      "label": [
+        {
+          "text": ""
+        },
+        {
+          "text": "",
+          "font": "pnp:menu"
+        },
+        {
+          "text": "  Shared Board"
+        }
+      ],
+      "tooltip": {
+        "text": "Everyone plays on the host table together."
+      },
+      "width": 230,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger pnp.menu set 2"
+      }
+    },
+    {
+      "label": [
+        {
+          "text": ""
+        },
+        {
+          "text": "",
+          "font": "pnp:menu"
+        },
+        {
+          "text": "  Individual Boards"
+        }
+      ],
+      "tooltip": {
+        "text": "Everyone builds their own table."
+      },
+      "width": 230,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger pnp.menu set 3"
+      }
+    },
+    {
+      "label": [
+        {
+          "text": ""
+        },
+        {
+          "text": "",
+          "font": "pnp:menu"
+        },
+        {
+          "text": "  PvP"
+        }
+      ],
+      "tooltip": {
+        "text": "Your own tables. Send fighters through portals to raid other players."
+      },
+      "width": 230,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger pnp.menu set 4"
+      }
+    }
+  ],
+  "exit_action": {
+    "label": {
+      "text": "Back"
+    },
+    "width": 120,
+    "action": {
+      "type": "minecraft:show_dialog",
+      "dialog": "pnp:start"
+    }
+  }
+}

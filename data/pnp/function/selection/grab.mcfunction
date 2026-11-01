@@ -1,0 +1,2 @@
+$execute in pnp:board positioned $(x) 60 $(z) positioned ~-1 ~ ~-1 as @e[type=item_display,tag=pnp.card,tag=!pnp.held,tag=!pnp.infight,tag=!pnp.k.enemy,tag=!pnp.k.shop,tag=!pnp.k.sell,tag=!pnp.k.quest,tag=!pnp.cg_carry,dx=$(dx),dy=12,dz=$(dz)] run tag @s add pnp.selc
+$execute in pnp:board positioned $(x) 60 $(z) positioned ~-1 ~ ~-1 as @e[type=item_display,tag=pnp.c.wandering_trader,tag=!pnp.held,dx=$(dx),dy=12,dz=$(dz)] run tag @s add pnp.selc

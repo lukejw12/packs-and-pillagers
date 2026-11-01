@@ -1,2 +1,0 @@
-
-execute align xyz positioned ~0.5 ~0.5 ~0.5 if block ~ ~ ~ #untitled:airs unless entity @e[type=mannequin,tag=untitled.jeff,distance=..0.7] run function untitled:player/interact/place_from_hand with entity @a[tag=untitled.spectate,limit=1] SelectedItem

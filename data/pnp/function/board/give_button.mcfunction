@@ -1,0 +1,1 @@
+give @s minecraft:carrot_on_a_stick[custom_data={pnp:{board_button:1b}},item_model="minecraft:book",item_name={text:"Card Board",color:"gold"},lore=[{text:"Right-click to open your board",color:"gray",italic:false},{text:"Sneak to put it away",color:"gray",italic:false}]]

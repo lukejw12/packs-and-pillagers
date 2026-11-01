@@ -1,0 +1,69 @@
+{
+  "type": "minecraft:multi_action",
+  "title": {
+    "text": "Packs & Pillagers",
+    "color": "gold",
+    "bold": true
+  },
+  "external_title": {
+    "text": "How do you want to play?"
+  },
+  "body": [
+    {
+      "type": "minecraft:plain_message",
+      "width": 330,
+      "contents": {
+        "text": "How do you want to play?",
+        "color": "gray"
+      }
+    }
+  ],
+  "can_close_with_escape": false,
+  "columns": 2,
+  "actions": [
+    {
+      "label": [
+        {
+          "text": ""
+        },
+        {
+          "text": "",
+          "font": "pnp:menu"
+        },
+        {
+          "text": "  Single Player"
+        }
+      ],
+      "tooltip": {
+        "text": "Just you and your own card table."
+      },
+      "width": 170,
+      "action": {
+        "type": "minecraft:run_command",
+        "command": "/trigger pnp.menu set 1"
+      }
+    },
+    {
+      "label": [
+        {
+          "text": ""
+        },
+        {
+          "text": "",
+          "font": "pnp:menu"
+        },
+        {
+          "text": "  Multiplayer"
+        }
+      ],
+      "tooltip": {
+        "text": "Play with friends: share a table, play side by side, or raid each other."
+      },
+      "width": 170,
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "pnp:multiplayer"
+      }
+    }
+  ]
+}

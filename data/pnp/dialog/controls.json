@@ -1,0 +1,231 @@
+{
+  "type": "minecraft:notice",
+  "title": {
+    "text": "Card Table Controls",
+    "color": "gold"
+  },
+  "external_title": {
+    "text": "Card Table Controls"
+  },
+  "body": [
+    {
+      "type": "minecraft:plain_message",
+      "width": 320,
+      "contents": [
+        "",
+        {
+          "text": "Moving\n",
+          "bold": true,
+          "color": "gold"
+        },
+        {
+          "keybind": "key.forward",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "keybind": "key.left",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "keybind": "key.back",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "keybind": "key.right",
+          "color": "yellow"
+        },
+        {
+          "text": "  move around the table\n",
+          "color": "gray"
+        },
+        {
+          "text": "Hold",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "keybind": "key.jump",
+          "color": "yellow"
+        },
+        {
+          "text": "  zoom out and move faster\n",
+          "color": "gray"
+        },
+        {
+          "text": "Hold",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "keybind": "key.sprint",
+          "color": "yellow"
+        },
+        {
+          "text": "  zoom in close\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.attack",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on empty felt",
+          "color": "yellow"
+        },
+        {
+          "text": "  glide there\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.sneak",
+          "color": "yellow"
+        },
+        {
+          "text": "  leave the table",
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:plain_message",
+      "width": 320,
+      "contents": [
+        "",
+        {
+          "text": "Cards\n",
+          "bold": true,
+          "color": "gold"
+        },
+        {
+          "keybind": "key.attack",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on a card",
+          "color": "yellow"
+        },
+        {
+          "text": "  pick it up, click again to drop it\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.use",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on a card",
+          "color": "yellow"
+        },
+        {
+          "text": "  use it: open packs and books, learn ideas\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.use",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on a villager",
+          "color": "yellow"
+        },
+        {
+          "text": "  give it a new name",
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:plain_message",
+      "width": 320,
+      "contents": [
+        "",
+        {
+          "text": "Tools\n",
+          "bold": true,
+          "color": "gold"
+        },
+        {
+          "keybind": "key.hotbar.9",
+          "color": "yellow"
+        },
+        {
+          "text": "  the Wrench: right-click to switch tool mode\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.use",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on a port",
+          "color": "yellow"
+        },
+        {
+          "text": "  in tool mode, then another to link them\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.attack",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "on a port",
+          "color": "yellow"
+        },
+        {
+          "text": "  in tool mode, cuts its link\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.sneak",
+          "color": "yellow"
+        },
+        " ",
+        {
+          "text": "while painting",
+          "color": "yellow"
+        },
+        {
+          "text": "  stop painting\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.hotbar.7",
+          "color": "yellow"
+        },
+        {
+          "text": "  the Grid: right-click to line every card up\n",
+          "color": "gray"
+        },
+        {
+          "keybind": "key.hotbar.8",
+          "color": "yellow"
+        },
+        {
+          "text": "  these controls, any time",
+          "color": "gray"
+        }
+      ]
+    }
+  ],
+  "action": {
+    "label": {
+      "text": "Show the keyboard"
+    },
+    "action": {
+      "type": "run_command",
+      "command": "/trigger pnp.kbt"
+    }
+  },
+  "can_close_with_escape": true,
+  "pause": false
+}

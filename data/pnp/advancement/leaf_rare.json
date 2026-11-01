@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "loot": {
+      "trigger": "minecraft:player_generates_container_loot",
+      "conditions": {
+        "loot_tables": [
+          "minecraft:chests/stronghold_corridor",
+          "minecraft:chests/stronghold_crossing",
+          "minecraft:chests/stronghold_library",
+          "minecraft:chests/nether_bridge",
+          "minecraft:chests/bastion_bridge",
+          "minecraft:chests/bastion_hoglin_stable",
+          "minecraft:chests/bastion_other",
+          "minecraft:chests/bastion_treasure",
+          "minecraft:chests/ancient_city",
+          "minecraft:chests/ancient_city_ice_box",
+          "minecraft:chests/woodland_mansion",
+          "minecraft:chests/end_city_treasure"
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "pnp:leaves/loot_rare"
+  }
+}

@@ -1,0 +1,1 @@
+$title @s actionbar [{text:"Painting ",color:"gray"},{storage:"pnp:cards",nbt:"paint[$(i)].n",color:"white"},{text:". Click two corners. Right-click the brush for the next colour, Shift to stop.",color:"gray"}]

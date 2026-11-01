@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "loot": {
+      "trigger": "minecraft:player_generates_container_loot",
+      "conditions": {
+        "loot_tables": [
+          "minecraft:chests/abandoned_mineshaft",
+          "minecraft:chests/simple_dungeon",
+          "minecraft:chests/desert_pyramid",
+          "minecraft:chests/jungle_temple",
+          "minecraft:chests/shipwreck_treasure",
+          "minecraft:chests/pillager_outpost",
+          "minecraft:chests/buried_treasure",
+          "minecraft:chests/abandoned_camp_secret_chest",
+          "minecraft:chests/trial_chambers/corridor",
+          "minecraft:chests/trial_chambers/entrance",
+          "minecraft:chests/trial_chambers/intersection",
+          "minecraft:chests/trial_chambers/intersection_barrel",
+          "minecraft:chests/trial_chambers/supply"
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "pnp:leaves/loot_uncommon"
+  }
+}

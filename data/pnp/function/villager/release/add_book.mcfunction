@@ -1,0 +1,1 @@
+$data modify storage pnp:board rel.offers append value {buy:{id:"minecraft:emerald",count:$(price)},buyB:{id:"minecraft:book",count:1},sell:{id:"minecraft:enchanted_book",count:1,components:{"minecraft:stored_enchantments":{"minecraft:$(e)":$(l)}}},maxUses:12,uses:0,xp:15,priceMultiplier:0.2f,rewardExp:1b,demand:0,specialPrice:0}

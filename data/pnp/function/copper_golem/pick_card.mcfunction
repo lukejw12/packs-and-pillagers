@@ -1,0 +1,1 @@
+$execute if score @s pnp.cgn matches ..7 as @e[type=item_display,tag=pnp.card,tag=!pnp.held,tag=!pnp.infight,distance=..2.5,sort=nearest] if entity @s[tag=pnp.c.$(c)] unless score @s pnp.stack = #gh pnp.tmp at @s unless entity @e[type=item_display,tag=pnp.card,tag=!pnp.cg_carry,tag=!pnp.c.copper_golem,distance=0.01..0.45] run function pnp:copper_golem/grab

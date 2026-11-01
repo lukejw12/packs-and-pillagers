@@ -1,0 +1,1 @@
+$execute on passengers if entity @s[type=text_display,tag=pnp.card_part,tag=!pnp.stat_label,tag=!pnp.lstat,tag=!pnp.qlabel] run data merge entity @s {line_width:$(lw),transformation:{translation:[0f,0.0145f,$(tz)f],scale:[$(ts)f,$(ts)f,$(ts)f]}}

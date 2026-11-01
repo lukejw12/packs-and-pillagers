@@ -1,0 +1,6 @@
+scoreboard players set #ox pnp.tmp 0
+scoreboard players set #oz pnp.tmp 0
+execute if score #pn pnp.tmp matches 1 run scoreboard players set #ox pnp.tmp -560
+execute if score #pn pnp.tmp matches 1 run scoreboard players set #oz pnp.tmp -160
+execute if score #pn pnp.tmp matches 2 run scoreboard players set #ox pnp.tmp -560
+execute if score #pn pnp.tmp matches 2 run scoreboard players set #oz pnp.tmp 160

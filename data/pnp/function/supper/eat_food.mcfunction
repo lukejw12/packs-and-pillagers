@@ -1,0 +1,2 @@
+$execute if score #need pnp.tmp matches 1.. as @e[type=item_display,tag=pnp.c.$(id),tag=!pnp.popping,tag=!pnp.meal,dx=170,dy=15,dz=140] run function pnp:supper/eat {v:$(v),m:$(m)}
+$execute if score #need pnp.tmp matches 1.. as @e[type=item_display,tag=pnp.c.barrel,scores={pnp.bcount=1..},dx=170,dy=15,dz=140] if data entity @s item.components."minecraft:custom_data"{bt:"$(id)"} at @s run function pnp:supper/eat_barrel {v:$(v),m:$(m)}

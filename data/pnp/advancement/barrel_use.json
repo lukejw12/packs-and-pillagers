@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "use": {
+      "trigger": "minecraft:any_block_use",
+      "conditions": {
+        "location": {
+          "type": "minecraft:location_check",
+          "predicate": {
+            "block": {
+              "blocks": "minecraft:barrel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "pnp:vanilla/barrel_use"
+  }
+}

@@ -1,0 +1,1 @@
+data modify storage pnp:cards paint set value [{b:"green_wool",n:"Green"},{b:"lime_wool",n:"Lime"},{b:"yellow_wool",n:"Yellow"},{b:"orange_wool",n:"Orange"},{b:"red_wool",n:"Red"},{b:"pink_wool",n:"Pink"},{b:"purple_wool",n:"Purple"},{b:"blue_wool",n:"Blue"},{b:"light_blue_wool",n:"Light blue"},{b:"cyan_wool",n:"Cyan"},{b:"gray_wool",n:"Gray"},{b:"white_wool",n:"White"}]

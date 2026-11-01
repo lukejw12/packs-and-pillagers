@@ -1,0 +1,5 @@
+$scoreboard players set #np pnp.tmp $(p)
+$scoreboard players set #nv pnp.tmp $(v)
+$scoreboard players set #nr pnp.tmp $(r)
+$scoreboard players set #ne pnp.tmp $(e)
+$scoreboard players set #nb pnp.tmp $(b)

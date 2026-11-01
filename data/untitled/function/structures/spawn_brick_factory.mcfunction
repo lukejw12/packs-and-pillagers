@@ -1,2 +1,0 @@
-summon item_display ~ ~ ~ {Rotation:[-90f,0f],width:1f,height:1f,item_display:"ground",Tags:["brick_factory","structure_display"],item:{id:"minecraft:structure_void",count:1,components:{"minecraft:item_model":"untitled:structures/brick_factory"}}}
-setblock ~ ~ ~ structure_void

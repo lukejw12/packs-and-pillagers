@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "capture": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "item": {
+          "items": "minecraft:carrot_on_a_stick",
+          "predicates": {
+            "minecraft:custom_data": "{pnp:{board_button:1b}}"
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#pnp:capturable",
+            "minecraft:flags": {
+              "is_baby": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "pnp:world/capture"
+  }
+}

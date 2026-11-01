@@ -1,0 +1,2 @@
+$execute as @e[type=item_display,tag=pnp.inrec,tag=pnp.c.$(u),tag=!pnp.c.copper_barrel,limit=1,sort=furthest] if entity @s[tag=pnp.c.barrel] run function pnp:logistics/barrel/save_contents
+$execute as @e[type=item_display,tag=pnp.inrec,tag=pnp.c.$(u),limit=1,sort=furthest] run function pnp:card/remove

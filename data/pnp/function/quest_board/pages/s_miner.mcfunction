@@ -1,0 +1,7 @@
+$execute if data storage pnp:board qbr{t:0} run data modify storage pnp:board qbs append value {text: "Miner I: Mine 10 ores in the world ($(n)/10)\n", color: "#2b1a0c"}
+execute if data storage pnp:board qbr{t:0} run data modify storage pnp:board qbs append value {text: "   Reward: Adventure Pack\n", color: "#7a5a30"}
+$execute if data storage pnp:board qbr{t:1} run data modify storage pnp:board qbs append value {text: "Miner II: Mine 30 ores in the world ($(n)/30)\n", color: "#2b1a0c"}
+execute if data storage pnp:board qbr{t:1} run data modify storage pnp:board qbs append value {text: "   Reward: Iron Pickaxe\n", color: "#7a5a30"}
+$execute if data storage pnp:board qbr{t:2} run data modify storage pnp:board qbs append value {text: "Miner III: Mine 80 ores in the world ($(n)/80)\n", color: "#2b1a0c"}
+execute if data storage pnp:board qbr{t:2} run data modify storage pnp:board qbs append value {text: "   Reward: Caving Pack and 2 Emeralds\n", color: "#7a5a30"}
+execute if data storage pnp:board qbr{t:3} run data modify storage pnp:board qbs append value {text: "✔ Miner: all three done\n", color: "#4a7a2a"}

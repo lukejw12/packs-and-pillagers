@@ -1,0 +1,1 @@
+$execute on passengers if entity @s[tag=pnp.lstat] run data modify entity @s text set value [{text:"",color:"black"},{sprite:"item/raw_iron",atlas:"minecraft:items",color:"white"},{text:" $(q)  "},{sprite:"item/coal",atlas:"minecraft:items",color:"white"},{text:" $(f)"}]

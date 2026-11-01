@@ -1,0 +1,2 @@
+$execute in pnp:board as @e[type=item_display,tag=pnp.card,tag=pnp.k.shop,tag=!pnp.c.wandering_trader,tag=!pnp.held,x=$(x0),y=60,z=-4,dx=33,dy=12,dz=40] at @s positioned ~ 65.01 $(a0).0 positioned ~ ~ ~0.75 run function pnp:board/size/place_shop
+$execute in pnp:board as @e[type=item_display,tag=pnp.card,tag=pnp.k.sell,tag=!pnp.held,x=$(x0),y=60,z=-4,dx=33,dy=12,dz=40] at @s positioned ~ 65.01 $(a0).0 positioned ~ ~ ~0.75 run function pnp:board/size/place_shop

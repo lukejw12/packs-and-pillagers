@@ -1,2 +1,0 @@
-
-execute if items entity @a[tag=untitled.spectate,limit=1] weapon.mainhand *[!custom_data~{card:1b}] as @e[type=mannequin,tag=untitled.jeff,limit=1] at @s anchored eyes positioned ^ ^ ^ run function untitled:player/interact/place_raycast

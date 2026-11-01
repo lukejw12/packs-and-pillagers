@@ -1,0 +1,1 @@
+execute as @e[type=item_display,tag=pnp.c.hopper,distance=..64] if score @s pnp.uid = #uid pnp.tmp at @s if data entity @s item.components."minecraft:custom_data".flt run function pnp:logistics/hopper/clear_at

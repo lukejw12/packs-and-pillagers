@@ -1,0 +1,4 @@
+execute if entity @s[tag=pnp.in_board] unless score @s pnp.gws matches 1.. run function pnp:board/close
+scoreboard players operation @s pnp.pold = @s pnp.plot
+scoreboard players set @s pnp.plot 3
+tellraw @s {text:"Your Card Board now takes you to the shared table. Your own table is paused until the shared table is turned off.",color:"green"}

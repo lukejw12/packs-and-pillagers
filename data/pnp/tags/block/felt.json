@@ -1,0 +1,31 @@
+{
+  "values": [
+    "minecraft:green_wool",
+    "minecraft:tuff_bricks",
+    "minecraft:deepslate_tiles",
+    "minecraft:prismarine_bricks",
+    "minecraft:dark_oak_planks",
+    "minecraft:brown_wool",
+    "minecraft:lime_wool",
+    "minecraft:yellow_wool",
+    "minecraft:orange_wool",
+    "minecraft:red_wool",
+    "minecraft:pink_wool",
+    "minecraft:purple_wool",
+    "minecraft:blue_wool",
+    "minecraft:light_blue_wool",
+    "minecraft:cyan_wool",
+    "minecraft:gray_wool",
+    "minecraft:white_wool",
+    "minecraft:polished_tuff",
+    "minecraft:deepslate_bricks",
+    "minecraft:polished_deepslate",
+    "minecraft:redstone_ore",
+    "minecraft:sculk",
+    "minecraft:dark_prismarine",
+    "minecraft:stripped_dark_oak_log",
+    "minecraft:polished_blackstone",
+    "minecraft:polished_blackstone_bricks",
+    "minecraft:redstone_block"
+  ]
+}

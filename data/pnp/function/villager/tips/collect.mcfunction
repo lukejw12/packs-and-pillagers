@@ -1,0 +1,20 @@
+function pnp:villager/tips/level
+execute if entity @s[tag=pnp.sp.swordsman] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.swordsman
+execute if entity @s[tag=pnp.sp.miner] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.miner
+execute if entity @s[tag=pnp.sp.lumberjack] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.lumberjack
+execute if entity @s[tag=pnp.sp.farmer] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.farmer
+execute if entity @s[tag=pnp.sp.shepherd] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.shepherd
+execute if entity @s[tag=pnp.sp.fisher] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.fisher
+execute if entity @s[tag=pnp.sp.smith] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.smith
+execute if entity @s[tag=pnp.sp.cleric] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.cleric
+execute if entity @s[tag=pnp.sp.scholar] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.scholar
+execute if entity @s[tag=pnp.sp.explorer] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.explorer
+execute if entity @s[tag=pnp.sp.builder] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.builder
+execute if entity @s[tag=pnp.sp.archer] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.archer
+execute if entity @s[tag=pnp.sp.guard] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.guard
+execute if entity @s[tag=pnp.sp.brute] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.brute
+execute if entity @s[tag=pnp.sp.lancer] run data modify storage pnp:board tipj.spl append from storage pnp:cards sptxt.lancer
+execute if entity @s[tag=pnp.tal.totem] run data modify storage pnp:board tipj.spl append from storage pnp:cards taltxt.totem
+execute if entity @s[tag=pnp.tal.clock] run data modify storage pnp:board tipj.spl append from storage pnp:cards taltxt.clock
+execute if entity @s[tag=pnp.tal.compass] run data modify storage pnp:board tipj.spl append from storage pnp:cards taltxt.compass
+execute if entity @s[tag=pnp.tal.rabbit_foot] run data modify storage pnp:board tipj.spl append from storage pnp:cards taltxt.rabbit_foot
