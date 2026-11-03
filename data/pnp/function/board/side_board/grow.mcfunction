@@ -1,5 +1,5 @@
 execute unless score @s pnp.sbsz matches 12.. run return run title @a[tag=pnp.leafpay] actionbar {translate:"pnp.board.side_board.unlock_the_side_table_to_the",fallback:"Unlock the side table to the left of your table first: 10 Emerald Blocks.",color:"gray"}
-execute if score @s pnp.sbsz matches 36.. run return run title @a[tag=pnp.leafpay] actionbar {translate:"pnp.board.side_board.your_side_board_is_as_big",fallback:"Your side board is as big as it gets.",color:"gold"}
+execute if score @s pnp.sbsz matches 36.. run return run title @a[tag=pnp.leafpay] actionbar {translate:"pnp.board.side_board.your_side_board_is_as_big",fallback:"Your side board can't get any bigger.",color:"gold"}
 scoreboard players set #lc pnp.tmp 1
 execute if score @s pnp.sbsz matches 20..27 run scoreboard players set #lc pnp.tmp 2
 execute if score @s pnp.sbsz matches 28.. run scoreboard players set #lc pnp.tmp 3

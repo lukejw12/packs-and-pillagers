@@ -27,6 +27,6 @@ tag @e[type=marker,tag=pnp.wsm_new] remove pnp.wsm_new
 function pnp:world/deliver {card:"waypoint"}
 execute in pnp:board as @e[type=item_display,tag=pnp.c.waypoint] if score @s pnp.uid = #uid pnp.ids run function pnp:waystone/bind with storage pnp:board wp
 clear @s minecraft:carrot_on_a_stick[minecraft:custom_data~{pnp:{waystone:1b}}] 1
-tellraw @s {translate:"pnp.waystone.waystone_placed_it_s_on_your",fallback:"Waystone placed. It's on your card table now: right-click it there to come back to this spot.",color:"aqua"}
+tellraw @s {translate:"pnp.waystone.waystone_placed_it_s_on_your",fallback:"Waystone placed. It's on your card table now, so right-click it there to come back here.",color:"aqua"}
 scoreboard players operation #wnid pnp.tmp = #wid pnp.ids
 function pnp:waystone/name_start

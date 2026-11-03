@@ -7,7 +7,7 @@ title @a[tag=pnp.mate] subtitle {translate:"pnp.common.humble_beginnings",fallba
 title @a[tag=pnp.mate] title {translate:"pnp.common.chapter_1_complete",fallback:"Chapter 1 Complete",color:"gold",bold:true}
 execute as @a[tag=pnp.mate] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 1 1
 execute as @a[tag=pnp.mate] at @s run playsound minecraft:entity.wither.death master @s ~ ~ ~ 0.4 1.4
-tellraw @a[tag=pnp.mate] [{text:"",extra:[{translate:"pnp.common.chapter_1_complete_2",fallback:"Chapter 1 complete!"}," "],color:"gold",bold:true},{translate:"pnp.common.chapter_2_is_on_its_way",fallback:"Chapter 2 is on its way in a future update.",color:"gray",bold:false}]
+tellraw @a[tag=pnp.mate] [{text:"",extra:[{translate:"pnp.common.chapter_1_complete_2",fallback:"Chapter 1 complete!"}," "],color:"gold",bold:true},{translate:"pnp.common.chapter_2_is_on_its_way",fallback:"Chapter 2, the Nether, is coming in a future update.",color:"gray",bold:false}]
 execute store result storage pnp:board qk.o int 1 run scoreboard players get @s pnp.tpid
 data modify storage pnp:board qk.qk set value "delve"
 function pnp:quest/on_event with storage pnp:board qk

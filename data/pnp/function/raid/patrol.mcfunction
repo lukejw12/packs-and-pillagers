@@ -16,4 +16,4 @@ scoreboard players set @s pnp.raid 1
 scoreboard players set @s pnp.rkind 2
 title @a[tag=pnp.mate] actionbar {translate:"pnp.raid.a_patrol_is_heading_for_your",fallback:"A patrol is heading for your board!",color:"red"}
 playsound minecraft:event.raid.horn master @s ~ ~ ~ 0.3 1.6
-execute unless entity @s[tag=pnp.in_board] run tellraw @a[tag=pnp.mate] {translate:"pnp.common.raiders_are_heading_for_your_board",fallback:"Raiders are heading for your board! While it's closed they move slowly, so you have a few minutes to get back.",color:"red"}
+execute unless entity @s[tag=pnp.in_board] run tellraw @a[tag=pnp.mate] {translate:"pnp.common.raiders_are_heading_for_your_board",fallback:"Raiders are heading for your board! They move slowly while it's closed, so you've got a few minutes to get back.",color:"red"}

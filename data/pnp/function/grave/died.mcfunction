@@ -12,4 +12,4 @@ execute store result storage pnp:board gr.g int 1 run scoreboard players get #gi
 function pnp:grave/store with storage pnp:board gr
 function pnp:world/deliver {card:"grave"}
 execute in pnp:board as @e[type=item_display,tag=pnp.c.grave] if score @s pnp.uid = #uid pnp.ids run function pnp:grave/bind with storage pnp:board gr
-tellraw @s {translate:"pnp.grave.your_things_were_saved_in_a",fallback:"Your things were saved in a Grave on your card table. Right-click it there to get them back.",color:"gold"}
+tellraw @s {translate:"pnp.grave.your_things_were_saved_in_a",fallback:"Your stuff is safe in a Grave on your card table. Right-click it there to get it back.",color:"gold"}

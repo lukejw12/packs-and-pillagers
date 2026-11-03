@@ -8,5 +8,5 @@ execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stac
 execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp run function pnp:card/remove
 execute as @e[type=item_display,tag=pnp.lhop,limit=1] at @s run function pnp:logistics/label/update
 execute as @e[type=item_display,tag=pnp.lhop,limit=1] at @s run playsound minecraft:block.copper.place block @a[distance=..24] ~ ~ ~ 0.8 1.4
-title @s actionbar {translate:"pnp.logistics.filter_set_only_that_card_can",fallback:"Filter set. Only that card can enter this hopper now.",color:"green"}
+title @s actionbar {translate:"pnp.logistics.filter_set_only_that_card_can",fallback:"Filter set. Only that card can go into this hopper now.",color:"green"}
 tag @e[type=item_display,tag=pnp.lhop] remove pnp.lhop
