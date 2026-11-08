@@ -24,6 +24,13 @@ tag @s remove pnp.sp.guard
 tag @s remove pnp.sp.brute
 tag @s remove pnp.sp.lancer
 tag @s remove pnp.tal.totem
+tag @s remove pnp.tal.blaze_charm
+tag @s remove pnp.tal.horse
+tag @s remove pnp.ench_fp
+tag @s remove pnp.wfs
+execute if data entity @s item.components."minecraft:custom_data".eq{t:"wildfire_shield"} run tag @s add pnp.wfs
+execute if data entity @s item.components."minecraft:custom_data".eq.ae{k:"f"} run tag @s add pnp.ench_fp
+tag @s remove pnp.tal.gilded_charm
 tag @s remove pnp.tal.clock
 tag @s remove pnp.tal.compass
 tag @s remove pnp.tal.rabbit_foot
@@ -80,6 +87,9 @@ execute if data entity @s item.components."minecraft:custom_data"{prof:"minecraf
 execute if data entity @s item.components."minecraft:custom_data"{prof:"minecraft:cartographer"} run tag @s add pnp.sp.explorer
 execute if data entity @s item.components."minecraft:custom_data"{prof:"minecraft:mason"} run tag @s add pnp.sp.builder
 execute if data entity @s item.components."minecraft:custom_data".eq{s:"totem"} run tag @s add pnp.tal.totem
+execute if data entity @s item.components."minecraft:custom_data".eq{s:"blaze_charm"} run tag @s add pnp.tal.blaze_charm
+execute if data entity @s item.components."minecraft:custom_data".eq{s:"horse"} run tag @s add pnp.tal.horse
+execute if data entity @s item.components."minecraft:custom_data".eq{s:"gilded_charm"} run tag @s add pnp.tal.gilded_charm
 execute if data entity @s item.components."minecraft:custom_data".eq{s:"clock"} run tag @s add pnp.tal.clock
 execute if data entity @s item.components."minecraft:custom_data".eq{s:"compass"} run tag @s add pnp.tal.compass
 execute if data entity @s item.components."minecraft:custom_data".eq{s:"rabbit_foot"} run tag @s add pnp.tal.rabbit_foot
@@ -105,6 +115,9 @@ scoreboard players operation @s pnp.hpmax += #ghp pnp.tmp
 scoreboard players operation #lb pnp.tmp = @s pnp.vlvl
 scoreboard players remove #lb pnp.tmp 1
 scoreboard players operation @s pnp.hpmax += #lb pnp.tmp
+scoreboard players set #enh pnp.tmp 0
+execute if data entity @s item.components."minecraft:custom_data".eq.ae{k:"p"} store result score #enh pnp.tmp run data get entity @s item.components."minecraft:custom_data".eq.ae.l
+scoreboard players operation @s pnp.hpmax += #enh pnp.tmp
 execute if score @s pnp.vlvl matches 3.. run tag @s add pnp.lv3
 execute if score @s pnp.vlvl matches 5.. run tag @s add pnp.lv5
 scoreboard players operation #atkb pnp.tmp = @s pnp.atkb
@@ -125,6 +138,8 @@ execute if entity @s[tag=pnp.sp.swordsman] run scoreboard players add #atkb pnp.
 execute if entity @s[tag=pnp.sp.swordsman] run scoreboard players add @s pnp.hpmax 2
 execute if entity @s[tag=pnp.wellfed] run scoreboard players add #atkb pnp.tmp 1
 execute if entity @s[tag=pnp.hungry] if score #atkb pnp.tmp matches 1.. run scoreboard players remove #atkb pnp.tmp 1
+execute store result score #ena pnp.tmp run data get entity @s item.components."minecraft:custom_data".eq.te.l
+scoreboard players operation #atkb pnp.tmp += #ena pnp.tmp
 scoreboard players operation @s pnp.atk = #atkb pnp.tmp
 scoreboard players operation #dl pnp.tmp = @s pnp.hpmax
 scoreboard players operation #dl pnp.tmp -= #oldmax pnp.tmp

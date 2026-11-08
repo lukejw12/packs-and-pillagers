@@ -2,6 +2,7 @@ scoreboard players operation #csid pnp.tmp = @s pnp.stack
 data modify storage pnp:board scan set value {counts:{}}
 scoreboard players set #size pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.card,tag=!pnp.held,distance=..64] if score @s pnp.stack = #csid pnp.tmp run function pnp:board/stack/count
+execute if entity @s[tag=pnp.c.nether_portal] if score #size pnp.tmp matches 2.. run return run function pnp:nether/send
 data modify storage pnp:board scan.list set from storage pnp:cards recipes
 scoreboard players set #match pnp.tmp 0
 function pnp:idea/load_known

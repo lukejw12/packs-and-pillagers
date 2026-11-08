@@ -35,6 +35,18 @@ scoreboard objectives add pnp.pop dummy
 scoreboard objectives add pnp.hover dummy
 scoreboard objectives add pnp.holding dummy
 scoreboard objectives add pnp.plot dummy
+scoreboard objectives add pnp.realm dummy
+scoreboard objectives add pnp.char dummy
+scoreboard objectives add pnp.wsh dummy
+scoreboard objectives add pnp.fres dummy
+scoreboard objectives add pnp.bcn trigger
+scoreboard objectives add pnp.bcu dummy
+scoreboard objectives add pnp.bhst dummy
+scoreboard objectives add pnp.bhp dummy
+scoreboard objectives add pnp.bleft dummy
+scoreboard objectives add pnp.btier dummy
+scoreboard players set #nsup pnp.tmp 0
+scoreboard players set #packmode pnp.tmp 0
 scoreboard objectives add pnp.info dummy
 scoreboard objectives add pnp.ids dummy
 scoreboard objectives add pnp.tmp dummy
@@ -377,5 +389,7 @@ scoreboard objectives add pnp.tipfood dummy
 scoreboard objectives add pnp.tipcards dummy
 data modify storage pnp:api kinds set value {res:"Resource",food:"Food",unit:"Worker",enemy:"Monster",struct:"Structure",tool:"Tool",weapon:"Weapon",armor:"Armor",animal:"Animal",node:"Renewable source",trinket:"Talisman",book:"Book",idea:"Idea",quest:"Quest",shop:"Shop",pack:"Card Pack",trophy:"Trophy",portal:"Portal",gate:"Gateway",baby:"Baby",sell:"Sell box"}
 data modify storage pnp:api registered set value {}
+function pnp:chapter2/register
+function pnp:progression/register
 function #pnp:load
 schedule function pnp:card/machine_sync 2t

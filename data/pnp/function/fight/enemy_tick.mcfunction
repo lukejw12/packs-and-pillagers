@@ -1,3 +1,7 @@
+execute if entity @s[tag=pnp.c.blaze] run return run function pnp:nether/blaze_ai
+execute if entity @s[tag=pnp.c.piglin] run return run function pnp:nether/piglin_ai
+execute if entity @s[tag=pnp.neutral] run return 0
+execute if entity @s[tag=pnp.c.hoglin,tag=!pnp.infight] if entity @e[type=item_display,tag=pnp.c.warped_fungus,distance=..3] run return 0
 execute if entity @s[tag=pnp.c.vex] run return 0
 execute if entity @s[tag=pnp.c.creeper] run return run function pnp:night/creeper_ai
 execute if entity @s[tag=pnp.infight] run return 0

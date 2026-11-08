@@ -14,3 +14,7 @@ execute if entity @s[tag=pnp.c.illusioner,tag=!pnp.illusion] if score @s pnp.fus
 execute if entity @s[tag=pnp.c.illusioner,tag=!pnp.illusion] if score @s pnp.fuse matches 1 run function pnp:gateway/illusioner/swap_slot
 execute if entity @s[tag=pnp.c.redstone_monstrosity] run function pnp:redstone_caves/monstrosity/tick
 execute if entity @s[tag=pnp.c.redstone_golem] run function pnp:redstone_caves/golem/tick
+execute if entity @s[tag=pnp.c.wildfire] if score @s pnp.spell matches 240.. run function pnp:nether/wildfire_call
+execute if entity @s[tag=pnp.c.mutated_hoglin] if score @s pnp.spell matches 200.. run function pnp:nether/hoglin_charge
+execute if entity @s[tag=pnp.c.wither,tag=!pnp.wbar] run function pnp:nether/wither_arrive
+execute if entity @s[tag=pnp.c.wither] if score @s pnp.spell matches 200.. run function pnp:nether/wither_mode

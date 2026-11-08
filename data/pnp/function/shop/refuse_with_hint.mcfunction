@@ -1,1 +1,1 @@
-$title @a[tag=pnp.dropper] actionbar {translate:"pnp.shop.locked_buy_3_packs_to_open",fallback:"Locked. Buy 3 %s Packs to open it (%s so far).",with:["$(kn)","$(h)"],color:"gray"}
+$title @a[tag=pnp.dropper] actionbar {translate:"pnp.shop.locked_quest_or_packs",fallback:"Locked. Finish %s or buy 3 %s Packs (%s so far).",with:[{translate:"$(qk)",fallback:"$(qf)"},"$(kn)","$(h)"],color:"gray"}

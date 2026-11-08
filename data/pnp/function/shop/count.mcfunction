@@ -1,4 +1,5 @@
 execute if entity @s[tag=pnp.c.wandering_trader] run return 0
+execute if entity @s[tag=pnp.c.piglin_merchant] run return 0
 execute store result score #lkp pnp.tmp run data get entity @s Pos[0]
 scoreboard players add #lkp pnp.tmp 64
 scoreboard players operation #lkp pnp.tmp /= #1024 pnp.tmp
@@ -8,5 +9,8 @@ execute if entity @s[tag=pnp.c.shop_farm] run data modify storage pnp:board lk m
 execute if entity @s[tag=pnp.c.shop_adventure] run data modify storage pnp:board lk merge value {k:"adventure",nx:"Combat and Caving Packs"}
 execute if entity @s[tag=pnp.c.shop_combat] run data modify storage pnp:board lk merge value {k:"combat",nx:""}
 execute if entity @s[tag=pnp.c.shop_caving] run data modify storage pnp:board lk merge value {k:"caving",nx:""}
+execute if entity @s[tag=pnp.c.shop_wastes] run data modify storage pnp:board lk merge value {k:"wastes",nx:"Fortress Pack"}
+execute if entity @s[tag=pnp.c.shop_fortress] run data modify storage pnp:board lk merge value {k:"fortress",nx:"Bastion Pack"}
+execute if entity @s[tag=pnp.c.shop_bastion] run data modify storage pnp:board lk merge value {k:"bastion",nx:""}
 function pnp:shop/count_for_player with storage pnp:board lk
 execute as @e[type=item_display,tag=pnp.k.shop,distance=..40] at @s run function pnp:shop/label

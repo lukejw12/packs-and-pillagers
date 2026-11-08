@@ -1,3 +1,4 @@
+scoreboard players set @s pnp.realm 0
 function pnp:inventory/stash
 execute if score @s pnp.gws matches 1.. run function pnp:gateway/finish {r:2}
 scoreboard players add @s pnp.sess 1

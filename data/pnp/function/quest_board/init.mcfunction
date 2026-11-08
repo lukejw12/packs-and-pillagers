@@ -1,1 +1,2 @@
-$execute unless data storage pnp:qb p$(p).m run data modify storage pnp:qb p$(p) merge value {m:0,mp:0,s:{s_feast:{t:0,n:0},s_wool:{t:0,n:0},s_baker:{t:0,n:0},s_hunter:{t:0,n:0},s_demo:{t:0,n:0},s_delver:{t:0,n:0},s_family:{t:0,n:0},s_angler:{t:0,n:0},s_wanderer:{t:0,n:0},s_miner:{t:0,n:0},s_slayer:{t:0,n:0}}}
+$execute unless data storage pnp:qb p$(p).m run data modify storage pnp:qb p$(p) merge value {v:2,m:0,mp:0,s:{s_feast:{t:0,n:0},s_wool:{t:0,n:0},s_baker:{t:0,n:0},s_hunter:{t:0,n:0},s_demo:{t:0,n:0},s_delver:{t:0,n:0},s_family:{t:0,n:0},s_angler:{t:0,n:0},s_wanderer:{t:0,n:0},s_miner:{t:0,n:0},s_slayer:{t:0,n:0}}}
+$execute unless data storage pnp:qb p$(p).v run function pnp:quest_board/migrate {p:$(p)}

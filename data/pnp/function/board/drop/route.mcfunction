@@ -12,14 +12,19 @@ execute as @e[type=item_display,tag=pnp.held,tag=pnp.k.weapon,distance=..64] if 
 execute as @e[type=item_display,tag=pnp.held,tag=pnp.k.food,distance=..64] if score @s pnp.stack = #hsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #hkind pnp.tmp 3
 execute as @e[type=item_display,tag=pnp.held,tag=pnp.c.wandering_trader,distance=..64] if score @s pnp.stack = #hsid pnp.tmp if entity @e[type=item_display,tag=pnp.dt] run return run function pnp:board/drop/free_trader
 execute if score #hkind pnp.tmp matches 1 as @e[type=item_display,tag=pnp.dt,tag=pnp.c.creeper,limit=1] at @s run function pnp:fight_box/creeper_pop
+execute if entity @e[type=item_display,tag=pnp.dt,tag=pnp.c.piglin] if entity @e[type=item_display,tag=pnp.held,tag=pnp.c.gold_ingot] run return run function pnp:nether/barter
 execute if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.enemy] run return run function pnp:board/drop/onto_enemy
 execute if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.shop] run return run function pnp:board/drop/buy
 execute if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.sell] run return run function pnp:board/drop/sell
+execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] if entity @e[type=item_display,tag=pnp.held,tag=pnp.c.potion_fire_res] run return run function pnp:nether/drink_fire
+execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.held,tag=pnp.c.bone_meal] if entity @e[type=item_display,tag=pnp.dt] if function pnp:nethermach/bone_meal_ok run return run function pnp:nethermach/bone_meal
+execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.c.zombified_piglin_ally] if entity @e[type=item_display,tag=pnp.held,tag=pnp.c.enchanted_crimson_fungus] run return run function pnp:nethermach/cure_piglin
+execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] as @e[type=item_display,tag=pnp.held,limit=1] if function pnp:progression/potion_is run return run function pnp:progression/drink
 execute if score #hsize pnp.tmp matches 1 if score #hkind pnp.tmp matches 3 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] run return run function pnp:board/drop/heal
 execute if score #hsize pnp.tmp matches 1 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] if function pnp:villager/try_route run return 1
 execute if score #hsize pnp.tmp matches 1 if score #hkind pnp.tmp matches 2 if entity @e[type=item_display,tag=pnp.dt,tag=pnp.k.unit] run return run function pnp:board/drop/equip
 scoreboard players set #tcm pnp.tmp 0
-execute as @e[type=item_display,tag=pnp.cm,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #tcm pnp.tmp 1
+execute as @e[type=item_display,tag=pnp.cm,tag=!pnp.c.nether_portal,tag=!pnp.c.brewing_stand,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #tcm pnp.tmp 1
 execute if score #tcm pnp.tmp matches 1 run return run function pnp:machine/drop
 scoreboard players set #tbarrel pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.c.barrel,distance=..64] if score @s pnp.stack = #tsid pnp.tmp if score @s pnp.idx matches 0 run scoreboard players set #tbarrel pnp.tmp 1

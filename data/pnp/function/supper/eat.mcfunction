@@ -1,3 +1,4 @@
+$execute if entity @s[tag=pnp.c.charred_food,tag=!pnp.cheat] run return run function pnp:nether/eat_charred {m:$(m)}
 execute if score #need pnp.tmp matches ..0 run return 0
 $scoreboard players remove #need pnp.tmp $(v)
 $scoreboard players add #ate pnp.tmp $(v)

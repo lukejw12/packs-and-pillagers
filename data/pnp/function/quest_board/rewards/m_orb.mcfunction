@@ -1,4 +1,1 @@
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"golden_apple"}
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.quest_complete",fallback:"Quest complete:"}," "], color: "gold"},{translate:"pnp.card.summoning_orb.name",fallback:"Summoning Orb", color: "white"},{text:"  ",extra:[{translate:"pnp.quest_board.reward_golden_apple",fallback:"Reward: a Golden Apple"}], color: "gray"}]
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"",extra:[{translate:"pnp.quest_board.next",fallback:"Next:"}," "], color: "yellow"},{translate:"pnp.quest_board.awakening",fallback:"Awakening", color: "white"},{text:" ",extra:[{translate:"pnp.quest_board.stack_the_core_and_orb_together",fallback:"- Stack the Core and the Orb together"}], color: "gray"}]
-$execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4

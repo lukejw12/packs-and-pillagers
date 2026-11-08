@@ -1,4 +1,8 @@
 data modify storage pnp:board gl set value {g:"Raids keep coming. Grow the side board and find every card."}
+$execute if data storage pnp:qb p$(p){v:2} unless data storage pnp:nether wither.p$(p) if data storage pnp:found p$(p).nether_portal run data modify storage pnp:board gl.g set value "Collect 3 Wither Skeleton Skulls and summon the Wither on 4 Soul Sand."
+$execute if data storage pnp:found p$(p).nether_portal unless data storage pnp:gw p$(p).won.fortress run data modify storage pnp:board gl.g set value "Find a Nether Fortress: keep working the Nether Wastes."
+$execute if data storage pnp:found p$(p).nether_portal unless data storage pnp:nether built2.p$(p) run data modify storage pnp:board gl.g set value "Right-click your Nether Portal to travel to the Nether table."
+$execute if data storage pnp:nether unlocked.p$(p) unless data storage pnp:found p$(p).nether_portal run data modify storage pnp:board gl.g set value "Build a Nether Portal: 10 Obsidian and Flint and Steel, or repair a Ruined Portal."
 execute if score @s pnp.rlvl matches ..10 run data modify storage pnp:board gl.g set value "Defeat the Illusioner in raid 10."
 $execute unless data storage pnp:found p$(p).gate_trial run data modify storage pnp:board gl.g set value "Open a gateway and take your villagers on an expedition."
 execute if score @s pnp.rlvl matches ..5 run data modify storage pnp:board gl.g set value "Win raid 5 and beat the first Evoker."

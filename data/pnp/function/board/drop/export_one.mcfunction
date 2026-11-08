@@ -6,5 +6,6 @@ execute if entity @s[tag=pnp.c.map_trial] run return run function pnp:maps/give 
 execute if entity @s[tag=pnp.c.map_mansion] run return run function pnp:maps/give {m:"mansion"}
 execute if entity @s[tag=pnp.c.map_monument] run return run function pnp:maps/give {m:"monument"}
 execute if entity @s[tag=pnp.c.map_city] run return run function pnp:maps/give {m:"city"}
+execute if data entity @s item.components."minecraft:custom_data".en run return run function pnp:enchant/export
 data modify storage pnp:board ex.card set from entity @s item.components."minecraft:custom_data".card
 function pnp:board/drop/export_card with storage pnp:board ex

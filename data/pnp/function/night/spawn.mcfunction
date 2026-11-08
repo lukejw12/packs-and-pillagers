@@ -3,6 +3,8 @@ data modify storage pnp:board ns.card set value "zombie"
 execute if score #nm pnp.tmp matches 36..60 run data modify storage pnp:board ns.card set value "skeleton"
 execute if score #nm pnp.tmp matches 61..80 run data modify storage pnp:board ns.card set value "spider"
 execute if score #nm pnp.tmp matches 81.. run data modify storage pnp:board ns.card set value "creeper"
+execute store result storage pnp:board nsw.p int 1 run scoreboard players get @s pnp.pid
+function pnp:night/witch_roll with storage pnp:board nsw
 scoreboard players operation #nx0 pnp.tmp = @s pnp.pid
 scoreboard players operation #nx0 pnp.tmp *= #1024 pnp.tmp
 scoreboard players set #ntry pnp.tmp 0

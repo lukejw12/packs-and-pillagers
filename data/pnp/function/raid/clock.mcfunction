@@ -18,7 +18,9 @@ execute if score #day pnp.tmp matches 1.. as @a[scores={pnp.plot=2}] unless scor
 function pnp:supper/clock
 execute as @e[type=item_display,tag=pnp.c.villager,tag=!pnp.named] run function pnp:villager/name
 execute as @e[type=item_display,tag=pnp.c.wandering_trader] run function pnp:trader/life
+execute as @e[type=item_display,tag=pnp.c.piglin_merchant] run function pnp:nether_trader/life
 execute if score #day pnp.tmp matches 1.. if score #dt pnp.tmp matches 1000..11000 as @a[scores={pnp.plot=2}] run function pnp:trader/roll
+execute if score #dt pnp.tmp matches 1000..11000 as @a[scores={pnp.plot=2}] run function pnp:nether_trader/roll
 execute as @a[scores={pnp.plot=2..3}] run function pnp:vanilla/check
 execute as @e[type=item_display,tag=pnp.k.idea,tag=!pnp.revealed,tag=!pnp.ihid] run function pnp:idea/hide
 execute as @e[type=item_display,tag=pnp.c.villager,tag=!pnp.v7] at @s run function pnp:villager/recalculate
@@ -86,3 +88,9 @@ execute as @e[type=item_display,tag=pnp.c.war_horn] run function pnp:card/remove
 function pnp:pvp/tick
 execute as @e[type=item_display,tag=pnp.c.redstone_monstrosity,tag=!pnp.rmin] at @s run function pnp:redstone_caves/boss_arrive
 execute as @e[type=item_display,tag=pnp.cm,tag=!pnp.held] at @s run function pnp:machine/tick
+execute as @e[type=item_display,tag=pnp.regen] at @s run function pnp:progression/regen_tick
+execute as @e[type=item_display,tag=pnp.incursion,tag=pnp.neutral] run function pnp:nether/provoke_one
+execute as @e[type=item_display,tag=pnp.infight,tag=pnp.c.wither,tag=!pnp.illusion] at @s run function pnp:boss/wither_tick
+execute as @e[type=item_display,tag=pnp.infight,tag=pnp.c.wildfire,tag=!pnp.illusion] at @s run function pnp:boss/wildfire_tick
+execute as @e[type=item_display,tag=pnp.infight,tag=pnp.c.redstone_monstrosity,tag=!pnp.illusion] at @s run function pnp:boss/monstrosity_tick
+execute as @e[type=item_display,tag=pnp.k.enemy,tag=!pnp.v8] at @s run function pnp:card/upgrade/tier_8

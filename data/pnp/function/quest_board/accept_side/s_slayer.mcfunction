@@ -1,3 +1,4 @@
+$execute unless data storage pnp:qb p$(p).offer[{c:"s_slayer"}] run return 0
 $execute store result score #qst pnp.tmp run data get storage pnp:qb p$(p).s.s_slayer.t
 execute if score #qst pnp.tmp matches 3.. run return 0
 $execute store result score #qsn pnp.tmp run data get storage pnp:qb p$(p).s.s_slayer.n

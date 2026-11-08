@@ -25,7 +25,7 @@ data modify storage pnp:hud u.dr set from storage pnp:hud pads.p0
 execute if score #hday pnp.tmp matches ..99 run data modify storage pnp:hud u.dr set from storage pnp:hud pads.p1
 execute if score #hday pnp.tmp matches ..9 run data modify storage pnp:hud u.dr set from storage pnp:hud pads.p2
 function pnp:board/plot/get_coords
-function pnp:supper/count with storage pnp:board tmp
+function pnp:nether/hud_food
 scoreboard players set #h12 pnp.tmp 2
 scoreboard players set #h4 pnp.tmp 1
 scoreboard players operation #need pnp.tmp = #vil pnp.tmp

@@ -16,3 +16,11 @@ $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.s
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.bundle,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/bundle
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.dropper,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/dropper
 $execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.cm,tag=!pnp.held,distance=..24] at @s run function pnp:machine/ports/spawn
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.nether_wastes,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/nether_wastes
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.crimson_forest,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/crimson_forest
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.warped_forest,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/warped_forest
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.soul_sand_valley,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/soul_sand_valley
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.basalt_deltas,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/basalt_deltas
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.lava_sea,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/lava_sea
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.lava_pool,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/lava_pool
+$execute in pnp:board positioned $(cx) 65 16 as @e[type=item_display,tag=pnp.c.ruined_portal,tag=!pnp.held,distance=..24] at @s run function pnp:wrench/spawn_ports/ruined_portal

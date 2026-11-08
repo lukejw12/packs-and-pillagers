@@ -1,5 +1,2 @@
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"combat_pack"}
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"idea_vault"}
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.quest_complete",fallback:"Quest complete:"}," "], color: "gold"},{translate:"pnp.quest_board.iron_age",fallback:"Iron Age", color: "white"},{text:"  ",extra:[{translate:"pnp.quest_board.reward_combat_pack_and_the_vault",fallback:"Reward: Combat Pack and the Vault idea"}], color: "gray"}]
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"",extra:[{translate:"pnp.quest_board.next",fallback:"Next:"}," "], color: "yellow"},{translate:"pnp.quest_board.into_the_depths",fallback:"Into the Depths", color: "white"},{text:" ",extra:[{translate:"pnp.quest_board.explore_a_cave_3_times",fallback:"- Explore a Cave 3 times"}], color: "gray"}]
-$execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4

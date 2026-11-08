@@ -6,5 +6,6 @@ scoreboard players set @s pnp.phov -1
 execute store result storage pnp:pedia2 ps.p int 1 run scoreboard players get @s pnp.here
 execute store result storage pnp:pedia2 ps.me int 1 run scoreboard players get #me pnp.tmp
 execute store result storage pnp:pedia2 ps.k int 1 run scoreboard players get @s pnp.pcat
+execute if entity @s[tag=pnp.pd_admin] if score @s pnp.pcat matches ..0 run return run function pnp:cardopedia/index_admin
 execute if score @s pnp.pcat matches ..0 run return run function pnp:cardopedia/index
 function pnp:cardopedia/grid

@@ -4,6 +4,7 @@ $data modify storage pnp:pedia2 ps.tzs set from storage pnp:pedia2 meta.$(id).tz
 data modify storage pnp:pedia2 ps.kn set value 0b
 $execute if data storage pnp:found p$(p).$(id) run data modify storage pnp:pedia2 ps.kn set value 1b
 $execute if data storage pnp:pedia2 all.p$(p) run data modify storage pnp:pedia2 ps.kn set value 1b
+execute if entity @s[tag=pnp.pd_admin] run data modify storage pnp:pedia2 ps.kn set value 1b
 $execute if data storage pnp:pedia2 ps{kn:0b} if data storage pnp:pedia2 ir.$(id) run function pnp:cardopedia/known_idea {id:"$(id)",p:$(p)}
 $data modify storage pnp:pedia2 v.p$(me).s$(i) set value {id:"$(id)"}
 $data modify storage pnp:pedia2 v.p$(me).s$(i).k set from storage pnp:pedia2 ps.kn

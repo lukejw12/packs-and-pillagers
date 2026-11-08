@@ -1,4 +1,2 @@
+$execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"idea_compass"}
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"redstone_caves"}
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.quest_complete",fallback:"Quest complete:"}," "], color: "gold"},{translate:"pnp.quest_board.into_the_depths",fallback:"Into the Depths", color: "white"},{text:"  ",extra:[{translate:"pnp.quest_board.reward_the_redstone_caves",fallback:"Reward: the Redstone Caves"}], color: "gray"}]
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"",extra:[{translate:"pnp.quest_board.next",fallback:"Next:"}," "], color: "yellow"},{translate:"pnp.card.redstone_caves.name",fallback:"Redstone Caves", color: "white"},{text:" ",extra:[{translate:"pnp.quest_board.clear_the_redstone_caves",fallback:"- Clear the Redstone Caves"}], color: "gray"}]
-$execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4

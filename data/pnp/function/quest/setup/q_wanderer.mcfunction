@@ -1,7 +1,7 @@
 data modify entity @s item.components."minecraft:custom_data".qk set value "village"
 data modify entity @s item.components."minecraft:custom_data".want set value ""
 scoreboard players set @s pnp.qprog 0
-execute store result score @s pnp.qneed run random value 1..1
+scoreboard players set @s pnp.qneed 1
 execute store result score #qo pnp.tmp run random value 0..1
 execute if score #qo pnp.tmp matches 0 run data modify entity @s item.components."minecraft:custom_data".rw set value ["adventure_pack"]
 execute if score #qo pnp.tmp matches 0 run data modify entity @s item.components."minecraft:custom_data".rwd set value "Adventure Pack"

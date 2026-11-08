@@ -46,6 +46,7 @@ scoreboard players operation @s pnp.su_unfed = #unfed pnp.tmp
 scoreboard players operation @s pnp.su_part = #part pnp.tmp
 scoreboard players operation @s pnp.su_wf = #wf pnp.tmp
 scoreboard players operation @s pnp.su_need = #need pnp.tmp
+execute if score #nsup pnp.tmp matches 1 run return run function pnp:nether/supper_finish with storage pnp:board nt
 scoreboard players set #riding pnp.tmp 0
 execute on vehicle if entity @s[tag=pnp.camera] run scoreboard players set #riding pnp.tmp 1
 execute if score #riding pnp.tmp matches 1 if score #vo pnp.tmp matches 1.. run return run function pnp:supper/animation/start

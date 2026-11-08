@@ -13,8 +13,12 @@ execute if entity @s[tag=pnp.k.enemy] run playsound minecraft:entity.pillager.de
 execute if entity @s[tag=pnp.k.unit] run playsound minecraft:entity.villager.death master @a[distance=..24] ~ ~ ~ 0.8 1
 scoreboard players operation #dead pnp.tmp = @s pnp.uid
 execute as @e[type=item_display,tag=pnp.card,scores={pnp.target=1..},distance=..4] if score @s pnp.target = #dead pnp.tmp run scoreboard players set @s pnp.target 0
-execute if entity @s[tag=pnp.c.redstone_golem] run function pnp:redstone_caves/rare_drop {c:"charged_redstone_core",p:20,msg:"The Redstone Golem dropped a Charged Redstone Core!"}
-execute if entity @s[tag=pnp.c.evoker] run function pnp:redstone_caves/rare_drop {c:"summoning_orb",p:10,msg:"The Evoker dropped a Summoning Orb!"}
+execute if entity @s[tag=pnp.c.redstone_golem] run function pnp:progression/golem_drop
+execute if entity @s[tag=pnp.c.evoker] run function pnp:progression/evoker_drop
+execute if entity @s[tag=pnp.c.blaze] run function pnp:chapter2/event_at {qk:"blaze_kill"}
+execute if entity @s[tag=pnp.c.villager] run function pnp:nethermach/anchor_revive
+execute if entity @s[tag=pnp.c.villager] run function pnp:progression/raid_loss
+execute if entity @s[tag=pnp.c.illusioner,tag=!pnp.illusion] run function pnp:redstone_caves/rare_drop {c:"evocation_staff",p:25,msg:"The Illusioner dropped an Evocation Staff!"}
 execute if entity @s[tag=pnp.c.redstone_monstrosity] run function pnp:redstone_caves/boss_dead
 data modify storage pnp:board die.card set from entity @s item.components."minecraft:custom_data".card
 function pnp:fight/loot with storage pnp:board die

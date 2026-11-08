@@ -2,6 +2,7 @@ $execute if score #gres pnp.tmp matches 1 in pnp:board positioned $(axc).5 65.01
 $execute in pnp:board positioned $(axc).5 65 16 as @e[type=item_display,tag=pnp.k.enemy,distance=..15] run function pnp:card/remove
 $execute in pnp:board positioned $(axc).5 65 16 as @e[type=item_display,tag=pnp.card,distance=..15] run tag @s add pnp.ret
 $execute if score #gres pnp.tmp matches 1 run function pnp:gateway/won/$(s)_$(st)
+$execute if score #gres pnp.tmp matches 1 if data storage pnp:cards gwq.$(s) in pnp:board positioned $(axc).5 65.01 16.5 run function pnp:chapter2/event_here {qk:"gw_win"}
 $execute in pnp:board positioned $(axc).5 65 16 as @e[type=marker,tag=pnp.fight,distance=..15] at @s run function pnp:gateway/end_fight
 $function pnp:gateway/return/stack {gx:$(gx),gz:$(gz)}
 $execute if score #gres pnp.tmp matches 0 run tellraw @s {translate:"pnp.gateway.your_party_fell_in_the_their",fallback:"Your party fell in the %s. Their gear made it back to your table.",with:["$(name)"],color:"red"}

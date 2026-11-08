@@ -1,3 +1,1 @@
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.quest_complete",fallback:"Quest complete:"}," "], color: "gold"},{translate:"pnp.quest_board.the_redstone_monstrosity",fallback:"The Redstone Monstrosity", color: "white"},{text: "", color: "gray"}]
-$tellraw @a[scores={pnp.tpid=$(p)}] [{text:"",extra:[{translate:"pnp.quest_board.next",fallback:"Next:"}," "], color: "yellow"},{translate:"pnp.quest_board.chapter_2_the_nether_is_coming",fallback:"Chapter 2, the Nether, is coming soon.", color: "gray"}]
-$execute as @a[scores={pnp.tpid=$(p)}] at @s run playsound minecraft:ui.toast.challenge_complete master @s ~ ~ ~ 0.5 1.4
+return 0

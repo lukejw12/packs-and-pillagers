@@ -1,4 +1,4 @@
-$execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"emerald"}
+$execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"idea_defense"}
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"emerald"}
 $execute in pnp:board positioned $(x).5 65.01 20.5 run function pnp:card/pop {card:"emerald"}
 $tellraw @a[scores={pnp.tpid=$(p)}] [{text:"✔ ",extra:[{translate:"pnp.quest_board.side_quest_complete",fallback:"Side quest complete:"}," "], color: "gold"},{translate:"pnp.quest_board.hunter_i",fallback:"Hunter I", color: "white"},{text:"  ",extra:[{translate:"pnp.quest_board.reward_3_emeralds",fallback:"Reward: 3 Emeralds"}], color: "gray"}]

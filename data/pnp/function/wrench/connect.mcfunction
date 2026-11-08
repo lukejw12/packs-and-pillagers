@@ -7,3 +7,4 @@ execute if score #ap pnp.tmp matches 11.. if score #bp pnp.tmp matches ..4 run f
 execute if score #okc pnp.tmp matches 0 if score #bp pnp.tmp matches 11.. if score #ap pnp.tmp matches ..4 run function pnp:wrench/connect/b_to_a
 execute if score #okc pnp.tmp matches 0 run return run title @s actionbar {translate:"pnp.wrench.link_an_output_orange_to_an",fallback:"Link an output (orange) to an input (green).",color:"red"}
 function pnp:wrench/link/make
+function pnp:quest_board/event_self {qk:"wrench_link"}

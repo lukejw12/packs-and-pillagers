@@ -27,6 +27,7 @@ execute if entity @s[tag=pnp.c.stray] as @e[type=item_display,tag=pnp.tgt,limit=
 execute if entity @s[tag=pnp.c.guardian] as @e[type=item_display,tag=pnp.tgt,limit=1] at @s run function pnp:fight/effects/apply {e:"mining_fatigue",s:"efat",t:80}
 execute if entity @s[tag=pnp.c.elder_guardian] as @e[type=item_display,tag=pnp.tgt,limit=1] at @s run function pnp:fight/effects/apply {e:"mining_fatigue",s:"efat",t:160}
 execute if entity @s[tag=pnp.c.vex] as @e[type=item_display,tag=pnp.tgt,limit=1] at @s run function pnp:fight/effects/apply {e:"weakness",s:"ewea",t:80}
+execute if entity @s[tag=pnp.c.witch] as @e[type=item_display,tag=pnp.tgt,limit=1] at @s run function pnp:fight/effects/apply {e:"poison",s:"epoi",t:80}
 execute if entity @s[tag=pnp.c.warden] as @e[type=item_display,tag=pnp.tgt,limit=1] at @s run function pnp:gateway/blind/unit
 tag @s remove pnp.atkr
 execute if score #killed pnp.tmp matches 1.. if entity @s[tag=pnp.c.villager] run function pnp:villager/gain_xp {x:3}

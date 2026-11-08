@@ -1,3 +1,5 @@
+execute if entity @s[tag=pnp.c.shop_wastes] run return fail
+execute if entity @s[tag=pnp.c.piglin_merchant] run return fail
 execute if entity @s[tag=pnp.c.shop_humble] run return fail
 execute if entity @s[tag=pnp.c.wandering_trader] run return fail
 execute if entity @s[tag=pnp.c.shop_side] run return fail

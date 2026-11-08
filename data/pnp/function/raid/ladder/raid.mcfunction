@@ -1,3 +1,4 @@
+execute if function pnp:incursion/roll run return run function pnp:incursion/start
 function pnp:coop/mates
 function pnp:board/plot/get_coords
 execute if score @s pnp.rlvl matches 1 run function pnp:raid/ladder/set {p:3,v:0,r:0,e:0,b:0}
@@ -23,6 +24,7 @@ execute if score #nb pnp.tmp matches 1.. run function pnp:raid/boss
 function pnp:raid/ladder/extras
 scoreboard players set @s pnp.raid 1
 scoreboard players set @s pnp.rkind 1
+function pnp:progression/raid_start
 execute store result storage pnp:board rl.n int 1 run scoreboard players get @s pnp.rlvl
 function pnp:raid/ladder/message with storage pnp:board rl
 playsound minecraft:event.raid.horn master @s ~ ~ ~ 0.5 1

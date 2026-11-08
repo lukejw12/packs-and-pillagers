@@ -1,3 +1,4 @@
+execute if entity @s[tag=pnp.order] run return run function pnp:orders/complete
 function pnp:quest/chain_done
 data modify storage pnp:board qrw set from entity @s item.components."minecraft:custom_data".rw
 scoreboard players add #stack pnp.ids 1

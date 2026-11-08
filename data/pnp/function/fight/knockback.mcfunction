@@ -1,3 +1,4 @@
+execute if entity @s[tag=pnp.slowfall] run return 0
 scoreboard players operation #ks pnp.tmp = @s pnp.stack
 scoreboard players operation #ku pnp.tmp = @s pnp.uid
 scoreboard players set #busy pnp.tmp 0
