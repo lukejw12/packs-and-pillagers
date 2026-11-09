@@ -1,6 +1,7 @@
 {
+  "id": "packs-and-pillagers",
   "pack": {
-    "description": "Packs & Pillagers -itsjustluke",
+    "description": "Packs & Pillagers",
     "min_format": 121,
     "max_format": 121
   }

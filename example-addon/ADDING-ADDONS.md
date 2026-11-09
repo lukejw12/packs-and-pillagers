@@ -146,4 +146,4 @@ Use `kind:"enemy"` or `kind:"unit"` with `hp` and `atk`, plus any of these:
 - Wrench ports for new machines.
 - Raid line-ups and PvP stealing.
 
-\Open an issue on GitHub if you need one of these, but it will likely get added in a future update when I'm not actively writing this at 2 am :D
+\Open an issue on GitHub if you need one of these, but it will likely get added in a future update when I'm not actively writing this at 2 am (x2) :D

@@ -18,5 +18,5 @@ scoreboard players operation #hvt pnp.tmp *= #h25 pnp.tmp
 scoreboard players operation #hmax pnp.tmp += #hsh pnp.tmp
 scoreboard players operation #hmax pnp.tmp += #hvt pnp.tmp
 scoreboard players set #bsl pnp.tmp 0
-$execute store result score #bsl pnp.tmp run data get storage pnp:beacon p$(p).slots
+$execute store result score #bsl pnp.tmp run data get storage pnp:beacon p$(pid).slots
 scoreboard players operation #hmax pnp.tmp += #bsl pnp.tmp
