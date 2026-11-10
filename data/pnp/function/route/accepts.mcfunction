@@ -1,3 +1,5 @@
+execute if entity @s[tag=pnp.c.barrel] if function pnp:route/is_living run return fail
+execute if entity @s[tag=pnp.c.ender_chest] if function pnp:route/is_living run return fail
 execute if entity @s[tag=pnp.c.barrel] run return run function pnp:route/accept/barrel
 execute if entity @s[tag=pnp.c.furnace] run return run function pnp:route/accept/furnace with storage pnp:board rt
 execute if entity @s[tag=pnp.c.autocrafter] run return run function pnp:route/accept/autocrafter

@@ -9,6 +9,10 @@ scoreboard players operation #bc pnp.tmp = @e[type=item_display,tag=pnp.lbar,lim
 scoreboard players operation #bc pnp.tmp += #hsize pnp.tmp
 execute unless entity @e[type=item_display,tag=pnp.lbar,tag=pnp.c.copper_barrel] if score #bc pnp.tmp matches 129.. run scoreboard players set #bad pnp.tmp 2
 execute if entity @e[type=item_display,tag=pnp.lbar,tag=pnp.c.copper_barrel] if score #bc pnp.tmp matches 257.. run scoreboard players set #bad pnp.tmp 2
+execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp if entity @s[tag=pnp.k.unit] run scoreboard players set #bad pnp.tmp 3
+execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp if entity @s[tag=pnp.k.animal] run scoreboard players set #bad pnp.tmp 3
+execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp if entity @s[tag=pnp.k.enemy] run scoreboard players set #bad pnp.tmp 3
+execute if score #bad pnp.tmp matches 3 run title @s actionbar {translate:"pnp.logistics.barrels_cant_hold_living",fallback:"Barrels can't hold villagers, animals, or monsters.",color:"red"}
 execute if score #bad pnp.tmp matches 1 run title @s actionbar {translate:"pnp.logistics.a_barrel_only_holds_one_kind",fallback:"A barrel only holds one kind of card.",color:"red"}
 execute if score #bad pnp.tmp matches 2 run title @s actionbar {translate:"pnp.logistics.that_barrel_is_full_128_cards",fallback:"That barrel is full (128 cards).",color:"red"}
 execute if score #bad pnp.tmp matches 1.. run return run scoreboard players set #route pnp.tmp 2
