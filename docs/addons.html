@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Addons | Packs &amp; Pillagers Wiki</title>
+<meta name="description" content="How to make an addon for Packs &amp; Pillagers: cards, recipes, food, gear, machines, raids, and PvP stealing.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Packs &amp; Pillagers Wiki">
+<meta property="og:title" content="Addons">
+<meta property="og:description" content="How to make an addon for Packs &amp; Pillagers: cards, recipes, food, gear, machines, raids, and PvP stealing.">
+<meta property="og:image" content="https://raw.githubusercontent.com/lukejw12/uistuff/main/packs-%26-pillagers/icon.png">
+<meta property="og:url" content="https://lukejw12.github.io/packs-and-pillagers/addons.html">
+<meta name="theme-color" content="#1b1c20">
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lukejw12/uistuff/main/packs-%26-pillagers/icon.png">
+<link rel="preload" href="assets/minecraft.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-root="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+<button class="menu" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 9 7" aria-hidden="true"><path d="M0 0h9v1H0zM0 3h9v1H0zM0 6h9v1H0z"/></svg></button>
+<a class="brand" href="index.html"><img src="https://raw.githubusercontent.com/lukejw12/uistuff/main/packs-%26-pillagers/icon.png" alt="" width="36" height="36"><span>Packs &amp; Pillagers Wiki</span></a>
+<div class="search" role="search"><input type="search" placeholder="Search cards and pages" aria-label="Search cards and pages" autocomplete="off" spellcheck="false"><div class="results" hidden></div></div>
+</header>
+<div class="wrap">
+<nav class="side" aria-label="Wiki pages"><p class="g">Start Here</p><ul><li><a href="index.html">Home</a></li><li><a href="getting-started.html">Getting Started</a></li><li><a href="table.html">The Table</a></li></ul><p class="g">Look It Up</p><ul><li><a href="cards.html">Cards</a></li><li><a href="recipes.html">Recipes</a></li><li><a href="ideas.html">Ideas</a></li><li><a href="packs.html">Packs &amp; Shops</a></li><li><a href="quests.html">Quests</a></li></ul><p class="g">How It Works</p><ul><li><a href="supper.html">Supper &amp; Food</a></li><li><a href="villagers.html">Villagers</a></li><li><a href="combat.html">Night &amp; Combat</a></li><li><a href="machines.html">Machines</a></li><li><a href="gateways.html">Gateways &amp; Bosses</a></li><li><a href="nether.html">The Nether</a></li><li><a href="world.html">Out in the World</a></li><li><a href="multiplayer.html">Multiplayer &amp; PvP</a></li></ul><p class="g">Make Your Own</p><ul><li class="on"><a href="addons.html" aria-current="page">Addons</a><ul class="sub"><li><a href="#load-hook">Load Hook</a></li><li><a href="#cards">Cards</a></li><li><a href="#card-text-and-translations">Card Text and Translations</a></li><li><a href="#art">Art</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#food">Food</a></li><li><a href="#smelting">Smelting</a></li><li><a href="#fighters">Fighters</a></li><li><a href="#gear">Gear</a></li><li><a href="#machines">Machines</a></li><li><a href="#raids">Raids</a></li><li><a href="#pvp-stealing">PvP Stealing</a></li><li><a href="#need-something-else">Need Something Else?</a></li></ul></li></ul></nav>
+<div class="scrim"></div>
+<main id="main">
+<h1>Addons</h1><p>Addons are separate data packs that add cards, recipes, food, gear, machines, and raiders to Packs &amp; Pillagers. Don't edit the main pack. Add to its storage from the load hook instead.</p>
+<p>The example addon shows most of this working: a Golden Carrot, a Sift, raw metals, and a Crushing Press machine. Download <a href="https://github.com/lukejw12/packs-and-pillagers/raw/main/example-addon/packs-and-pillagers-example-addon.zip">the example addon</a> and <a href="https://github.com/lukejw12/packs-and-pillagers/raw/main/example-addon/packs-and-pillagers-example-addon-resources.zip">its resource pack</a>.</p>
+<h2 id="load-hook">Load Hook</h2>
+<p>Packs &amp; Pillagers rebuilds all its data every time it loads, so anything added from <code>minecraft:load</code> gets wiped. Use <code>#pnp:load</code> instead. It runs right after the pack finishes loading.</p>
+<p>In <code>data/pnp/tags/function/load.json</code>:</p>
+<pre><code>{
+  &quot;values&quot;: [&quot;yourpack:register&quot;]
+}</code></pre>
+<h2 id="cards">Cards</h2>
+<p>Write the card into <code>pnp:cards defs.&lt;id&gt;</code>, then call <code>add_card</code>:</p>
+<pre><code>data modify storage pnp:cards defs.golden_carrot set value {id:&quot;golden_carrot&quot;,name:&quot;Golden Carrot&quot;,kind:&quot;food&quot;,food:6,meal:6,heal:4,sell:12,give:&quot;minecraft:golden_carrot&quot;,gn:1,desc:&quot;Food: 6. A carrot dipped in gold.&quot;,l1:&quot;Food: 6. A carrot&quot;,l2:&quot;dipped in gold.&quot;,atlas:&quot;minecraft:items&quot;,sprite:&quot;item/golden_carrot&quot;}
+function pnp:api/add_card {id:&quot;golden_carrot&quot;,category:&quot;c2&quot;}</code></pre>
+<p><code>add_card</code> fills in anything you leave out and adds the card to the Cardopedia, plus supper if it's food. Only <code>id</code>, <code>name</code>, and <code>kind</code> are required. The rest:</p>
+<ul><li><code>desc</code>: the Cardopedia description</li><li><code>l1</code> to <code>l4</code>: tooltip lines, about 22 characters each</li><li><code>hp</code>, <code>atk</code>: health and attack</li><li><code>sell</code>: sell price in quarter emeralds, so 4 is 1 emerald</li><li><code>heal</code>: health it gives a hurt villager</li><li><code>give</code>, <code>gn</code>: the vanilla item and count it turns into when exported</li><li><code>sprite</code>, <code>atlas</code>: the icon next to its name (<code>atlas</code> defaults to <code>minecraft:items</code>)</li><li><code>food</code>, <code>meal</code>, <code>eat_order</code>: see Food below</li><li><code>traits</code>, <code>cooldown</code>, <code>eq</code>, <code>loot</code>: see Fighters below</li></ul>
+<p><strong>Kinds:</strong> <code>res</code>, <code>food</code> (eaten at supper), <code>unit</code> (fights for you), <code>enemy</code> (monster), <code>animal</code> (wanders around), <code>struct</code>, <code>node</code> (renewable source), <code>tool</code>, <code>weapon</code>, <code>armor</code>, and <code>trinket</code>. The other kinds are for built-in cards.</p>
+<p><strong>Categories:</strong> <code>c1</code> Resources, <code>c2</code> Food, <code>c3</code> Nature, <code>c4</code> Buildings, <code>c5</code> People, <code>c6</code> Gear, <code>c7</code> Monsters, <code>c8</code> Ideas, and <code>c9</code> Adventure.</p>
+<p>Card ids are shared between addons, so give generic ones a prefix. You can change built-in cards the same way, like <code>data modify storage pnp:cards defs.bread.food set value 6</code>. For a custom Cardopedia tooltip, set <code>pnp:pedia2 tip.&lt;id&gt;</code> after calling <code>add_card</code>.</p>
+<h2 id="card-text-and-translations">Card Text and Translations</h2>
+<p>Card text can be translated. Put these keys in a lang file in your resource pack, in any namespace folder, like <code>assets/yourpack/lang/en_us.json</code>:</p>
+<ul><li><code>pnp.card.&lt;id&gt;.name</code>, <code>pnp.card.&lt;id&gt;.type</code>, and <code>pnp.card.&lt;id&gt;.desc</code></li><li><code>pnp.card.&lt;id&gt;.line1</code> to <code>pnp.card.&lt;id&gt;.line4</code> for the tooltip</li></ul>
+<p>The text in your defs shows whenever a key is missing. For your own messages, use <code>{translate:&quot;yourpack.key&quot;,fallback:&quot;Text&quot;}</code> so they can be translated too. The example addon comes with English and Spanish.</p>
+<h2 id="art">Art</h2>
+<p>Two files in a resource pack. First <code>assets/pnp/items/card/golden_carrot.json</code>:</p>
+<pre><code>{
+  &quot;model&quot;: {
+    &quot;type&quot;: &quot;minecraft:model&quot;,
+    &quot;model&quot;: &quot;pnp:card/golden_carrot&quot;
+  }
+}</code></pre>
+<p>Then <code>assets/pnp/models/card/golden_carrot.json</code>:</p>
+<pre><code>{
+  &quot;parent&quot;: &quot;pnp:card/template_food_item&quot;,
+  &quot;textures&quot;: {
+    &quot;art&quot;: &quot;minecraft:item/golden_carrot&quot;
+  }
+}</code></pre>
+<p>The parent is the card frame: <code>pnp:card/template_&lt;kind&gt;_item</code>, or <code>template_&lt;kind&gt;_block</code> for block art. <code>art</code> can be any texture.</p>
+<h2 id="recipes">Recipes</h2>
+<pre><code>data modify storage pnp:cards recipes append value {r:1001,in:{villager:1,carrot:1,gold_ingot:1},n:3,time:80,use:[&quot;carrot&quot;,&quot;gold_ingot&quot;],out:[&quot;golden_carrot&quot;],il:[{c:&quot;villager&quot;,n:1},{c:&quot;carrot&quot;,n:1},{c:&quot;gold_ingot&quot;,n:1}]}
+data modify storage pnp:cards free.r1001 set value 1b</code></pre>
+<ul><li><code>r</code>: the recipe number. Packs &amp; Pillagers uses numbers under 1000, so pick your own range above that, like 1000 to 1099.</li><li><code>in</code>: the cards needed. <code>n</code> is the total, and the stack has to match it exactly. Recipes don't need a villager: the example smelts Raw Iron with just a Furnace and Coal.</li><li><code>time</code>: in tenths of a second, so 80 is 8 seconds.</li><li><code>use</code>: cards that get used up, once per copy. Anything not listed stays.</li><li><code>out</code>: the cards it makes, or <code>&quot;@name&quot;</code> for a random pick from <code>pnp:cards pools.&lt;name&gt;</code>.</li><li><code>il</code>: the same cards as <code>in</code>, written as a list. It's used for hints.</li></ul>
+<p><code>free.r&lt;number&gt;</code> makes the recipe known from the start. You can add it to an idea's <code>r</code> list instead (<code>pnp:cards ideas.&lt;idea&gt;.r</code>), but anyone who already learned that idea won't get it.</p>
+<p>Pools look like <code>{t:10,e:[{c:&quot;carrot&quot;,w:6},{c:&quot;potato&quot;,w:4}]}</code>, where <code>t</code> is the total weight. An entry with <code>c:&quot;nothing&quot;</code> gives nothing, for a chance of coming up empty.</p>
+<h2 id="food">Food</h2>
+<p>Use <code>kind:&quot;food&quot;</code> with:</p>
+<ul><li><code>food</code>: the points it's worth. Villagers eat 2, and babies eat 1.</li><li><code>meal</code>: how much of it counts as cooked. Villagers get Well Fed when at least half of what they ate was cooked. Use the same number as <code>food</code> for cooked food, and 0 for raw.</li><li><code>eat_order</code>: optional. The lowest gets eaten first. It defaults to <code>food</code>.</li></ul>
+<p>Barrels holding it count automatically.</p>
+<h2 id="smelting">Smelting</h2>
+<pre><code>data modify storage pnp:cards smelt.raw_iron set value &quot;iron_ingot&quot;</code></pre>
+<p>A linked Furnace then smelts that card on its own. Add a Furnace recipe as well so it can be smelted by hand.</p>
+<h2 id="fighters">Fighters</h2>
+<p>Use <code>kind:&quot;enemy&quot;</code> or <code>kind:&quot;unit&quot;</code> with <code>hp</code> and <code>atk</code>, plus any of these:</p>
+<ul><li><code>traits</code>: any of <code>ranged</code>, <code>beam</code>, <code>knock</code>, <code>fast</code>, <code>undead</code> (burns in daylight), and <code>boss</code>, like <code>{ranged:1b,undead:1b}</code></li><li><code>cooldown</code>: ticks between special attacks</li><li><code>eq</code>: starting gear, with <code>t</code> for a weapon or tool, <code>a</code> for armor, and <code>s</code> for special, like <code>{t:&quot;bow&quot;}</code></li><li><code>loot</code>: cards it drops, like <code>[&quot;bone&quot;]</code></li></ul>
+<h2 id="gear">Gear</h2>
+<p>Make a card equippable with <code>pnp:cards slot.&lt;id&gt;</code>: <code>&quot;t&quot;</code> for the weapon or tool slot, <code>&quot;a&quot;</code> for armor, or <code>&quot;s&quot;</code> for the talisman slot. Then say what it does in <code>pnp:cards gear.&lt;id&gt;</code>:</p>
+<pre><code>data modify storage pnp:cards slot.copper_sword set value &quot;t&quot;
+data modify storage pnp:cards gear.copper_sword set value {atk:2,role:&quot;swordsman&quot;}
+data modify storage pnp:cards slot.sling set value &quot;t&quot;
+data modify storage pnp:cards gear.sling set value {atk:1,role:&quot;archer&quot;,ranged:1b,cd:18}
+data modify storage pnp:cards slot.lucky_clover set value &quot;s&quot;
+data modify storage pnp:cards gear.lucky_clover set value {talisman:&quot;rabbit_foot&quot;}</code></pre>
+<ul><li><code>atk</code>, <code>hp</code>: attack and health it adds</li><li><code>role</code>: the job it gives, the same jobs the built-in tools give: <code>swordsman</code>, <code>miner</code>, <code>lumberjack</code>, <code>farmer</code>, <code>shepherd</code>, <code>fisher</code>, <code>smith</code>, <code>cleric</code>, <code>scholar</code>, <code>explorer</code>, <code>builder</code>, <code>archer</code>, <code>guard</code>, <code>brute</code>, or <code>lancer</code></li><li><code>talisman</code>: works like a built-in talisman: <code>totem</code>, <code>clock</code>, <code>compass</code>, <code>rabbit_foot</code>, <code>bone</code>, <code>prismarine_shard</code>, <code>echo_shard</code>, or <code>pumpkin</code></li><li><code>ranged:1b</code>: attacks from the back row, like a Bow</li><li><code>pierce:1b</code>: hits a second enemy, like a Crossbow</li><li><code>reach:1b</code>: hits from further away, like a Spear</li><li><code>guard:1b</code>: draws attacks and blocks some, like a Shield</li><li><code>mace:1b</code>: hits everything around the target, like a Mace</li><li><code>cd</code>: ticks between attacks. The default is 20, a Bow is 16, and a Mace is 30.</li></ul>
+<h2 id="machines">Machines</h2>
+<p>There are two ways to add a machine. The quick one makes your card work exactly like a built-in machine, ports and all:</p>
+<pre><code>data modify storage pnp:cards machine.big_barrel set value &quot;barrel&quot;</code></pre>
+<p>That works with <code>barrel</code>, <code>copper_barrel</code>, <code>hopper</code>, <code>dropper</code>, <code>furnace</code>, <code>sell_box</code>, <code>bundle</code>, <code>oak_tree</code>, <code>rock</code>, <code>berry_bush</code>, <code>forest</code>, <code>mountain</code>, <code>cave</code>, <code>farm</code>, <code>chicken</code>, <code>cow</code>, <code>sheep</code>, and <code>pig</code>.</p>
+<p>For a machine that does something new, describe it in <code>pnp:cards machines.&lt;id&gt;</code> and write its functions yourself:</p>
+<pre><code>data modify storage pnp:cards machines.crushing_press set value {in:1,out:1,storage:16,accepts:[&quot;cobblestone&quot;,&quot;iron_ore&quot;,&quot;gold_ore&quot;,&quot;copper_ore&quot;],on_tick:&quot;pnp_example:press/tick&quot;,on_use:&quot;pnp_example:press/use&quot;}</code></pre>
+<ul><li><code>in</code>, <code>out</code>: how many input and output ports it gets, from 1 to 4. Both default to 1.</li><li><code>storage</code>: how many cards can wait inside. The default is 64.</li><li><code>accepts</code>: the cards it takes. Leave it out to take anything.</li><li><code>on_input</code>: a function that runs when a card goes in, dropped or piped</li><li><code>on_tick</code>: a function that runs once a second</li><li><code>on_use</code>: a function that runs when a player right-clicks it</li></ul>
+<p>Players can drop cards on it or pipe them in with the Wrench, and its label shows what's waiting. Your functions run as the machine card, at its position, and can use these:</p>
+<ul><li><code>pnp:api/machine/take</code>: takes the next waiting card and puts its id in <code>pnp:machine io.c</code>. It fails if nothing is waiting.</li><li><code>pnp:api/machine/emit {c:&quot;&lt;id&gt;&quot;}</code>: sends a card out of the output port, or drops it beside the machine if nothing is linked.</li><li><code>pnp:api/machine/store {c:&quot;&lt;id&gt;&quot;}</code>: adds a card to the ones waiting.</li><li><code>pnp:api/machine/count</code>: returns how many cards are waiting.</li><li><code>pnp:api/machine/progress {p:&lt;0 to 100&gt;}</code>: shows a progress bar under the card. 0 hides it.</li></ul>
+<p>The Crushing Press starts a job like this, then finishes it 4 ticks later:</p>
+<pre><code>execute unless function pnp:api/machine/take run return 0
+data modify entity @s item.components.&quot;minecraft:custom_data&quot;.pj set value {t:0}
+data modify entity @s item.components.&quot;minecraft:custom_data&quot;.pj.c set from storage pnp:machine io.c
+function pnp:api/machine/progress {p:1}</code></pre>
+<h2 id="raids">Raids</h2>
+<pre><code>data modify storage pnp:cards raiders append value {c:&quot;husk&quot;,from:3,n:2}</code></pre>
+<p>Every raid from raid <code>from</code> to raid <code>to</code> brings <code>n</code> more of that enemy, on top of the usual raiders. <code>from</code> defaults to 1, <code>to</code> to forever, and <code>n</code> to 1. Any enemy card works, including your own.</p>
+<h2 id="pvp-stealing">PvP Stealing</h2>
+<p><code>pnp:cards steal</code> lists the cards invaders go for, in order. Each invader that survives takes the first card on the list it can find on the table it raided. Use <code>prepend</code> to put yours first, or <code>append</code> to put it last:</p>
+<pre><code>data modify storage pnp:cards steal prepend value &quot;golden_carrot&quot;</code></pre>
+<p>The built-in list starts with Emerald Blocks, Diamonds, and Emeralds, and ends with Oak Logs and Cobblestone.</p>
+<h2 id="need-something-else">Need Something Else?</h2>
+<p>If your addon needs a hook that isn't here, <a href="https://github.com/lukejw12/packs-and-pillagers/issues">open an issue on GitHub</a>.</p>
+</main>
+</div>
+<footer class="foot"><div class="fin"><a class="soc" href="https://discord.com/invite/YxRWAPUtDt"><img src="https://raw.githubusercontent.com/lukejw12/uistuff/main/icon/discord.png" alt="" width="28" height="28" loading="lazy">Discord</a><a class="soc" href="https://ko-fi.com/itsjustluke"><img src="https://raw.githubusercontent.com/lukejw12/uistuff/main/icon/kofi.png" alt="" width="28" height="28" loading="lazy">Ko-fi</a><a class="soc" href="https://github.com/lukejw12/packs-and-pillagers"><img src="https://raw.githubusercontent.com/lukejw12/uistuff/main/icon/github.png" alt="" width="28" height="28" loading="lazy">GitHub</a><a class="soc" href="https://modrinth.com/mod/packs-and-pillagers"><img src="https://raw.githubusercontent.com/lukejw12/uistuff/main/packs-%26-pillagers/icon.png" alt="" width="28" height="28" loading="lazy">Modrinth</a></div><p>Packs &amp; Pillagers is made by ItsJustLuke_. This wiki covers version 2.0 for Minecraft Java 26.3.</p><p class="dim">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. <a href="https://github.com/lukejw12/packs-and-pillagers/blob/main/datapack-license.txt">Data pack license</a></p></footer>
+<script src="assets/search.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
