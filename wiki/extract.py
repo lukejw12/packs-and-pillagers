@@ -156,7 +156,8 @@ if __name__ == '__main__':
     print('-- recipes', d['recipes'][0], d['recipes'][66], d['recipes'][156])
 
 
-OPS = re.compile(r'^data modify storage pnp:cards ([a-z_]+)((?:\.[A-Za-z0-9_]+)*) (set|merge|append|prepend) value ', re.M)
+OPS = re.compile(r'^(?:execute unless data storage pnp:cards \S+ run )?data modify storage pnp:cards ([a-z_]+)((?:\.[A-Za-z0-9_]+)*) (set|merge|append|prepend) value ', re.M)
+COPY = re.compile(r'^data modify storage pnp:cards defs\.([A-Za-z0-9_]+) set from storage pnp:cards defs\.([A-Za-z0-9_]+)\s*$', re.M)
 CATOPS = re.compile(r'^data modify storage pnp:pedia2 cat((?:\.[A-Za-z0-9_]+)*) (set|merge|append|prepend) value ', re.M)
 ADDC = re.compile(r'^function pnp:api/add_card \{id:"([a-z0-9_]+)"(?:,\s*category:"(c[0-9]+)")?', re.M)
 ROOTS = ('defs', 'recipes', 'pools', 'free', 'ideas', 'unlock', 'card_idea', 'ac', 'foods', 'gates', 'taltxt', 'sptxt', 'vtool', 'smelt', 'steal')
@@ -195,6 +196,10 @@ def merge_additions(fn, d):
             if m.group(1) in ROOTS and not m.group(2) and m.group(3) == 'set' and d.get(m.group(1)) is None:
                 p = P(t); p.i = m.end(); d[m.group(1)] = p.val()
     for rel, t in files:
+        for m in COPY.finditer(t):
+            if m.group(2) in d['defs']:
+                d['defs'][m.group(1)] = json.loads(json.dumps(d['defs'][m.group(2)]))
+                src[m.group(1)] = rel
         for m in OPS.finditer(t):
             root, keys, op = m.group(1), [k for k in m.group(2).split('.') if k], m.group(3)
             if root not in ROOTS or (not keys and op == 'set'):

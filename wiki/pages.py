@@ -1,4 +1,3 @@
-
 from wiki import *
 
 QD = D.get('quests') or {'main': [], 'side': []}
@@ -43,6 +42,7 @@ NOTES = {
     'redstone_cube_ally': 'Called by the [[redstone_awakened]] every third hit.',
     'wandering_trader': 'Stops by your table now and then, and leaves after a few minutes. The first one is announced the evening before.',
     'emerald': 'Selling cards, winning raids, filling Orders, and finishing quests.',
+    'emerald_shard': 'Selling a card that is worth part of an emerald pays the rest out in Emerald Shards.',
     'nether_portal': 'Build one from 10 Obsidian and Flint and Steel, or repair a [[ruined_portal]].',
     'badlands': 'Visit the Badlands in your world and its card lands on your table.',
     'snowy_plains': 'Visit the Snowy Plains in your world and its card lands on your table.',
@@ -113,7 +113,7 @@ def page_home():
     look = [('cards.html', 'Cards', len(BROWSE), 'villager'), ('recipes.html', 'Recipes', len(recipes), 'crafting_table'),
             ('ideas.html', 'Ideas', len(IDEA_IDS), 'idea_weapons'), ('packs.html', 'Packs', len(PACKS), 'humble_pack'),
             ('quests.html', 'Quests', len(MAINQ) + len(SIDEQ), 'q_lumber')]
-    toc = '<ul class="toc">' + ''.join(f'<li><a href="{p}">{icon(c)}<span>{t}</span><i></i><b>{n}</b></a></li>'
+    toc = '<ul class="toc">' + ''.join(f'<li><a href="{p}">{icon(c)}<span>{t}</span><i class="ld"></i><b>{n}</b></a></li>'
                                        for p, t, n, c in look) + '</ul>'
     rules = '<ul class="rules">' + ''.join(f'<li><a href="{p}">{esc(t)}</a><p>{d}</p></li>' for p, t, d in RULES) + '</ul>'
     join = ('<div class="join">'
@@ -395,7 +395,9 @@ Now and then a Piglin Merchant visits your Nether table by day, with one rare ca
 
 ## Selling
 
-Drop cards on the [[sell_box|Sell box]] at the end of your shop row, or on a [[market]], to sell them for emeralds. A card's tooltip shows what it's worth, and nearly everything sells for at least 1 emerald. [[diamond|Diamonds]] are for crafting and can't be sold.
+Drop cards on the [[sell_box|Sell box]] at the end of your shop row, or on a [[market]], to sell them. A card's tooltip shows what it's worth. Whatever's left over after whole emeralds pays out in [[emerald_shard|Emerald Shards]], a quarter of an emerald each, and 4 Shards stack into an Emerald. [[diamond|Diamonds]] are for crafting and can't be sold.
+
+@tiles 268
 
 Emeralds and books don't take up card slots, so selling is also how you make room. See [p:table.html#card-slots|Card Slots].
 
@@ -450,7 +452,7 @@ def page_supper():
             continue
         rows.append((clink(f['id']), str(d.get('food', 0)), 'Yes' if d.get('meal') else 'No',
                      'Fully' if d.get('heal', 0) >= 99 else str(d.get('heal', 0)),
-                     fmt_sell(d['sell']) if d.get('sell') else '&ndash;'))
+                     sell_text(d['sell']) if d.get('sell') else '&ndash;'))
     body = '<h1>Supper &amp; Food</h1>' + doc("""
 Every morning at dawn your villagers eat. Keep enough food on the table, and cook it when you can.
 
@@ -645,7 +647,7 @@ Cards go to a matching filter or barrel first. Anything with nowhere to go waits
 
 ## Storage
 
-A [[barrel]] stores up to 128 cards of one kind. Drop cards in, and right-click it to take 5 out. A [[copper_barrel]] holds 256. Food in barrels counts at supper. An [[ender_chest]] shares one storage across your overworld and Nether tables.
+A [[barrel]] stores up to 128 cards of one kind. Drop cards in, and right-click it to take 5 out. Villagers and other living cards can't go in barrels or other storage. A [[copper_barrel]] holds 256. Food in barrels counts at supper. An [[ender_chest]] shares one storage across your overworld and Nether tables.
 
 A [[copper_golem]] walks loose cards to a matching or empty barrel, 8 at a time.
 
@@ -1111,132 +1113,141 @@ def export_name(d, c):
     return (f'{d["gn"]}&times; ' if d['gn'] > 1 else '') + esc(name)
 
 
-def stats_html(c, rel):
+def stats_rows(c):
     d = defs[c]
     k = d.get('kind')
-    em = texicon('minecraft:item/emerald', rel)
+    em = '{icon:emerald}'
     rows = []
     if k == 'shop' and d.get('price'):
-        rows.append(('Price', '10 Emerald Blocks' if c == 'shop_side' else f'{em}{d["price"]} emeralds'))
-        if d.get('pack') in defs:
-            rows.append(('Sells', clink(d['pack'], rel)))
+        if c == 'shop_side':
+            rows.append(['Price', '10 Emerald Blocks'])
+        elif shop_pack(c) in NETHER_PACKS:
+            rows.append(['Price', '{icon:gold_ingot}' + f'{d["price"]} Gold Ingots'])
+        else:
+            rows.append(['Price', f'{em}{d["price"]} emeralds'])
+        if shop_pack(c):
+            rows.append(['Sells', tok(shop_pack(c))])
     if d.get('sell'):
-        rows.append(('Sells for', f'{em}{fmt_sell(d["sell"])} emerald{"" if d["sell"] == 4 else "s"}'))
-    elif k in ('res', 'food', 'tool', 'weapon', 'armor', 'trinket', 'struct', 'animal') and c != 'emerald':
-        rows.append(('Sells for', "Can't be sold"))
+        rows.append(['Sells for', f'{em}{sell_text(d["sell"])}'])
+    elif k in ('res', 'food', 'tool', 'weapon', 'armor', 'trinket', 'struct', 'animal') and c not in ('emerald', 'emerald_shard'):
+        rows.append(['Sells for', "Can't be sold"])
     if k in ('unit', 'enemy', 'baby'):
         if d.get('hp'):
-            rows.append(('Health', str(d['hp'])))
-        rows.append(('Attack', str(d.get('atk', 0))))
+            rows.append(['Health', str(d['hp'])])
+        rows.append(['Attack', str(d.get('atk', 0))])
     elif d.get('atk'):
-        rows.append(('Attack', '+' + str(d['atk'])))
+        rows.append(['Attack', '+' + str(d['atk'])])
     if d.get('food'):
-        rows.append(('Food', f'{d["food"]} points' + (', counts as cooked' if d.get('meal') else '')))
+        rows.append(['Food', f'{d["food"]} points' + (', counts as cooked' if d.get('meal') else '')])
     if d.get('heal'):
-        rows.append(('Heals', 'Fully' if d['heal'] >= 99 else f'{d["heal"]} health'))
+        rows.append(['Heals', 'Fully' if d['heal'] >= 99 else f'{d["heal"]} health'])
     if k == 'pack' and d.get('count'):
-        rows.append(('Cards', str(d['count'])))
+        rows.append(['Cards', str(d['count'])])
     if c in SPEC_OF:
-        rows.append(('Job', f'{SPEC_OF[c][0]}. {SPEC_OF[c][1]}.'))
+        rows.append(['Job', f'{SPEC_OF[c][0]}. {SPEC_OF[c][1]}.'])
     if c in TALIS:
-        rows.append(('As a talisman', TALIS[c]))
+        rows.append(['As a talisman', esc(TALIS[c])])
     if d.get('traits'):
-        rows.append(('Traits', esc(join_and(TRAITS.get(t, t) for t in d['traits']))))
+        rows.append(['Traits', esc(join_and(TRAITS.get(t, t) for t in d['traits']))])
     if d.get('eq'):
-        rows.append(('Carries', join_and(clink(v, rel) for v in d['eq'].values())))
+        rows.append(['Carries', join_and(tok(v) for v in d['eq'].values())])
     if d.get('loot'):
-        rows.append(('Drops', join_and(clink(v, rel) for v in dict.fromkeys(d['loot']))))
+        rows.append(['Drops', join_and(tok(v) for v in dict.fromkeys(d['loot']))])
     if c in AC:
         v = AC[c]
-        need = join_and(((str(q) + '&times; ') if q > 1 else '') + clink(x, rel) for x, q in v.get('need', {}).items())
-        rows.append(('Autocrafter', f'{need} in {v.get("t", 0) / 20:g}s'))
+        need = join_and(((str(q) + '&times; ') if q > 1 else '') + tok(x) for x, q in v.get('need', {}).items())
+        rows.append(['Autocrafter', f'{need} in {v.get("t", 0) / 20:g}s'])
     ex = export_name(d, c)
     if ex:
-        rows.append(('A Bundle sends home', ex))
-    if not rows:
-        return ''
-    return '<dl class="stats">' + ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in rows) + '</dl>'
+        rows.append(['A Bundle sends home', ex])
+    return rows
 
 
-def get_blocks(c, rel):
-    blocks = []
-    if MADE.get(c):
-        blocks.append(('Made From', tiles(MADE[c], rel)))
-    fi = found_items(c, rel)
-    if fi:
-        blocks.append(('Found In', f'<ul class="pl src">{fi}</ul>'))
-    if LOOT.get(c):
-        blocks.append(('Loot From', '<ul class="pl src">' + ''.join(f'<li>{clink(s, rel)}</li>' for s in dict.fromkeys(LOOT[c])) + '</ul>'))
-    if DROPPED.get(c):
-        blocks.append(('Dropped By', '<ul class="pl src">' + ''.join(f'<li>{clink(s, rel)}</li>' for s in DROPPED[c]) + '</ul>'))
-    if c in WORLD:
-        blocks.append(('Out in the World', f'<p>{WORLD[c]}.</p>'))
-    if c in CAPTURE:
-        blocks.append(('Out in the World', '<p>Right-click one out in the world with your Card Board to bring it onto your table.</p>'))
-    if REVEAL.get(c):
-        blocks.append(('Comes Free With', '<p>You learn it anyway the first time you get '
-                       + join_and((clink(x, rel) for x in REVEAL[c]), 'or') + '.</p>'))
-    if c in NOTES:
-        blocks.append(('Other Ways', f'<p>{md(NOTES[c], rel)}</p>'))
-    return blocks
+FIELD_NAMES = {'mf': 'madeFrom', 'fi': 'foundIn', 'lf': 'lootFrom', 'db': 'droppedBy', 'w': 'world', 'cap': 'capture',
+               'rv': 'freeWith', 'nt': 'notes', 'te': 'teaches', 'pk': 'contents', 'gv': 'gives', 'gi': 'gateway',
+               'pi': 'portal', 'wm': 'where', 'ui': 'usedIn', 'uc': 'usedInCount', 'ul': 'usedInList'}
 
 
-def page_card(c, prev, nxt):
-    rel = '../'
+def card_record(c):
     d = defs[c]
     k = d.get('kind')
-    parts = []
-    blocks = get_blocks(c, rel)
-    if blocks:
-        parts.append(h2('How to Get It') + ''.join(h3(t) + b for t, b in blocks))
+    g = {}
+    if MADE.get(c):
+        g['mf'] = [r for r in MADE[c] if r in R]
+    fi = []
+    for pl, x in FOUND.get(c, []):
+        for s in POOL_SRC.get(pl, []):
+            extra = ' with an Iron Pickaxe' if pl == 'cave_rich' else (' with a Stone Pickaxe' if pl == 'cave' else '')
+            fi.append([s, extra, pct(x)])
+    if fi:
+        g['fi'] = fi
+    if LOOT.get(c):
+        g['lf'] = list(dict.fromkeys(LOOT[c]))
+    if DROPPED.get(c):
+        g['db'] = DROPPED[c]
+    if c in WORLD:
+        g['w'] = WORLD[c]
+    if c in CAPTURE:
+        g['cap'] = 1
+    if REVEAL.get(c):
+        g['rv'] = REVEAL[c]
+    if c in NOTES:
+        g['nt'] = NOTES[c]
     if c in ideas and ideas[c].get('r'):
-        parts.append(h2('Teaches') + tiles([x['v'] for x in ideas[c]['r']], rel))
-    if k == 'pack' and d.get('pool'):
-        n = d.get('count', 1)
-        parts.append(h2("What's Inside") + f'<p>Opening it gives {n} card{"s" if n != 1 else ""}. Each one comes from this list:</p>'
-                     + pool_list(d['pool'], rel, cls='pl cols'))
+        g['te'] = [x['v'] for x in ideas[c]['r'] if x['v'] in R]
+    if k == 'pack' and d.get('pool') in pools:
+        g['pk'] = [d['pool'], d.get('count', 1)]
     if k == 'node':
-        gives = [r for r in USED.get(c, []) if any(o.startswith('@') for o in R[r]['out'])]
-        if gives:
-            sec = h2('What It Gives')
-            for r in gives:
-                rr = R[r]
-                extra = [x for x in rr['in'] if x not in ('villager', c)]
-                label = ('With ' + join_and(esc(cname(x)) for x in extra)) if extra else 'With a Villager'
-                p = next(o[1:] for o in rr['out'] if o.startswith('@'))
-                sec += f'<h3>{label}</h3><p class="dim">Every {fmt_time(rr["time"])}, one of these:</p>' + pool_list(p, rel, cls='pl cols')
-            parts.append(sec)
+        gv = []
+        for r in USED.get(c, []):
+            rr = R[r]
+            pl = next((o[1:] for o in rr['out'] if o.startswith('@')), None)
+            if not pl:
+                continue
+            extra = [x for x in rr['in'] if x not in ('villager', c)]
+            gv.append([('With ' + join_and(esc(cname(x)) for x in extra)) if extra else 'With a Villager', fmt_time(rr['time']), pl])
+        if gv:
+            g['gv'] = gv
     gi = next((x for x in GATE_INFO if x[0] == c), None)
     if gi:
-        boss = f'the {clink(gi[2], rel)}' if gi[2] else 'a boss'
-        learn = f' Win and you learn the {clink(gi[3], rel)}.' if gi[3] else ''
-        parts.append(h2('Inside') + f'<p>A few waves of enemies, and then {boss}.{learn} '
-                     'The loot can include:</p><ul class="pl src">' + ''.join(f'<li>{clink(x, rel)}</li>' for x in gi[5]) + '</ul>')
+        g['gi'] = {'boss': gi[2] or '', 'learns': gi[3] or '', 'loot': [x for x in gi[5] if x in defs and x not in HIDE]}
     pi = next((x for x in GATE_INFO if x[3] == c), None)
     if pi:
-        cost = f'Each run costs a {clink(pi[4], rel)} and takes' if pi[4] else 'It takes'
-        parts.append(h2('Using It') + f'<p>{cost} your villagers back to the {pi[1]} and the {clink(pi[2], rel) if pi[2] else "boss"}.</p>')
+        g['pi'] = {'key': pi[4] or '', 'place': pi[1], 'boss': pi[2] or ''}
     if k == 'enemy' and where_of(c):
-        parts.append(h2('Where You Meet It') + f'<p>{esc(where_of(c))}.</p>')
+        g['wm'] = where_of(c)
     used = USED.get(c, [])
     if used:
         if len(used) <= 12:
-            parts.append(h2('Used In') + tiles(used, rel))
+            g['ui'] = [r for r in used if r in R]
         else:
-            labels = list(dict.fromkeys(out_label(r, rel) for r in used))
-            parts.append(h2('Used In') + f'<p>{esc(cname(c))} goes into {len(used)} recipes. They make:</p>'
-                         f'<p class="many">{", ".join(labels)}</p><p><a href="../recipes.html">See every recipe</a></p>')
-    cat = CAT_OF.get(c, 'more')
-    pager = '<nav class="pager" aria-label="More cards">' + (f'<a href="{prev}.html">Previous: {esc(cname(prev))}</a>' if prev else '<span></span>') \
-            + (f'<a href="{nxt}.html">Next: {esc(cname(nxt))}</a>' if nxt else '') + '</nav>'
-    body = (f'<p class="crumbs"><a href="../cards.html">Cards</a> / <a href="../cards.html#{cat}">{esc(CAT_NAME[cat])}</a></p>'
-            f'<div class="chead"><div class="big">{card(c, rel, link=False)}</div><div class="cinfo"><h1>{esc(cname(c))}</h1>'
-            f'<p class="kn"><i class="sw k-{tk_of(c)}"></i>{esc(d.get("kn", ""))}</p><p class="desc">{esc(d.get("desc", ""))}</p>'
-            f'{stats_html(c, rel)}</div></div>' + ''.join(parts) + pager)
-    write_page(f'card/{c}.html', cname(c), body, d.get('desc', ''), search=False)
-    art, blk = art_of(c)
-    SEARCH.append({'n': cname(c), 'u': f'card/{c}.html', 'k': d.get('kn', ''), 'a': tex_path(art) if art else '',
-                   'h': 1 if art and hi(art) else 0})
+            g['uc'] = len(used)
+            g['ul'] = list(dict.fromkeys(out_label_tokens(r) for r in used))
+    rec = {'type': d.get('kn', ''), 'desc': d.get('desc', ''), 'category': CAT_OF.get(c, 'more')}
+    st = stats_rows(c)
+    if st:
+        rec['stats'] = st
+    rec.update({FIELD_NAMES[k]: v for k, v in g.items()})
+    return rec
+
+
+def _clean(v):
+    if isinstance(v, str):
+        return v.replace('&times;', '\u00d7').replace('&#x27;', "'").replace('&quot;', '"')
+    if isinstance(v, list):
+        return [_clean(x) for x in v]
+    if isinstance(v, dict):
+        return {k: _clean(x) for k, x in v.items()}
+    return v
+
+
+def cards_data():
+    cards = {c: card_face(c) for c in defs if c not in HIDE}
+    for c in BROWSE:
+        cards[c].update(card_record(c))
+    return _clean({'cards': cards, 'recipes': {str(r): recipe_data(r) for r in R},
+                   'pools': {pl: [[c, pct(x)] for c, x in pool_items(pl)] for pl in pools},
+                   'order': BROWSE, 'categories': {k: CAT_NAME[k] for k in CAT_KEYS}})
 
 
 def main():
@@ -1252,8 +1263,14 @@ def main():
               page_supper, page_villagers, page_combat, page_machines, page_gateways, page_nether, page_world,
               page_multiplayer, page_addons):
         f()
-    for i, c in enumerate(BROWSE):
-        page_card(c, BROWSE[i - 1] if i else None, BROWSE[i + 1] if i + 1 < len(BROWSE) else None)
+    for c in BROWSE:
+        art, blk = art_of(c)
+        a = ATLAS.get(art) if art else None
+        SEARCH.append({'n': cname(c), 'u': f'card.html#{c}', 'k': defs[c].get('kn', ''), 'i': a[0] if a else '', 'p': a[1] if a else ''})
+    write_page('card.html', 'Card', '<div id="cardview" aria-live="polite"></div><noscript><p>Card pages need JavaScript turned on. '
+               'You can still see every card on the <a href="cards.html">Cards</a> page.</p></noscript>',
+               'A card from Packs & Pillagers.', search=False)
+    write_data(os.path.join(OUT, 'assets', 'cards.js'), cards_data())
     write_search()
     open(os.path.join(OUT, '.nojekyll'), 'w').close()
     n = sum(len(fs) for _, _, fs in os.walk(OUT))

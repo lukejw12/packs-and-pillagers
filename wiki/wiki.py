@@ -1,4 +1,4 @@
-import os, re, sys, json, glob, html, shutil, zipfile, urllib.request
+import os, re, sys, json, glob, html, math, shutil, zipfile, urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from PIL import Image
@@ -57,7 +57,7 @@ LINK = {
     'addon_rp': GH + '/raw/main/example-addon/packs-and-pillagers-example-addon-resources.zip',
     'addon_md': GH + '/blob/main/example-addon/ADDING-ADDONS.md',
 }
-VERSION = '2.0'
+VERSION = '2.2'
 GAME = 'Minecraft Java 26.3'
 
 if not os.path.exists(FONT):
@@ -134,6 +134,16 @@ def fmt_sell(q):
     return str(int(v)) if v == int(v) else f'{v:g}'
 
 
+def sell_text(q):
+    whole, rest = divmod(int(q), 4)
+    parts = []
+    if whole:
+        parts.append(f'{whole} emerald' + ('' if whole == 1 else 's'))
+    if rest:
+        parts.append(f'{rest} shard' + ('' if rest == 1 else 's'))
+    return ' and '.join(parts) or '0'
+
+
 def fmt_time(t):
     v = t / 10
     return (str(int(v)) if v == int(v) else f'{v:g}') + 's'
@@ -144,7 +154,6 @@ def pct(x):
     return f'{v:.0f}%' if v >= 0.995 else '<1%'
 
 
-# ---------- category groups (same order as the Cardopedia)
 _allcat = {i for v in CATS.values() for i in v.get('ids', [])}
 HIDE |= {c for c, x in defs.items() if x.get('kind') == 'quest' and c not in _allcat}
 CAT_KEYS = [k for k in sorted(CATS, key=lambda k: int(k[1:]) if k[1:].isdigit() else 99) if CATS[k].get('ids')]
@@ -166,7 +175,6 @@ CAT_OF = {i: k for k, v in CAT_IDS.items() for i in v}
 BROWSE = [i for k in CAT_KEYS for i in CAT_IDS[k]]
 IDEA_IDS = list(CAT_IDS['c8'])
 
-# ---------- textures
 TEXSIZE = {}
 EXTRA_TEX = [
     'minecraft:item/emerald', 'minecraft:gui/sprites/hud/heart/full', 'minecraft:item/clock_00',
@@ -202,9 +210,8 @@ def _fetch(tex):
         src = os.path.join(RP, 'assets', ns, 'textures', p + '.png')
         if not os.path.exists(src):
             return tex, None, 'not in the resource pack'
-    dst = os.path.join(OUT, tex_path(tex))
-    os.makedirs(os.path.dirname(dst), exist_ok=True)
     im = Image.open(src)
+    im.load()
     w, h = im.size
     if h > w:
         im = im.crop((0, 0, w, w))
@@ -213,19 +220,58 @@ def _fetch(tex):
         bb = im.getchannel('A').getbbox()
         if bb:
             im = im.crop(bb)
-            w = im.size[0]
-    im.save(dst, optimize=True)
-    return tex, w, None
+    return tex, im, None
+
+
+TEXIMG = {}
+ATLAS = {}
+ATLAS_FILES = {}
 
 
 def fetch_textures(texes):
     with ThreadPoolExecutor(16) as ex:
-        for tex, w, err in ex.map(_fetch, sorted(set(texes))):
-            if w:
-                TEXSIZE[tex] = w
+        for tex, im, err in ex.map(_fetch, sorted(set(texes))):
+            if im is not None:
+                TEXIMG[tex] = im
+                TEXSIZE[tex] = im.size[0]
             else:
                 print('texture missing:', tex, err)
 
+
+def build_atlases():
+    by = defaultdict(list)
+    for tex, im in TEXIMG.items():
+        by[max(im.size)].append(tex)
+    for s, texes in sorted(by.items()):
+        texes.sort()
+        cols = max(1, math.ceil(math.sqrt(len(texes))))
+        rows = math.ceil(len(texes) / cols)
+        sheet = Image.new('RGBA', (cols * s, rows * s), (0, 0, 0, 0))
+        for n, tex in enumerate(texes):
+            im = TEXIMG[tex].convert('RGBA')
+            cx, cy = n % cols, n // cols
+            sheet.paste(im, (cx * s + (s - im.size[0]) // 2, cy * s + (s - im.size[1]) // 2))
+            px = 0 if cols == 1 else cx / (cols - 1) * 100
+            py = 0 if rows == 1 else cy / (rows - 1) * 100
+            ATLAS[tex] = (f'a{s}', f'{px:.4g}% {py:.4g}%')
+        sheet.save(os.path.join(OUT, 'assets', f'a{s}.png'), optimize=True)
+        ATLAS_FILES[f'a{s}'] = (cols, rows, s)
+
+
+def sprite(tex, cls=''):
+    a = ATLAS.get(tex)
+    if not a:
+        return ''
+    return f'<i class="sp {a[0]}{(" " + cls) if cls else ""}" style="background-position:{a[1]}"></i>'
+
+
+def sprite_css(sel, tex):
+    a = ATLAS.get(tex)
+    if not a:
+        return ''
+    cols, rows, s = ATLAS_FILES[a[0]]
+    return (f'{sel}{{background-image:url({a[0]}.png);background-size:{cols * 100}% {rows * 100}%;'
+            f'background-position:{a[1]};background-repeat:no-repeat}}')
 
 def make_bg(path):
     src_p = os.path.join(CACHE, 'block/deepslate.png')
@@ -247,16 +293,23 @@ def make_bg(path):
 
 def write_assets():
     os.makedirs(os.path.join(OUT, 'assets'), exist_ok=True)
+    build_atlases()
     css = open(os.path.join(HERE, 'style.css'), encoding='utf-8').read()
+    ccss = open(os.path.join(HERE, 'card-style.css'), encoding='utf-8').read()
     kinds = '\n'.join(f'.k-{k}{{--hd:{h};--bd:{b}}}' for k, (h, b) in sorted(TCOL.items()))
+    sheets = '\n'.join(f'.{a}{{background-image:url({a}.png);background-size:{c * 100}% {r * 100}%'
+                       + (';image-rendering:auto' if s > 32 else '') + '}' for a, (c, r, s) in sorted(ATLAS_FILES.items()))
+    fixed = '\n'.join(x for x in (sprite_css('.cs::before', 'minecraft:item/emerald'),
+                                   sprite_css('.ch::before', 'minecraft:gui/sprites/hud/heart/full')) if x)
+    with open(os.path.join(OUT, 'assets/card-style.css'), 'w', encoding='utf-8') as fh:
+        fh.write(ccss.rstrip() + '\n' + kinds + '\n' + sheets + '\n' + fixed + '\n')
     with open(os.path.join(OUT, 'assets/style.css'), 'w', encoding='utf-8') as fh:
-        fh.write(css.rstrip() + '\n' + kinds + '\n')
+        fh.write(css.rstrip() + '\n' + sprite_css('.results .pg', 'minecraft:item/book') + '\n')
     shutil.copy(os.path.join(HERE, 'site.js'), os.path.join(OUT, 'assets/site.js'))
     make_bg(os.path.join(OUT, 'assets/deepslate.png'))
     shutil.copy(FONT, os.path.join(OUT, 'assets', 'minecraft.ttf'))
 
 
-# ---------- cards
 def tk_of(c):
     v = VIS.get(c)
     if v and v['tk'] in TCOL:
@@ -277,55 +330,58 @@ def hi(tex):
 
 
 def card(c, rel='', u=None, link=True, cls='', style='', label=True, attrs='', art_as=None):
-    d = defs.get(c, {})
-    name = d.get('name', c)
-    w = TW(name)
-    ts = min(1.0, 42.0 / w) if w > 0 else 1.0
-    art, blk = art_as if art_as else art_of(c)
-    inner = '<b class="ct">' + esc(name) + '</b>'
-    if art:
-        k = 'ca' + (' b' if blk else '') + (' h' if hi(art) else '')
-        inner += f'<img class="{k}" src="{rel}{tex_path(art)}" alt="" loading="lazy" decoding="async">'
-    if label:
-        if d.get('sell'):
-            inner += '<span class="cs">' + fmt_sell(d['sell']) + '</span>'
-        if d.get('hp'):
-            inner += '<span class="ch">' + str(d['hp']) + '</span>'
-    st = f'--ts:{ts:.3f}'
+    if c not in defs or c in HIDE:
+        return ''
+    a = ''
     if u:
-        st += f';--u:{u}px'
-    if style:
-        st += ';' + style
-    k = 'c k-' + tk_of(c) + ((' ' + cls) if cls else '')
-    lab = esc(cname(c))
-    if link:
-        return f'<a class="{k}" href="{rel}card/{c}.html" style="{st}" aria-label="{lab}"{attrs}><span class="cf">{inner}</span></a>'
-    return f'<div class="{k}" style="{st}" role="img" aria-label="{lab}"{attrs}><span class="cf">{inner}</span></div>'
+        a += f' data-u="{u}"'
+    if not link:
+        a += ' data-link="0"'
+    if cls:
+        a += f' data-cls="{esc(cls)}"'
+    if not label:
+        a += ' data-label="0"'
+    if art_as and art_as[0] in ATLAS:
+        at = ATLAS[art_as[0]]
+        a += f' data-art="{at[0]}|{at[1]}|{1 if art_as[1] else 0}"'
+    return f'<i data-card="{c}"{a}{attrs}></i>'
+
+
+def card_face(c):
+    d = defs[c]
+    name = d.get('name', c)
+    tw = TW(name)
+    f = {'name': name, 'title': cname(c), 'frame': tk_of(c), 'titleScale': round(min(1.0, 42.0 / tw) if tw > 0 else 1.0, 3)}
+    art, blk = art_of(c)
+    if art and art in ATLAS:
+        f['art'] = [ATLAS[art][0], ATLAS[art][1], 1 if blk else 0]
+    if d.get('sell'):
+        f['sell'] = fmt_sell(d['sell'])
+    if d.get('hp'):
+        f['health'] = d['hp']
+    return f
 
 
 def icon(c, rel=''):
     art, blk = art_of(c)
     if not art:
         return ''
-    h = ' h' if hi(art) else ''
-    return f'<img class="ico{h}" src="{rel}{tex_path(art)}" alt="" loading="lazy">'
+    return sprite(art, 'ico')
 
 
 def texicon(tex, rel='', cls='ico'):
     if tex not in TEXSIZE:
         return ''
-    h = ' h' if hi(tex) else ''
-    return f'<img class="{cls}{h}" src="{rel}{tex_path(tex)}" alt="" loading="lazy">'
+    return sprite(tex, cls)
 
 
 def clink(c, rel='', text=None):
     t = esc(text or cname(c))
     if c not in defs or c in HIDE:
         return t
-    return f'<a class="cl" href="{rel}card/{c}.html">{icon(c, rel)}{t}</a>'
+    return f'<a class="cl" href="{rel}card.html#{c}">{icon(c, rel)}{t}</a>'
 
 
-# ---------- recipes
 VARIANT = set(range(91, 105)) | set(range(107, 121)) | set(range(123, 137))
 STATIONS = ('crafting_table', 'furnace', 'farm', 'house', 'pen', 'trading_post', 'brewing_stand', 'library')
 ARROW = ('<svg class="arw" viewBox="0 0 21 16" aria-hidden="true"><path d="M0 5H14V1'
@@ -350,13 +406,6 @@ def stack_order(rr):
     return out
 
 
-def stack(ids, rel='', u=None):
-    n = len(ids)
-    h = ''.join(card(c, rel, style=f'--i:{i}', label=(i == n - 1)) for i, c in enumerate(ids))
-    st = f'--n:{n}' + (f';--u:{u}px' if u else '')
-    return f'<div class="stk" style="{st}">{h}</div>'
-
-
 def pool_items(p):
     pd = pools[p]
     agg = Counter()
@@ -366,23 +415,8 @@ def pool_items(p):
 
 
 def pool_list(p, rel='', limit=None, cls='pl'):
-    items = pool_items(p)
-    show = items[:limit] if limit else items
-    lis = ''.join(f'<li>{clink(c, rel)}<span class="pc">{pct(x)}</span></li>' for c, x in show)
-    if limit and len(items) > limit:
-        lis += f'<li class="more">and {len(items) - limit} more</li>'
-    return f'<ul class="{cls}">{lis}</ul>'
-
-
-def outs_html(rr, rel=''):
-    h = ''
-    for o, n in Counter(rr['out']).items():
-        if o.startswith('@'):
-            h += '<div class="rp"><p>One of these:</p>' + pool_list(o[1:], rel, limit=5) + '</div>'
-        else:
-            x = f'<span class="x">&times;{n}</span>' if n > 1 else ''
-            h += f'<div class="ro">{card(o, rel)}{x}</div>'
-    return h
+    lim = f' data-limit="{limit}"' if limit else ''
+    return f'<ul class="{cls}" data-pool="{p}"{lim}></ul>'
 
 
 SRC = defaultdict(list)
@@ -403,10 +437,16 @@ for _rr in recipes:
             SRC[_rr['r']].append(('gate', GATE_OF[_o]))
 
 
-def learn_html(r, rel=''):
+def tok(c, text=None):
+    if c not in defs or c in HIDE:
+        return esc(text or cname(c))
+    return f'[[{c}|{text}]]' if text else f'[[{c}]]'
+
+
+def learn_tokens(r):
     srcs = list(dict.fromkeys(SRC.get(r, [])))
     if not srcs:
-        return "Can't be learned yet in version 1.0."
+        return "Can't be learned yet."
     if any(s[0] == 'start' for s in srcs):
         return 'Known from the start.'
     ids = [x for k, x in srcs if k == 'idea']
@@ -414,28 +454,25 @@ def learn_html(r, rel=''):
     gts = [x for k, x in srcs if k == 'gate']
     bits = []
     if ids:
-        bits.append('from the ' + ' or the '.join(clink(x, rel) for x in ids))
+        bits.append('from the ' + ' or the '.join(tok(x) for x in ids))
     if crd:
-        bits.append('by getting your first ' + ' or '.join(clink(x, rel) for x in crd))
+        bits.append('by getting your first ' + ' or '.join(tok(x) for x in crd))
     if gts:
-        bits.append('by winning a run through the ' + ' or the '.join(clink(x, rel) for x in gts))
+        bits.append('by winning a run through the ' + ' or the '.join(tok(x) for x in gts))
     return 'Learned ' + ', or '.join(bits) + '.'
 
 
-def recipe(r, rel=''):
+def recipe_data(r):
     rr = R[r]
-    ids = stack_order(rr)
+    used = Counter(rr.get('use', []))
+    ut = ('Uses up ' + join_and((f'{n}&times; {esc(cname(c))}' if n > 1 else esc(cname(c))) for c, n in used.items())) if used else 'Nothing gets used up'
+    outs = [['@', o[1:]] if o.startswith('@') else [o, n] for o, n in Counter(rr['out']).items()]
     names = norm(' '.join(cname(c) for c in dict.fromkeys(list(rr['in']) + [o for o in rr['out'] if not o.startswith('@')])))
-    used = list(dict.fromkeys(rr.get('use', [])))
-    ut = ('Uses up ' + join_and(esc(cname(c)) for c in used)) if used else 'Nothing gets used up'
-    return (f'<div class="rcp" id="r{r}" data-n="{esc(names)}">'
-            f'<div class="rk">{stack(ids, rel)}<div class="ra">{ARROW}<span>{fmt_time(rr["time"])}</span></div>'
-            f'<div class="rout">{outs_html(rr, rel)}</div></div>'
-            f'<p class="ru">{ut}.</p><p class="rl">{learn_html(r, rel)}</p></div>')
+    return {'stack': stack_order(rr), 'makes': outs, 'time': fmt_time(rr['time']), 'usesUp': ut, 'learn': learn_tokens(r), 'search': names}
 
 
 def tiles(rs, rel=''):
-    return '<div class="rgrid">' + ''.join(recipe(r, rel) for r in rs if r in R) + '</div>'
+    return '<div class="rgrid" data-rs="' + ','.join(str(r) for r in rs if r in R) + '"></div>'
 
 
 def inputs_text(r):
@@ -461,7 +498,23 @@ def out_label(r, rel=''):
     return join_and(parts)
 
 
-# ---------- where things come from
+def out_label_tokens(r):
+    rr = R[r]
+    parts = []
+    for o in dict.fromkeys(rr['out']):
+        if o.startswith('@'):
+            node = next((c for c in rr['in'] if defs.get(c, {}).get('kind') == 'node'), None)
+            if node is None:
+                src = next((c for c in rr['in'] if c != 'villager'), None)
+                parts.append(('a random card from the ' + tok(src)) if src else 'a random card')
+                continue
+            tools = [c for c in rr['in'] if c not in ('villager', node)]
+            parts.append(tok(node) + ' trips' + ((' with ' + join_and(tok(t) for t in tools)) if tools else ''))
+        else:
+            parts.append(tok(o))
+    return join_and(parts)
+
+
 POOL_SRC = defaultdict(list)
 for _rr in recipes:
     for _o in _rr['out']:
@@ -634,7 +687,6 @@ TRAITS = {'ranged': 'Ranged', 'beam': 'Beam attack', 'knock': 'Knockback', 'fast
           'undead': 'Undead (burns at dawn)', 'boss': 'Boss'}
 
 
-# ---------- text helpers
 def md(s, rel=''):
     out = []
     for p in re.split(r'(`[^`]+`)', s):
@@ -697,7 +749,6 @@ def table(head, rows, cls='tbl'):
     return f'<div class="tw"><table class="{cls}"><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>'
 
 
-# ---------- page shell
 NAV = [
     ('Start Here', [('index.html', 'Home'), ('getting-started.html', 'Getting Started'), ('table.html', 'The Table')]),
     ('Look It Up', [('cards.html', 'Cards'), ('recipes.html', 'Recipes'), ('ideas.html', 'Ideas'),
@@ -731,13 +782,13 @@ def footer(rel):
             f'<a href="{LINK["license"]}">Data pack license</a></p>')
 
 
-def layout(path, title, body, desc, rel):
+def layout(path, title, body, desc, rel, scripts=()):
     secs = section_list(body)
     nav = ''
     for g, items in NAV:
         lis = ''
         for p, t in items:
-            on = p == path or (path.startswith('card/') and p == 'cards.html')
+            on = p == path or (path == 'card.html' and p == 'cards.html')
             cls = ' class="on"' if on else ''
             cur = ' aria-current="page"' if p == path else ''
             sub = ''
@@ -746,6 +797,7 @@ def layout(path, title, body, desc, rel):
             lis += f'<li{cls}><a href="{rel}{p}"{cur}>{esc(t)}</a>{sub}</li>'
         nav += f'<p class="g">{esc(g)}</p><ul>{lis}</ul>'
     full = 'Packs & Pillagers Wiki' if path == 'index.html' else f'{title} | Packs & Pillagers Wiki'
+    extra = ''.join(f'<script src="{rel}{s}" defer></script>\n' for s in scripts)
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -762,6 +814,7 @@ def layout(path, title, body, desc, rel):
 <meta name="theme-color" content="#1b1c20">
 <link rel="icon" type="image/png" href="{PP}icon.png">
 <link rel="preload" href="{rel}assets/minecraft.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="{rel}assets/card-style.css">
 <link rel="stylesheet" href="{rel}assets/style.css">
 </head>
 <body data-root="{rel}">
@@ -780,18 +833,19 @@ def layout(path, title, body, desc, rel):
 </div>
 <footer class="foot">{footer(rel)}</footer>
 <script src="{rel}assets/search.js" defer></script>
-<script src="{rel}assets/site.js" defer></script>
+<script src="{rel}assets/cards.js" defer></script>
+{extra}<script src="{rel}assets/site.js" defer></script>
 </body>
 </html>
 '''
 
 
-def write_page(path, title, body, desc='', search=True):
+def write_page(path, title, body, desc='', search=True, scripts=()):
     rel = '../' * path.count('/')
     fp = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     with open(fp, 'w', encoding='utf-8') as fh:
-        fh.write(layout(path, title, body, desc, rel))
+        fh.write(layout(path, title, body, desc, rel, scripts))
     if search:
         SEARCH.append({'n': title, 'u': path, 'k': 'Page', 't': 'p'})
         for i, s in section_list(body):
@@ -799,5 +853,58 @@ def write_page(path, title, body, desc='', search=True):
 
 
 def write_search():
+    rows = ',\n'.join('  ' + json.dumps(e, ensure_ascii=False) for e in SEARCH)
     with open(os.path.join(OUT, 'assets/search.js'), 'w', encoding='utf-8') as fh:
-        fh.write('window.PNP_SEARCH=' + json.dumps(SEARCH, ensure_ascii=False, separators=(',', ':')) + ';\n')
+        fh.write('window.PNP_SEARCH = [\n' + rows + '\n];\n')
+
+
+def _j(v):
+    return json.dumps(v, ensure_ascii=False)
+
+
+def _fmt(v, pad):
+    s = _j(v)
+    if len(s) <= 120 or not isinstance(v, list) or not v:
+        return s
+    inner = pad + '  '
+    if all(not isinstance(x, (list, dict)) for x in v):
+        rows, line = [], []
+        for x in v:
+            t = _j(x)
+            if line and len(', '.join(line + [t])) > 100:
+                rows.append(inner + ', '.join(line))
+                line = []
+            line.append(t)
+        rows.append(inner + ', '.join(line))
+    else:
+        rows = [inner + _j(x) for x in v]
+    return '[\n' + ',\n'.join(rows) + '\n' + pad + ']'
+
+
+def write_data(path, data):
+    out = ['window.PNP = {']
+    keys = list(data)
+    for i, key in enumerate(keys):
+        val = data[key]
+        end = ',' if i < len(keys) - 1 else ''
+        if isinstance(val, dict) and val and all(isinstance(v, dict) for v in val.values()):
+            out.append(f'  {_j(key)}: {{')
+            items = list(val.items())
+            for n, (k, rec) in enumerate(items):
+                fields = list(rec.items())
+                out.append(f'    {_j(k)}: {{')
+                out += [f'      {_j(f)}: {_fmt(v, "      ")}' + (',' if m < len(fields) - 1 else '') for m, (f, v) in enumerate(fields)]
+                out.append('    }' + (',' if n < len(items) - 1 else ''))
+            out.append('  }' + end)
+        elif isinstance(val, dict):
+            items = list(val.items())
+            out.append(f'  {_j(key)}: {{')
+            out += [f'    {_j(k)}: {_fmt(v, "    ")}' + (',' if n < len(items) - 1 else '') for n, (k, v) in enumerate(items)]
+            out.append('  }' + end)
+        elif isinstance(val, list):
+            out.append(f'  {_j(key)}: {_fmt(val, "  ")}{end}')
+        else:
+            out.append(f'  {_j(key)}: {_j(val)}{end}')
+    out.append('};')
+    with open(path, 'w', encoding='utf-8') as fh:
+        fh.write('\n'.join(out) + '\n')
