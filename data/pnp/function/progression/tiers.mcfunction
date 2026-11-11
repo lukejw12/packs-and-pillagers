@@ -39,4 +39,6 @@ data modify storage pnp:cards defs.horse.icon set value "pnp:icon/horse"
 data modify storage pnp:cards defs.wildfire_shield.icon set value "pnp:icon/wildfire_shield"
 data modify storage pnp:cards defs.wildfire_crown.icon set value "pnp:icon/wildfire_crown"
 data modify storage pnp:cards defs.swamp merge value {atlas:"minecraft:items",sprite:"pnp:item/art/lily_pad"}
-data modify storage pnp:board qdx set value [-3.85d,-2.95d,-2.05d,-1.15d]
+data remove storage pnp:board qdx
+data modify storage pnp:board qtdx set value [-3.85d,-2.95d,-2.05d,-1.15d]
+function pnp:progression/shards

@@ -5,4 +5,4 @@ $execute if data storage pnp:cards defs.$(c).lw run data modify storage pnp:boar
 $execute if data storage pnp:cards defs.$(c).name run data modify storage pnp:board qtp.nm set from storage pnp:cards defs.$(c).name
 execute store result storage pnp:board qtp.st float 0.00078 run data get storage pnp:board qtp.ts 1000
 execute store result storage pnp:board qtp.sz float 0.00078 run data get storage pnp:board qtp.tz 1000
-$data modify storage pnp:board qtp.dx set from storage pnp:board qdx[$(i)]
+$data modify storage pnp:board qtp.dx set from storage pnp:board qtdx[$(i)]

@@ -1,5 +1,6 @@
 scoreboard players set #route pnp.tmp 1
 scoreboard players set #earn pnp.tmp 0
+scoreboard players set #esh pnp.tmp 0
 scoreboard players set #nosell pnp.tmp 0
 execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp run function pnp:board/drop/sell_one
 execute as @e[type=item_display,tag=pnp.held,distance=..64] if score @s pnp.stack = #hsid pnp.tmp run function pnp:board/drop/release

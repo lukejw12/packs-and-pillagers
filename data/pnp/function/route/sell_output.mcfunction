@@ -1,4 +1,4 @@
-execute if score #earn pnp.tmp matches ..0 run return 0
+execute if score #earn pnp.tmp matches ..0 run return run function pnp:route/sell_shards
 scoreboard players remove #earn pnp.tmp 1
 data modify storage pnp:board rt.c set value "emerald"
 scoreboard players set #sent pnp.tmp 0

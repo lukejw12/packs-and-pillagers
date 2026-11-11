@@ -1,1 +1,1 @@
-$data modify storage pnp:board tipj.svs set value "$(i)$(f)"
+$data modify storage pnp:board tipj.svs set value "$(i) and $(f)"
