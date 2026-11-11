@@ -1113,6 +1113,16 @@ def export_name(d, c):
     return (f'{d["gn"]}&times; ' if d['gn'] > 1 else '') + esc(name)
 
 
+def sell_icons(q):
+    whole, rest = divmod(int(q), 4)
+    parts = []
+    if whole:
+        parts.append('{icon:emerald}' + f'{whole} emerald' + ('' if whole == 1 else 's'))
+    if rest:
+        parts.append('{icon:emerald_shard}' + f'{rest} shard' + ('' if rest == 1 else 's'))
+    return ' and '.join(parts)
+
+
 def stats_rows(c):
     d = defs[c]
     k = d.get('kind')
@@ -1128,7 +1138,7 @@ def stats_rows(c):
         if shop_pack(c):
             rows.append(['Sells', tok(shop_pack(c))])
     if d.get('sell'):
-        rows.append(['Sells for', f'{em}{sell_text(d["sell"])}'])
+        rows.append(['Sells for', sell_icons(d['sell'])])
     elif k in ('res', 'food', 'tool', 'weapon', 'armor', 'trinket', 'struct', 'animal') and c not in ('emerald', 'emerald_shard'):
         rows.append(['Sells for', "Can't be sold"])
     if k in ('unit', 'enemy', 'baby'):
@@ -1272,6 +1282,7 @@ def main():
                'A card from Packs & Pillagers.', search=False)
     write_data(os.path.join(OUT, 'assets', 'cards.js'), cards_data())
     write_search()
+    bust_cache()
     open(os.path.join(OUT, '.nojekyll'), 'w').close()
     n = sum(len(fs) for _, _, fs in os.walk(OUT))
     print(f'built {len(BROWSE)} card pages, {len(TEXSIZE)} textures, {n} files in {OUT}')

@@ -13,7 +13,8 @@
     var art = o.art || c.art;
     var inner = '<b class="ct">' + esc(c.name) + '</b>' + (art ? sp(art, 'ca' + (art[2] ? ' b' : '')) : '');
     if (o.label !== false) {
-      if (c.sell) inner += '<span class="cs">' + c.sell + '</span>';
+      if (c.sell) inner += '<span class="cs">' + c.sell + (c.shards ? '<i class="sd"></i>' + c.shards : '') + '</span>';
+      else if (c.shards) inner += '<span class="cs so">' + c.shards + '</span>';
       if (c.health) inner += '<span class="ch">' + c.health + '</span>';
     }
     var st = '--ts:' + c.titleScale + (o.u ? ';--u:' + o.u + 'px' : '') + (o.style ? ';' + o.style : '');
@@ -229,6 +230,10 @@
   var view = document.getElementById('cardview');
   if (view) {
     var show = function () {
+      if (!P.order.length) {
+        view.innerHTML = '<h1>Something Went Wrong</h1><p>The card data didn\'t load. Try refreshing the page.</p>';
+        return;
+      }
       var id = decodeURIComponent(location.hash.slice(1)), h = cardPage(id);
       if (!h) {
         view.innerHTML = '<h1>Card Not Found</h1><p>There\'s no card by that name. Try the <a href="cards.html">Cards</a> page.</p>';

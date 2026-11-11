@@ -1,4 +1,4 @@
-@font-face{font-family:"MinecraftTTF";src:url(minecraft.ttf) format("truetype");font-display:swap}
+@font-face{font-family:"MinecraftTTF";src:url(minecraft.ttf?v=94c892b5) format("truetype");font-display:swap}
 :root{
   --bg:#26282d;--bg-lo:#1b1c20;--bg-ink:#131417;--line:#3d4048;
   --chalk:#ece6d6;--sage:#b6b0a3;--dim:#8d887e;
@@ -11,7 +11,7 @@
 html{scroll-padding-top:calc(var(--top) + 20px);-webkit-text-size-adjust:100%}
 body{margin:0;min-height:100vh;font-family:"MinecraftTTF",ui-monospace,monospace;font-size:var(--fs);line-height:1.5;color:var(--chalk);
   background:radial-gradient(130% 80% at 50% -10%,rgba(255,255,255,.07),rgba(255,255,255,0) 60%) fixed,
-    radial-gradient(150% 120% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.3)) fixed,url(deepslate.png) var(--bg);
+    radial-gradient(150% 120% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.3)) fixed,url(deepslate.png?v=f70affa1) var(--bg);
   text-shadow:2px 2px 0 var(--shadow);font-synthesis:none}
 ::selection{background:var(--gold);color:var(--maroon);text-shadow:none}
 img{image-rendering:pixelated}
@@ -190,4 +190,4 @@ h2 .n{font-size:var(--fs-s);color:var(--sage);text-shadow:none;margin-left:8px}
   h2{margin-top:48px}
 }
 @media (max-width:520px){.brand span{display:none}}
-.results .pg{background-image:url(a16.png);background-size:1500% 1500%;background-position:35.71% 42.86%;background-repeat:no-repeat}
+.results .pg{background-image:url(a16.png?v=1198799e);background-size:1500% 1500%;background-position:35.71% 42.86%;background-repeat:no-repeat}

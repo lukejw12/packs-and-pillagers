@@ -1,4 +1,4 @@
-import os, re, sys, json, glob, html, math, shutil, zipfile, urllib.request
+import os, re, sys, json, glob, html, math, shutil, hashlib, zipfile, urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from PIL import Image
@@ -127,11 +127,6 @@ def join_and(xs, word='and'):
     if len(xs) == 2:
         return xs[0] + ' ' + word + ' ' + xs[1]
     return ', '.join(xs[:-1]) + ', ' + word + ' ' + xs[-1]
-
-
-def fmt_sell(q):
-    v = q / 4
-    return str(int(v)) if v == int(v) else f'{v:g}'
 
 
 def sell_text(q):
@@ -299,7 +294,10 @@ def write_assets():
     kinds = '\n'.join(f'.k-{k}{{--hd:{h};--bd:{b}}}' for k, (h, b) in sorted(TCOL.items()))
     sheets = '\n'.join(f'.{a}{{background-image:url({a}.png);background-size:{c * 100}% {r * 100}%'
                        + (';image-rendering:auto' if s > 32 else '') + '}' for a, (c, r, s) in sorted(ATLAS_FILES.items()))
+    shard = art_of('emerald_shard')[0] if 'emerald_shard' in defs else None
     fixed = '\n'.join(x for x in (sprite_css('.cs::before', 'minecraft:item/emerald'),
+                                   sprite_css('.cs.so::before', shard),
+                                   sprite_css('.cs .sd', shard),
                                    sprite_css('.ch::before', 'minecraft:gui/sprites/hud/heart/full')) if x)
     with open(os.path.join(OUT, 'assets/card-style.css'), 'w', encoding='utf-8') as fh:
         fh.write(ccss.rstrip() + '\n' + kinds + '\n' + sheets + '\n' + fixed + '\n')
@@ -356,7 +354,11 @@ def card_face(c):
     if art and art in ATLAS:
         f['art'] = [ATLAS[art][0], ATLAS[art][1], 1 if blk else 0]
     if d.get('sell'):
-        f['sell'] = fmt_sell(d['sell'])
+        whole, rest = divmod(int(d['sell']), 4)
+        if whole:
+            f['sell'] = whole
+        if rest:
+            f['shards'] = rest
     if d.get('hp'):
         f['health'] = d['hp']
     return f
@@ -908,3 +910,35 @@ def write_data(path, data):
     out.append('};')
     with open(path, 'w', encoding='utf-8') as fh:
         fh.write('\n'.join(out) + '\n')
+
+
+def bust_cache():
+    adir = os.path.join(OUT, 'assets')
+
+    def tag(name):
+        with open(os.path.join(adir, name), 'rb') as fh:
+            return hashlib.sha1(fh.read()).hexdigest()[:8]
+
+    def has(name):
+        return os.path.isfile(os.path.join(adir, name))
+
+    css_ref = re.compile(r'url\(([\w.-]+\.(?:png|ttf|woff2?))\)')
+    for css in ('card-style.css', 'style.css'):
+        path = os.path.join(adir, css)
+        with open(path, encoding='utf-8') as fh:
+            text = fh.read()
+        text = css_ref.sub(lambda m: f'url({m.group(1)}?v={tag(m.group(1))})' if has(m.group(1)) else m.group(0), text)
+        with open(path, 'w', encoding='utf-8') as fh:
+            fh.write(text)
+    html_ref = re.compile(r'((?:href|src)=")((?:\.\./)*assets/)([\w.-]+\.(?:css|js|ttf|png))(")')
+    for folder, _, files in os.walk(OUT):
+        for f in files:
+            if not f.endswith('.html'):
+                continue
+            path = os.path.join(folder, f)
+            with open(path, encoding='utf-8') as fh:
+                page = fh.read()
+            new = html_ref.sub(lambda m: f'{m.group(1)}{m.group(2)}{m.group(3)}?v={tag(m.group(3))}{m.group(4)}' if has(m.group(3)) else m.group(0), page)
+            if new != page:
+                with open(path, 'w', encoding='utf-8') as fh:
+                    fh.write(new)

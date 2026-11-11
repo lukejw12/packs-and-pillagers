@@ -13,6 +13,7 @@ a.c:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 .cs{left:calc(var(--u)*1.7)}
 .ch{right:calc(var(--u)*1.7)}
 .cs::before,.ch::before{content:"";width:calc(var(--u)*1.3);height:calc(var(--u)*1.3);image-rendering:pixelated}
+.cs .sd{width:calc(var(--u)*1.3);height:calc(var(--u)*1.3);margin-left:calc(var(--u)*.3);image-rendering:pixelated}
 .cgrid{--u:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(var(--u)*14),1fr));gap:24px 16px;justify-items:center;margin:12px 0 8px}
 .stk{position:relative;flex:none;width:calc(var(--u)*14);height:calc(var(--u)*(12 + 4*var(--n)))}
 .stk>.c{position:absolute;left:0;top:calc(var(--u)*4*var(--i))}
